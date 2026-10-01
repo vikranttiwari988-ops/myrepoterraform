@@ -1,0 +1,4358 @@
+[2026-09-30 19:25:20Z INFO HostContext] No proxy settings were found based on environmental variables (http_proxy/https_proxy/HTTP_PROXY/HTTPS_PROXY)
+[2026-09-30 19:25:20Z INFO HostContext] Well known directory 'Bin': 'D:\cicd\actions-runner\bin'
+[2026-09-30 19:25:20Z INFO HostContext] Well known directory 'Root': 'D:\cicd\actions-runner'
+[2026-09-30 19:25:20Z INFO HostContext] Well known config file 'Credentials': 'D:\cicd\actions-runner\.credentials'
+[2026-09-30 19:25:20Z INFO HostContext] Well known directory 'Bin': 'D:\cicd\actions-runner\bin'
+[2026-09-30 19:25:20Z INFO HostContext] Well known directory 'Root': 'D:\cicd\actions-runner'
+[2026-09-30 19:25:20Z INFO HostContext] Well known config file 'Runner': 'D:\cicd\actions-runner\.runner'
+[2026-09-30 19:25:20Z INFO Worker] Version: 2.337.0
+[2026-09-30 19:25:20Z INFO Worker] Commit: 397b032cbf865e9c3ddfab89d533ec19325e1273
+[2026-09-30 19:25:20Z INFO Worker] Culture: en-IN
+[2026-09-30 19:25:20Z INFO Worker] UI Culture: en-US
+[2026-09-30 19:25:20Z INFO Worker] Waiting to receive the job message from the channel.
+[2026-09-30 19:25:20Z INFO ProcessChannel] Receiving message of length 25964, with hash '23b8b62dcef7f89ef8ab171003353a55e531c25134225146c205ede7476b11d3'
+[2026-09-30 19:25:20Z INFO Worker] Message received.
+[2026-09-30 19:25:20Z INFO Worker] Job message:
+ {
+  "fileTable": [
+    ".github/workflows/k8s_by_terraform.yaml"
+  ],
+  "mask": [
+    {
+      "type": "regex",
+      "value": "***"
+    },
+    {
+      "type": "regex",
+      "value": "***"
+    },
+    {
+      "type": "regex",
+      "value": "***"
+    },
+    {
+      "type": "regex",
+      "value": "***"
+    },
+    {
+      "type": "regex",
+      "value": "***"
+    },
+    {
+      "type": "regex",
+      "value": "***"
+    },
+    {
+      "type": "regex",
+      "value": "***"
+    },
+    {
+      "type": "regex",
+      "value": "***"
+    },
+    {
+      "type": "regex",
+      "value": "***"
+    },
+    {
+      "type": "regex",
+      "value": "***"
+    },
+    {
+      "type": "regex",
+      "value": "***"
+    },
+    {
+      "type": "regex",
+      "value": "***"
+    },
+    {
+      "type": "regex",
+      "value": "***"
+    },
+    {
+      "type": "regex",
+      "value": "***"
+    },
+    {
+      "type": "regex",
+      "value": "***"
+    },
+    {
+      "type": "regex",
+      "value": "***"
+    },
+    {
+      "type": "regex",
+      "value": "***"
+    },
+    {
+      "type": "regex",
+      "value": "***"
+    },
+    {
+      "type": "regex",
+      "value": "***"
+    },
+    {
+      "type": "regex",
+      "value": "***"
+    },
+    {
+      "type": "regex",
+      "value": "***"
+    },
+    {
+      "type": "regex",
+      "value": "***"
+    },
+    {
+      "type": "regex",
+      "value": "***"
+    },
+    {
+      "type": "regex",
+      "value": "***"
+    }
+  ],
+  "steps": [
+    {
+      "type": "action",
+      "reference": {
+        "type": "repository",
+        "name": "actions/checkout",
+        "ref": "v4",
+        "repositoryType": "GitHub"
+      },
+      "displayNameToken": {
+        "type": 0,
+        "file": 1,
+        "line": 12,
+        "col": 15,
+        "lit": "Checkout Code"
+      },
+      "contextName": "__actions_checkout",
+      "condition": "success()",
+      "id": "39be5d59-d575-4438-b2eb-b703ae5c5fdc",
+      "name": "__actions_checkout"
+    },
+    {
+      "type": "action",
+      "reference": {
+        "type": "script"
+      },
+      "displayNameToken": {
+        "type": 0,
+        "file": 1,
+        "line": 15,
+        "col": 15,
+        "lit": "Docker Login"
+      },
+      "contextName": "__run",
+      "inputs": {
+        "type": 2,
+        "map": [
+          {
+            "key": "script",
+            "value": {
+              "type": 3,
+              "file": 1,
+              "line": 16,
+              "col": 14,
+              "expr": "format('echo \"{0}\" | docker login -u \"{1}\" --password-stdin', secrets.DOCKERHUB_TOKEN, secrets.DOCKERHUB_USERNAME)"
+            }
+          }
+        ]
+      },
+      "condition": "success()",
+      "id": "378e10c9-1c0a-4d60-a804-79acc625d24d",
+      "name": "__run"
+    },
+    {
+      "type": "action",
+      "reference": {
+        "type": "script"
+      },
+      "displayNameToken": {
+        "type": 0,
+        "file": 1,
+        "line": 18,
+        "col": 15,
+        "lit": "Build Docker Image"
+      },
+      "contextName": "__run_2",
+      "inputs": {
+        "type": 2,
+        "map": [
+          {
+            "key": "script",
+            "value": {
+              "type": 3,
+              "file": 1,
+              "line": 19,
+              "col": 14,
+              "expr": "format('docker build -t ***/devops:{0} .\ndocker push ***/devops:{1}\n', github.run_number, github.run_number)"
+            }
+          }
+        ]
+      },
+      "condition": "success()",
+      "id": "1360e268-b555-4525-8840-ae922f1d74c6",
+      "name": "__run_2"
+    },
+    {
+      "type": "action",
+      "reference": {
+        "type": "script"
+      },
+      "displayNameToken": {
+        "type": 0,
+        "file": 1,
+        "line": 23,
+        "col": 15,
+        "lit": "Terraform Init"
+      },
+      "contextName": "__run_3",
+      "inputs": {
+        "type": 2,
+        "map": [
+          {
+            "key": "script",
+            "value": {
+              "type": 0,
+              "file": 1,
+              "line": 25,
+              "col": 14,
+              "lit": "terraform init"
+            }
+          },
+          {
+            "key": "workingDirectory",
+            "value": {
+              "type": 0,
+              "file": 1,
+              "line": 24,
+              "col": 28,
+              "lit": "infra"
+            }
+          }
+        ]
+      },
+      "condition": "success()",
+      "id": "240318ae-f383-42e7-811d-0a24626a18c2",
+      "name": "__run_3"
+    },
+    {
+      "type": "action",
+      "reference": {
+        "type": "script"
+      },
+      "displayNameToken": {
+        "type": 0,
+        "file": 1,
+        "line": 27,
+        "col": 15,
+        "lit": "Terraform Validate"
+      },
+      "contextName": "__run_4",
+      "inputs": {
+        "type": 2,
+        "map": [
+          {
+            "key": "script",
+            "value": {
+              "type": 0,
+              "file": 1,
+              "line": 29,
+              "col": 14,
+              "lit": "terraform validate"
+            }
+          },
+          {
+            "key": "workingDirectory",
+            "value": {
+              "type": 0,
+              "file": 1,
+              "line": 28,
+              "col": 28,
+              "lit": "infra"
+            }
+          }
+        ]
+      },
+      "condition": "success()",
+      "id": "d878afd5-6ac3-4ac3-914a-2797fa48e166",
+      "name": "__run_4"
+    },
+    {
+      "type": "action",
+      "reference": {
+        "type": "script"
+      },
+      "displayNameToken": {
+        "type": 0,
+        "file": 1,
+        "line": 31,
+        "col": 15,
+        "lit": "Terraform Plan"
+      },
+      "contextName": "__run_5",
+      "inputs": {
+        "type": 2,
+        "map": [
+          {
+            "key": "script",
+            "value": {
+              "type": 3,
+              "file": 1,
+              "line": 33,
+              "col": 14,
+              "expr": "format('terraform plan -var=\"image_tag={0}\"', github.run_number)"
+            }
+          },
+          {
+            "key": "workingDirectory",
+            "value": {
+              "type": 0,
+              "file": 1,
+              "line": 32,
+              "col": 28,
+              "lit": "infra"
+            }
+          }
+        ]
+      },
+      "condition": "success()",
+      "id": "5eb90abe-2d26-4b71-b5a8-41548c397652",
+      "name": "__run_5"
+    },
+    {
+      "type": "action",
+      "reference": {
+        "type": "script"
+      },
+      "displayNameToken": {
+        "type": 0,
+        "file": 1,
+        "line": 35,
+        "col": 15,
+        "lit": "Terraform Apply"
+      },
+      "contextName": "__run_6",
+      "inputs": {
+        "type": 2,
+        "map": [
+          {
+            "key": "script",
+            "value": {
+              "type": 0,
+              "file": 1,
+              "line": 37,
+              "col": 14,
+              "lit": "terraform apply -auto-approve"
+            }
+          },
+          {
+            "key": "workingDirectory",
+            "value": {
+              "type": 0,
+              "file": 1,
+              "line": 36,
+              "col": 28,
+              "lit": "infra"
+            }
+          }
+        ]
+      },
+      "condition": "success()",
+      "id": "6b0da0d3-bdfe-4efe-a35a-3e685b18c974",
+      "name": "__run_6"
+    },
+    {
+      "type": "action",
+      "reference": {
+        "type": "script"
+      },
+      "displayNameToken": {
+        "type": 0,
+        "file": 1,
+        "line": 39,
+        "col": 15,
+        "lit": "Wait for Deployment"
+      },
+      "contextName": "__run_7",
+      "inputs": {
+        "type": 2,
+        "map": [
+          {
+            "key": "script",
+            "value": {
+              "type": 0,
+              "file": 1,
+              "line": 40,
+              "col": 14,
+              "lit": "kubectl rollout status deployment/devops-app"
+            }
+          }
+        ]
+      },
+      "condition": "success()",
+      "id": "73bb8462-fac8-4ede-a47b-a59533e5bccf",
+      "name": "__run_7"
+    },
+    {
+      "type": "action",
+      "reference": {
+        "type": "script"
+      },
+      "displayNameToken": {
+        "type": 0,
+        "file": 1,
+        "line": 42,
+        "col": 15,
+        "lit": "Verify Pods"
+      },
+      "contextName": "__run_8",
+      "inputs": {
+        "type": 2,
+        "map": [
+          {
+            "key": "script",
+            "value": {
+              "type": 0,
+              "file": 1,
+              "line": 43,
+              "col": 14,
+              "lit": "kubectl get pods -o wide"
+            }
+          }
+        ]
+      },
+      "condition": "success()",
+      "id": "d8e07890-1caf-4d47-ad14-51784ca8be4a",
+      "name": "__run_8"
+    }
+  ],
+  "variables": {
+    "Actions.EnableHttpRedirects": {
+      "value": "true"
+    },
+    "DOCKERHUB_TOKEN": {
+      "value": "***",
+      "isSecret": true
+    },
+    "DOCKERHUB_USERNAME": {
+      "value": "***",
+      "isSecret": true
+    },
+    "DistributedTask.AddWarningToNode12Action": {
+      "value": "true"
+    },
+    "DistributedTask.AddWarningToNode16Action": {
+      "value": "true"
+    },
+    "DistributedTask.AllowRunnerContainerHooks": {
+      "value": "true"
+    },
+    "DistributedTask.DeprecateStepOutputCommands": {
+      "value": "true"
+    },
+    "DistributedTask.DetailUntarFailure": {
+      "value": "true"
+    },
+    "DistributedTask.EnableCompositeActions": {
+      "value": "true"
+    },
+    "DistributedTask.EnableJobServerQueueTelemetry": {
+      "value": "true"
+    },
+    "DistributedTask.EnhancedAnnotations": {
+      "value": "true"
+    },
+    "DistributedTask.ForceGithubJavascriptActionsToNode16": {
+      "value": "true"
+    },
+    "DistributedTask.ForceGithubJavascriptActionsToNode20": {
+      "value": "true"
+    },
+    "DistributedTask.LogTemplateErrorsAsDebugMessages": {
+      "value": "true"
+    },
+    "DistributedTask.MarkJobAsFailedOnWorkerCrash": {
+      "value": "true"
+    },
+    "DistributedTask.NewActionMetadata": {
+      "value": "true"
+    },
+    "DistributedTask.UploadStepSummary": {
+      "value": "true"
+    },
+    "DistributedTask.UseActionArchiveCache": {
+      "value": "true"
+    },
+    "DistributedTask.UseWhich2": {
+      "value": "true"
+    },
+    "RunService.FixEmbeddedIssues": {
+      "value": "true"
+    },
+    "actions.runner.requirenode24": {
+      "value": "true"
+    },
+    "actions.runner.usenode24bydefault": {
+      "value": "true"
+    },
+    "actions.runner.warnonnode20": {
+      "value": "true"
+    },
+    "actions_add_check_run_id_to_job_context": {
+      "value": "true"
+    },
+    "actions_batch_action_resolution": {
+      "value": "false"
+    },
+    "actions_cache_mode": {
+      "value": "write"
+    },
+    "actions_container_action_runner_temp": {
+      "value": "true"
+    },
+    "actions_display_helpful_actions_download_errors": {
+      "value": "true"
+    },
+    "actions_runner_allow_artifacts_file": {
+      "value": "false"
+    },
+    "actions_runner_compare_workflow_parser": {
+      "value": "false"
+    },
+    "actions_runner_deprecate_linux_arm32": {
+      "value": "true"
+    },
+    "actions_runner_emit_composite_markers": {
+      "value": "true"
+    },
+    "actions_runner_kill_linux_arm32": {
+      "value": "false"
+    },
+    "actions_runner_node20_removal_date": {
+      "value": "September 23rd, 2026"
+    },
+    "actions_runner_node24_default_date": {
+      "value": "June 16th, 2026"
+    },
+    "actions_self_repository": {
+      "value": "true"
+    },
+    "actions_service_container_command": {
+      "value": "true"
+    },
+    "actions_set_orchestration_id_env_for_actions": {
+      "value": "true"
+    },
+    "actions_skip_retry_complete_job_upon_known_errors": {
+      "value": "true"
+    },
+    "actions_snapshot_preflight_hosted_runner_check": {
+      "value": "false"
+    },
+    "actions_snapshot_preflight_image_gen_pool_check": {
+      "value": "false"
+    },
+    "actions_use_bearer_token_for_codeload": {
+      "value": "false"
+    },
+    "actions_uses_cache_service_v2": {
+      "value": "true"
+    },
+    "github_token": {
+      "value": "***",
+      "isSecret": true
+    },
+    "system.from_run_service": {
+      "value": "true"
+    },
+    "system.github.job": {
+      "value": "deploy"
+    },
+    "system.github.launch_endpoint": {
+      "value": "https://launch.actions.githubusercontent.com"
+    },
+    "system.github.results_endpoint": {
+      "value": "https://results-receiver.actions.githubusercontent.com/"
+    },
+    "system.github.results_upload_with_sdk": {
+      "value": "true"
+    },
+    "system.github.token": {
+      "value": "***",
+      "isSecret": true
+    },
+    "system.github.token.permissions": {
+      "value": "{\"Contents\":\"read\",\"Metadata\":\"read\",\"Packages\":\"read\"}"
+    },
+    "system.orchestrationId": {
+      "value": "6c078622-02c2-80e4-b884-1b0faaf9f69e.deploy.__default"
+    },
+    "system.phaseDisplayName": {
+      "value": "deploy"
+    },
+    "system.runner.lowdiskspacethreshold": {
+      "value": "100"
+    },
+    "system.runnerEnvironment": {
+      "value": "self-hosted"
+    },
+    "system.runnerGroupName": {
+      "value": "Default"
+    }
+  },
+  "messageType": "RunnerJobRequest",
+  "plan": {
+    "scopeIdentifier": "00000000-0000-0000-0000-000000000000",
+    "planType": "actions",
+    "version": 0,
+    "planId": "6c078622-02c2-80e4-b884-1b0faaf9f69e",
+    "planGroup": null,
+    "artifactUri": null,
+    "artifactLocation": null,
+    "definition": null,
+    "owner": null
+  },
+  "timeline": {
+    "id": "6c078622-02c2-80e4-b884-1b0faaf9f69e",
+    "changeId": 0,
+    "location": null
+  },
+  "jobId": "2df8a9c6-a163-5333-b137-88c3e4493c33",
+  "jobDisplayName": "deploy",
+  "jobName": "__default",
+  "requestId": 0,
+  "lockedUntil": "0001-01-01T00:00:00",
+  "resources": {
+    "endpoints": [
+      {
+        "data": {
+          "ServerId": "",
+          "ServerName": "",
+          "CacheServerUrl": "https://artifactcache.actions.githubusercontent.com/vNJajpvbF6IjDhJJK2oJL6aFAilgYF0ASuY1lz9oWwnetORATd/",
+          "FeedStreamUrl": "wss://results-receiver.actions.githubusercontent.com/_ws/ingest.sock",
+          "ResultsServiceUrl": "https://results-receiver.actions.githubusercontent.com/",
+          "PipelinesServiceUrl": "https://pipelinesghubeus4.actions.githubusercontent.com/vNJajpvbF6IjDhJJK2oJL6aFAilgYF0ASuY1lz9oWwnetORATd/",
+          "GenerateIdTokenUrl": "",
+          "ConnectivityChecks": "[\"https://broker.actions.githubusercontent.com/health\",\"https://token.actions.githubusercontent.com/ready\",\"https://run.actions.githubusercontent.com/health\"]",
+          "ConnectivityAndDNSChecks": ""
+        },
+        "name": "SystemVssConnection",
+        "url": "https://run-actions-3-azure-eastus.actions.githubusercontent.com/54/",
+        "authorization": {
+          "parameters": {
+            "AccessToken": "***"
+          },
+          "scheme": "OAuth"
+        },
+        "isShared": false,
+        "isReady": true
+      }
+    ]
+  },
+  "contextData": {
+    "github": {
+      "t": 2,
+      "d": [
+        {
+          "k": "ref",
+          "v": "refs/heads/main"
+        },
+        {
+          "k": "sha",
+          "v": "a18ec97b07d08db7f4729b7b9b85e747d5209b2d"
+        },
+        {
+          "k": "repository",
+          "v": "***-ops/my-repo"
+        },
+        {
+          "k": "repository_owner",
+          "v": "***-ops"
+        },
+        {
+          "k": "repository_owner_id",
+          "v": "328057542"
+        },
+        {
+          "k": "repositoryUrl",
+          "v": "git://github.com/***-ops/my-repo.git"
+        },
+        {
+          "k": "run_id",
+          "v": "36765543544"
+        },
+        {
+          "k": "run_number",
+          "v": "9"
+        },
+        {
+          "k": "retention_days",
+          "v": "90"
+        },
+        {
+          "k": "run_attempt",
+          "v": "1"
+        },
+        {
+          "k": "artifact_cache_size_limit",
+          "v": "10"
+        },
+        {
+          "k": "repository_visibility",
+          "v": "public"
+        },
+        {
+          "k": "actor_id",
+          "v": "328057542"
+        },
+        {
+          "k": "actor",
+          "v": "***-ops"
+        },
+        {
+          "k": "workflow",
+          "v": "Local CI-CD Pipelines"
+        },
+        {
+          "k": "head_ref",
+          "v": ""
+        },
+        {
+          "k": "base_ref",
+          "v": ""
+        },
+        {
+          "k": "event_name",
+          "v": "push"
+        },
+        {
+          "k": "server_url",
+          "v": "https://github.com"
+        },
+        {
+          "k": "api_url",
+          "v": "https://api.github.com"
+        },
+        {
+          "k": "graphql_url",
+          "v": "https://api.github.com/graphql"
+        },
+        {
+          "k": "ref_name",
+          "v": "main"
+        },
+        {
+          "k": "ref_protected",
+          "v": false
+        },
+        {
+          "k": "ref_type",
+          "v": "branch"
+        },
+        {
+          "k": "secret_source",
+          "v": "Actions"
+        },
+        {
+          "k": "event",
+          "v": {
+            "t": 2,
+            "d": [
+              {
+                "k": "after",
+                "v": "a18ec97b07d08db7f4729b7b9b85e747d5209b2d"
+              },
+              {
+                "k": "base_ref",
+                "v": null
+              },
+              {
+                "k": "before",
+                "v": "2334e5d3a78e07a59698d6afa562d34e56dce165"
+              },
+              {
+                "k": "commits",
+                "v": {
+                  "t": 1,
+                  "a": [
+                    {
+                      "t": 2,
+                      "d": [
+                        {
+                          "k": "author",
+                          "v": {
+                            "t": 2,
+                            "d": [
+                              {
+                                "k": "email",
+                                "v": "***@gmail.com"
+                              },
+                              {
+                                "k": "name",
+                                "v": "***"
+                              },
+                              {
+                                "k": "username",
+                                "v": "***-ops"
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "k": "committer",
+                          "v": {
+                            "t": 2,
+                            "d": [
+                              {
+                                "k": "email",
+                                "v": "***@gmail.com"
+                              },
+                              {
+                                "k": "name",
+                                "v": "***"
+                              },
+                              {
+                                "k": "username",
+                                "v": "***-ops"
+                              }
+                            ]
+                          }
+                        },
+                        {
+                          "k": "distinct",
+                          "v": true
+                        },
+                        {
+                          "k": "id",
+                          "v": "a18ec97b07d08db7f4729b7b9b85e747d5209b2d"
+                        },
+                        {
+                          "k": "message",
+                          "v": "dockerfilechanged_variabletf_added3"
+                        },
+                        {
+                          "k": "timestamp",
+                          "v": "2026-10-01T00:55:04+05:30"
+                        },
+                        {
+                          "k": "tree_id",
+                          "v": "724c68b826d5d36a259bb05bed16999fb12bd052"
+                        },
+                        {
+                          "k": "url",
+                          "v": "https://github.com/***-ops/my-repo/commit/a18ec97b07d08db7f4729b7b9b85e747d5209b2d"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              },
+              {
+                "k": "compare",
+                "v": "https://github.com/***-ops/my-repo/compare/2334e5d3a78e...a18ec97b07d0"
+              },
+              {
+                "k": "created",
+                "v": false
+              },
+              {
+                "k": "deleted",
+                "v": false
+              },
+              {
+                "k": "forced",
+                "v": false
+              },
+              {
+                "k": "head_commit",
+                "v": {
+                  "t": 2,
+                  "d": [
+                    {
+                      "k": "author",
+                      "v": {
+                        "t": 2,
+                        "d": [
+                          {
+                            "k": "email",
+                            "v": "***@gmail.com"
+                          },
+                          {
+                            "k": "name",
+                            "v": "***"
+                          },
+                          {
+                            "k": "username",
+                            "v": "***-ops"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "k": "committer",
+                      "v": {
+                        "t": 2,
+                        "d": [
+                          {
+                            "k": "email",
+                            "v": "***@gmail.com"
+                          },
+                          {
+                            "k": "name",
+                            "v": "***"
+                          },
+                          {
+                            "k": "username",
+                            "v": "***-ops"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "k": "distinct",
+                      "v": true
+                    },
+                    {
+                      "k": "id",
+                      "v": "a18ec97b07d08db7f4729b7b9b85e747d5209b2d"
+                    },
+                    {
+                      "k": "message",
+                      "v": "dockerfilechanged_variabletf_added3"
+                    },
+                    {
+                      "k": "timestamp",
+                      "v": "2026-10-01T00:55:04+05:30"
+                    },
+                    {
+                      "k": "tree_id",
+                      "v": "724c68b826d5d36a259bb05bed16999fb12bd052"
+                    },
+                    {
+                      "k": "url",
+                      "v": "https://github.com/***-ops/my-repo/commit/a18ec97b07d08db7f4729b7b9b85e747d5209b2d"
+                    }
+                  ]
+                }
+              },
+              {
+                "k": "pusher",
+                "v": {
+                  "t": 2,
+                  "d": [
+                    {
+                      "k": "email",
+                      "v": "***@gmail.com"
+                    },
+                    {
+                      "k": "name",
+                      "v": "***-ops"
+                    }
+                  ]
+                }
+              },
+              {
+                "k": "ref",
+                "v": "refs/heads/main"
+              },
+              {
+                "k": "repository",
+                "v": {
+                  "t": 2,
+                  "d": [
+                    {
+                      "k": "allow_forking",
+                      "v": true
+                    },
+                    {
+                      "k": "archive_url",
+                      "v": "https://api.github.com/repos/***-ops/my-repo/{archive_format}{/ref}"
+                    },
+                    {
+                      "k": "archived",
+                      "v": false
+                    },
+                    {
+                      "k": "assignees_url",
+                      "v": "https://api.github.com/repos/***-ops/my-repo/assignees{/user}"
+                    },
+                    {
+                      "k": "blobs_url",
+                      "v": "https://api.github.com/repos/***-ops/my-repo/git/blobs{/sha}"
+                    },
+                    {
+                      "k": "branches_url",
+                      "v": "https://api.github.com/repos/***-ops/my-repo/branches{/branch}"
+                    },
+                    {
+                      "k": "clone_url",
+                      "v": "https://github.com/***-ops/my-repo.git"
+                    },
+                    {
+                      "k": "collaborators_url",
+                      "v": "https://api.github.com/repos/***-ops/my-repo/collaborators{/collaborator}"
+                    },
+                    {
+                      "k": "comments_url",
+                      "v": "https://api.github.com/repos/***-ops/my-repo/comments{/number}"
+                    },
+                    {
+                      "k": "commits_url",
+                      "v": "https://api.github.com/repos/***-ops/my-repo/commits{/sha}"
+                    },
+                    {
+                      "k": "compare_url",
+                      "v": "https://api.github.com/repos/***-ops/my-repo/compare/{base}...{head}"
+                    },
+                    {
+                      "k": "contents_url",
+                      "v": "https://api.github.com/repos/***-ops/my-repo/contents/{+path}"
+                    },
+                    {
+                      "k": "contributors_url",
+                      "v": "https://api.github.com/repos/***-ops/my-repo/contributors"
+                    },
+                    {
+                      "k": "created_at",
+                      "v": 1789143027.0
+                    },
+                    {
+                      "k": "default_branch",
+                      "v": "main"
+                    },
+                    {
+                      "k": "deployments_url",
+                      "v": "https://api.github.com/repos/***-ops/my-repo/deployments"
+                    },
+                    {
+                      "k": "description",
+                      "v": "my repository "
+                    },
+                    {
+                      "k": "disabled",
+                      "v": false
+                    },
+                    {
+                      "k": "downloads_url",
+                      "v": "https://api.github.com/repos/***-ops/my-repo/downloads"
+                    },
+                    {
+                      "k": "events_url",
+                      "v": "https://api.github.com/repos/***-ops/my-repo/events"
+                    },
+                    {
+                      "k": "fork",
+                      "v": false
+                    },
+                    {
+                      "k": "forks",
+                      "v": 0.0
+                    },
+                    {
+                      "k": "forks_count",
+                      "v": 0.0
+                    },
+                    {
+                      "k": "forks_url",
+                      "v": "https://api.github.com/repos/***-ops/my-repo/forks"
+                    },
+                    {
+                      "k": "full_name",
+                      "v": "***-ops/my-repo"
+                    },
+                    {
+                      "k": "git_commits_url",
+                      "v": "https://api.github.com/repos/***-ops/my-repo/git/commits{/sha}"
+                    },
+                    {
+                      "k": "git_refs_url",
+                      "v": "https://api.github.com/repos/***-ops/my-repo/git/refs{/sha}"
+                    },
+                    {
+                      "k": "git_tags_url",
+                      "v": "https://api.github.com/repos/***-ops/my-repo/git/tags{/sha}"
+                    },
+                    {
+                      "k": "git_url",
+                      "v": "git://github.com/***-ops/my-repo.git"
+                    },
+                    {
+                      "k": "has_discussions",
+                      "v": false
+                    },
+                    {
+                      "k": "has_downloads",
+                      "v": true
+                    },
+                    {
+                      "k": "has_issues",
+                      "v": true
+                    },
+                    {
+                      "k": "has_pages",
+                      "v": false
+                    },
+                    {
+                      "k": "has_projects",
+                      "v": true
+                    },
+                    {
+                      "k": "has_pull_requests",
+                      "v": true
+                    },
+                    {
+                      "k": "has_wiki",
+                      "v": true
+                    },
+                    {
+                      "k": "homepage",
+                      "v": null
+                    },
+                    {
+                      "k": "hooks_url",
+                      "v": "https://api.github.com/repos/***-ops/my-repo/hooks"
+                    },
+                    {
+                      "k": "html_url",
+                      "v": "https://github.com/***-ops/my-repo"
+                    },
+                    {
+                      "k": "id",
+                      "v": 1366412515.0
+                    },
+                    {
+                      "k": "is_template",
+                      "v": false
+                    },
+                    {
+                      "k": "issue_comment_url",
+                      "v": "https://api.github.com/repos/***-ops/my-repo/issues/comments{/number}"
+                    },
+                    {
+                      "k": "issue_events_url",
+                      "v": "https://api.github.com/repos/***-ops/my-repo/issues/events{/number}"
+                    },
+                    {
+                      "k": "issues_url",
+                      "v": "https://api.github.com/repos/***-ops/my-repo/issues{/number}"
+                    },
+                    {
+                      "k": "keys_url",
+                      "v": "https://api.github.com/repos/***-ops/my-repo/keys{/key_id}"
+                    },
+                    {
+                      "k": "labels_url",
+                      "v": "https://api.github.com/repos/***-ops/my-repo/labels{/name}"
+                    },
+                    {
+                      "k": "language",
+                      "v": "HCL"
+                    },
+                    {
+                      "k": "languages_url",
+                      "v": "https://api.github.com/repos/***-ops/my-repo/languages"
+                    },
+                    {
+                      "k": "license",
+                      "v": null
+                    },
+                    {
+                      "k": "master_branch",
+                      "v": "main"
+                    },
+                    {
+                      "k": "merges_url",
+                      "v": "https://api.github.com/repos/***-ops/my-repo/merges"
+                    },
+                    {
+                      "k": "milestones_url",
+                      "v": "https://api.github.com/repos/***-ops/my-repo/milestones{/number}"
+                    },
+                    {
+                      "k": "mirror_url",
+                      "v": null
+                    },
+                    {
+                      "k": "name",
+                      "v": "my-repo"
+                    },
+                    {
+                      "k": "node_id",
+                      "v": "R_kgDOUXHM4w"
+                    },
+                    {
+                      "k": "notifications_url",
+                      "v": "https://api.github.com/repos/***-ops/my-repo/notifications{?since,all,participating}"
+                    },
+                    {
+                      "k": "open_issues",
+                      "v": 0.0
+                    },
+                    {
+                      "k": "open_issues_count",
+                      "v": 0.0
+                    },
+                    {
+                      "k": "owner",
+                      "v": {
+                        "t": 2,
+                        "d": [
+                          {
+                            "k": "avatar_url",
+                            "v": "https://avatars.githubusercontent.com/u/328057542?v=4"
+                          },
+                          {
+                            "k": "email",
+                            "v": "***@gmail.com"
+                          },
+                          {
+                            "k": "events_url",
+                            "v": "https://api.github.com/users/***-ops/events{/privacy}"
+                          },
+                          {
+                            "k": "followers_url",
+                            "v": "https://api.github.com/users/***-ops/followers"
+                          },
+                          {
+                            "k": "following_url",
+                            "v": "https://api.github.com/users/***-ops/following{/other_user}"
+                          },
+                          {
+                            "k": "gists_url",
+                            "v": "https://api.github.com/users/***-ops/gists{/gist_id}"
+                          },
+                          {
+                            "k": "gravatar_id",
+                            "v": ""
+                          },
+                          {
+                            "k": "html_url",
+                            "v": "https://github.com/***-ops"
+                          },
+                          {
+                            "k": "id",
+                            "v": 328057542.0
+                          },
+                          {
+                            "k": "login",
+                            "v": "***-ops"
+                          },
+                          {
+                            "k": "name",
+                            "v": "***-ops"
+                          },
+                          {
+                            "k": "node_id",
+                            "v": "U_kgDOE43Cxg"
+                          },
+                          {
+                            "k": "organizations_url",
+                            "v": "https://api.github.com/users/***-ops/orgs"
+                          },
+                          {
+                            "k": "received_events_url",
+                            "v": "https://api.github.com/users/***-ops/received_events"
+                          },
+                          {
+                            "k": "repos_url",
+                            "v": "https://api.github.com/users/***-ops/repos"
+                          },
+                          {
+                            "k": "site_admin",
+                            "v": false
+                          },
+                          {
+                            "k": "starred_url",
+                            "v": "https://api.github.com/users/***-ops/starred{/owner}{/repo}"
+                          },
+                          {
+                            "k": "subscriptions_url",
+                            "v": "https://api.github.com/users/***-ops/subscriptions"
+                          },
+                          {
+                            "k": "type",
+                            "v": "User"
+                          },
+                          {
+                            "k": "url",
+                            "v": "https://api.github.com/users/***-ops"
+                          },
+                          {
+                            "k": "user_view_type",
+                            "v": "public"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "k": "private",
+                      "v": false
+                    },
+                    {
+                      "k": "pull_request_creation_policy",
+                      "v": "all"
+                    },
+                    {
+                      "k": "pulls_url",
+                      "v": "https://api.github.com/repos/***-ops/my-repo/pulls{/number}"
+                    },
+                    {
+                      "k": "pushed_at",
+                      "v": 1790796314.0
+                    },
+                    {
+                      "k": "releases_url",
+                      "v": "https://api.github.com/repos/***-ops/my-repo/releases{/id}"
+                    },
+                    {
+                      "k": "size",
+                      "v": 13732.0
+                    },
+                    {
+                      "k": "ssh_url",
+                      "v": "git@github.com:***-ops/my-repo.git"
+                    },
+                    {
+                      "k": "stargazers",
+                      "v": 0.0
+                    },
+                    {
+                      "k": "stargazers_count",
+                      "v": 0.0
+                    },
+                    {
+                      "k": "stargazers_url",
+                      "v": "https://api.github.com/repos/***-ops/my-repo/stargazers"
+                    },
+                    {
+                      "k": "statuses_url",
+                      "v": "https://api.github.com/repos/***-ops/my-repo/statuses/{sha}"
+                    },
+                    {
+                      "k": "subscribers_url",
+                      "v": "https://api.github.com/repos/***-ops/my-repo/subscribers"
+                    },
+                    {
+                      "k": "subscription_url",
+                      "v": "https://api.github.com/repos/***-ops/my-repo/subscription"
+                    },
+                    {
+                      "k": "svn_url",
+                      "v": "https://github.com/***-ops/my-repo"
+                    },
+                    {
+                      "k": "tags_url",
+                      "v": "https://api.github.com/repos/***-ops/my-repo/tags"
+                    },
+                    {
+                      "k": "teams_url",
+                      "v": "https://api.github.com/repos/***-ops/my-repo/teams"
+                    },
+                    {
+                      "k": "topics",
+                      "v": {
+                        "t": 1
+                      }
+                    },
+                    {
+                      "k": "trees_url",
+                      "v": "https://api.github.com/repos/***-ops/my-repo/git/trees{/sha}"
+                    },
+                    {
+                      "k": "updated_at",
+                      "v": "2026-09-30T19:19:44Z"
+                    },
+                    {
+                      "k": "url",
+                      "v": "https://api.github.com/repos/***-ops/my-repo"
+                    },
+                    {
+                      "k": "visibility",
+                      "v": "public"
+                    },
+                    {
+                      "k": "watchers",
+                      "v": 0.0
+                    },
+                    {
+                      "k": "watchers_count",
+                      "v": 0.0
+                    },
+                    {
+                      "k": "web_commit_signoff_required",
+                      "v": false
+                    }
+                  ]
+                }
+              },
+              {
+                "k": "sender",
+                "v": {
+                  "t": 2,
+                  "d": [
+                    {
+                      "k": "avatar_url",
+                      "v": "https://avatars.githubusercontent.com/u/328057542?v=4"
+                    },
+                    {
+                      "k": "events_url",
+                      "v": "https://api.github.com/users/***-ops/events{/privacy}"
+                    },
+                    {
+                      "k": "followers_url",
+                      "v": "https://api.github.com/users/***-ops/followers"
+                    },
+                    {
+                      "k": "following_url",
+                      "v": "https://api.github.com/users/***-ops/following{/other_user}"
+                    },
+                    {
+                      "k": "gists_url",
+                      "v": "https://api.github.com/users/***-ops/gists{/gist_id}"
+                    },
+                    {
+                      "k": "gravatar_id",
+                      "v": ""
+                    },
+                    {
+                      "k": "html_url",
+                      "v": "https://github.com/***-ops"
+                    },
+                    {
+                      "k": "id",
+                      "v": 328057542.0
+                    },
+                    {
+                      "k": "login",
+                      "v": "***-ops"
+                    },
+                    {
+                      "k": "node_id",
+                      "v": "U_kgDOE43Cxg"
+                    },
+                    {
+                      "k": "organizations_url",
+                      "v": "https://api.github.com/users/***-ops/orgs"
+                    },
+                    {
+                      "k": "received_events_url",
+                      "v": "https://api.github.com/users/***-ops/received_events"
+                    },
+                    {
+                      "k": "repos_url",
+                      "v": "https://api.github.com/users/***-ops/repos"
+                    },
+                    {
+                      "k": "site_admin",
+                      "v": false
+                    },
+                    {
+                      "k": "starred_url",
+                      "v": "https://api.github.com/users/***-ops/starred{/owner}{/repo}"
+                    },
+                    {
+                      "k": "subscriptions_url",
+                      "v": "https://api.github.com/users/***-ops/subscriptions"
+                    },
+                    {
+                      "k": "type",
+                      "v": "User"
+                    },
+                    {
+                      "k": "url",
+                      "v": "https://api.github.com/users/***-ops"
+                    },
+                    {
+                      "k": "user_view_type",
+                      "v": "public"
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        {
+          "k": "workflow_ref",
+          "v": "***-ops/my-repo/.github/workflows/k8s_by_terraform.yaml@refs/heads/main"
+        },
+        {
+          "k": "workflow_sha",
+          "v": "a18ec97b07d08db7f4729b7b9b85e747d5209b2d"
+        },
+        {
+          "k": "repository_id",
+          "v": "1366412515"
+        },
+        {
+          "k": "triggering_actor",
+          "v": "***-ops"
+        }
+      ]
+    },
+    "inputs": {
+      "t": 2
+    },
+    "job": {
+      "t": 2,
+      "d": [
+        {
+          "k": "check_run_id",
+          "v": 110058656974.0
+        },
+        {
+          "k": "workflow_ref",
+          "v": "***-ops/my-repo/.github/workflows/k8s_by_terraform.yaml@refs/heads/main"
+        },
+        {
+          "k": "workflow_sha",
+          "v": "a18ec97b07d08db7f4729b7b9b85e747d5209b2d"
+        },
+        {
+          "k": "workflow_repository",
+          "v": "***-ops/my-repo"
+        },
+        {
+          "k": "workflow_file_path",
+          "v": ".github/workflows/k8s_by_terraform.yaml"
+        }
+      ]
+    },
+    "matrix": null,
+    "needs": {
+      "t": 2
+    },
+    "strategy": {
+      "t": 2,
+      "d": [
+        {
+          "k": "fail-fast",
+          "v": true
+        },
+        {
+          "k": "job-index",
+          "v": 0.0
+        },
+        {
+          "k": "job-total",
+          "v": 1.0
+        },
+        {
+          "k": "max-parallel",
+          "v": 1.0
+        }
+      ]
+    },
+    "vars": {
+      "t": 2
+    }
+  },
+  "billingOwnerId": "U_kgDOE43Cxg"
+}
+[2026-09-30 19:25:20Z INFO JobRunner] Job ID 2df8a9c6-a163-5333-b137-88c3e4493c33
+[2026-09-30 19:25:20Z INFO ConfigurationStore] currentAssemblyLocation: D:\cicd\actions-runner\bin\Runner.Worker.dll
+[2026-09-30 19:25:20Z INFO HostContext] Well known directory 'Bin': 'D:\cicd\actions-runner\bin'
+[2026-09-30 19:25:20Z INFO ConfigurationStore] binPath: D:\cicd\actions-runner\bin
+[2026-09-30 19:25:20Z INFO HostContext] Well known directory 'Bin': 'D:\cicd\actions-runner\bin'
+[2026-09-30 19:25:20Z INFO HostContext] Well known directory 'Root': 'D:\cicd\actions-runner'
+[2026-09-30 19:25:20Z INFO ConfigurationStore] RootFolder: D:\cicd\actions-runner
+[2026-09-30 19:25:20Z INFO HostContext] Well known directory 'Bin': 'D:\cicd\actions-runner\bin'
+[2026-09-30 19:25:20Z INFO HostContext] Well known directory 'Root': 'D:\cicd\actions-runner'
+[2026-09-30 19:25:20Z INFO HostContext] Well known config file 'Runner': 'D:\cicd\actions-runner\.runner'
+[2026-09-30 19:25:20Z INFO ConfigurationStore] ConfigFilePath: D:\cicd\actions-runner\.runner
+[2026-09-30 19:25:20Z INFO HostContext] Well known directory 'Bin': 'D:\cicd\actions-runner\bin'
+[2026-09-30 19:25:20Z INFO HostContext] Well known directory 'Root': 'D:\cicd\actions-runner'
+[2026-09-30 19:25:20Z INFO HostContext] Well known config file 'MigratedRunner': 'D:\cicd\actions-runner\.runner_migrated'
+[2026-09-30 19:25:20Z INFO ConfigurationStore] MigratedConfigFilePath: D:\cicd\actions-runner\.runner_migrated
+[2026-09-30 19:25:20Z INFO HostContext] Well known directory 'Bin': 'D:\cicd\actions-runner\bin'
+[2026-09-30 19:25:20Z INFO HostContext] Well known directory 'Root': 'D:\cicd\actions-runner'
+[2026-09-30 19:25:20Z INFO HostContext] Well known config file 'Credentials': 'D:\cicd\actions-runner\.credentials'
+[2026-09-30 19:25:20Z INFO ConfigurationStore] CredFilePath: D:\cicd\actions-runner\.credentials
+[2026-09-30 19:25:20Z INFO HostContext] Well known directory 'Bin': 'D:\cicd\actions-runner\bin'
+[2026-09-30 19:25:20Z INFO HostContext] Well known directory 'Root': 'D:\cicd\actions-runner'
+[2026-09-30 19:25:20Z INFO HostContext] Well known config file 'MigratedCredentials': 'D:\cicd\actions-runner\.credentials_migrated'
+[2026-09-30 19:25:20Z INFO ConfigurationStore] MigratedCredFilePath: D:\cicd\actions-runner\.credentials_migrated
+[2026-09-30 19:25:20Z INFO HostContext] Well known directory 'Bin': 'D:\cicd\actions-runner\bin'
+[2026-09-30 19:25:20Z INFO HostContext] Well known directory 'Root': 'D:\cicd\actions-runner'
+[2026-09-30 19:25:20Z INFO HostContext] Well known config file 'Service': 'D:\cicd\actions-runner\.service'
+[2026-09-30 19:25:20Z INFO ConfigurationStore] ServiceConfigFilePath: D:\cicd\actions-runner\.service
+[2026-09-30 19:25:20Z INFO ConfigurationStore] Read setting file: 398 chars
+[2026-09-30 19:25:20Z INFO JobRunner] Initializing launch client
+[2026-09-30 19:25:20Z INFO JobServerQueue] Initializing results client
+[2026-09-30 19:25:20Z INFO ResultServer] Creating websocket client ...wss://results-receiver.actions.githubusercontent.com/_ws/ingest.sock
+[2026-09-30 19:25:20Z INFO ResultServer] Attempting to start websocket client with delay 00:00:00.
+[2026-09-30 19:25:21Z INFO JobServerQueue] Start process web console line queue.
+[2026-09-30 19:25:21Z INFO JobServerQueue] Start process file upload queue.
+[2026-09-30 19:25:21Z INFO JobServerQueue] Start results file upload queue.
+[2026-09-30 19:25:21Z INFO JobServerQueue] Starting results-based upload queue...
+[2026-09-30 19:25:21Z INFO JobServerQueue] Start process timeline update queue.
+[2026-09-30 19:25:21Z INFO ExecutionContext] Initializing Job context
+[2026-09-30 19:25:21Z INFO ExecutionContext] Initialize GitHub context
+[2026-09-30 19:25:21Z INFO ExecutionContext] Initialize Env context
+[2026-09-30 19:25:21Z INFO HostContext] Well known directory 'Bin': 'D:\cicd\actions-runner\bin'
+[2026-09-30 19:25:21Z INFO HostContext] Well known directory 'Root': 'D:\cicd\actions-runner'
+[2026-09-30 19:25:21Z INFO HostContext] Well known directory 'Diag': 'D:\cicd\actions-runner\_diag'
+[2026-09-30 19:25:21Z INFO HostContext] Well known directory 'Bin': 'D:\cicd\actions-runner\bin'
+[2026-09-30 19:25:21Z INFO HostContext] Well known directory 'Root': 'D:\cicd\actions-runner'
+[2026-09-30 19:25:21Z INFO HostContext] Well known directory 'Diag': 'D:\cicd\actions-runner\_diag'
+[2026-09-30 19:25:21Z INFO JobRunner] Starting the job execution context.
+[2026-09-30 19:25:21Z INFO HostContext] Well known directory 'Bin': 'D:\cicd\actions-runner\bin'
+[2026-09-30 19:25:21Z INFO HostContext] Well known directory 'Root': 'D:\cicd\actions-runner'
+[2026-09-30 19:25:21Z INFO HostContext] Well known directory 'Work': 'D:\cicd\actions-runner\_work'
+[2026-09-30 19:25:21Z INFO JobRunner] Validating directory permissions for: 'D:\cicd\actions-runner\_work'
+[2026-09-30 19:25:21Z INFO HostContext] Well known directory 'Bin': 'D:\cicd\actions-runner\bin'
+[2026-09-30 19:25:21Z INFO HostContext] Well known directory 'Root': 'D:\cicd\actions-runner'
+[2026-09-30 19:25:21Z INFO HostContext] Well known directory 'Work': 'D:\cicd\actions-runner\_work'
+[2026-09-30 19:25:21Z INFO HostContext] Well known directory 'Tools': 'D:\cicd\actions-runner\_work\_tool'
+[2026-09-30 19:25:21Z INFO HostContext] Well known directory 'Bin': 'D:\cicd\actions-runner\bin'
+[2026-09-30 19:25:21Z INFO HostContext] Well known directory 'Root': 'D:\cicd\actions-runner'
+[2026-09-30 19:25:21Z INFO HostContext] Well known directory 'Work': 'D:\cicd\actions-runner\_work'
+[2026-09-30 19:25:21Z INFO HostContext] Well known directory 'Temp': 'D:\cicd\actions-runner\_work\_temp'
+[2026-09-30 19:25:21Z INFO JobRunner] Getting job extension.
+[2026-09-30 19:25:21Z INFO JobRunner] Initialize job. Getting all job steps.
+[2026-09-30 19:25:21Z INFO HostContext] Well known directory 'Bin': 'D:\cicd\actions-runner\bin'
+[2026-09-30 19:25:21Z INFO HostContext] Well known directory 'Root': 'D:\cicd\actions-runner'
+[2026-09-30 19:25:21Z INFO HostContext] Well known directory 'Diag': 'D:\cicd\actions-runner\_diag'
+[2026-09-30 19:25:21Z INFO HostContext] Well known directory 'Bin': 'D:\cicd\actions-runner\bin'
+[2026-09-30 19:25:21Z INFO HostContext] Well known directory 'Root': 'D:\cicd\actions-runner'
+[2026-09-30 19:25:21Z INFO HostContext] Well known directory 'Diag': 'D:\cicd\actions-runner\_diag'
+[2026-09-30 19:25:21Z INFO HostContext] Well known directory 'Bin': 'D:\cicd\actions-runner\bin'
+[2026-09-30 19:25:21Z INFO HostContext] Well known directory 'Root': 'D:\cicd\actions-runner'
+[2026-09-30 19:25:21Z INFO HostContext] Well known config file 'Credentials': 'D:\cicd\actions-runner\.credentials'
+[2026-09-30 19:25:21Z INFO HostContext] Well known directory 'Bin': 'D:\cicd\actions-runner\bin'
+[2026-09-30 19:25:21Z INFO HostContext] Well known directory 'Root': 'D:\cicd\actions-runner'
+[2026-09-30 19:25:21Z INFO HostContext] Well known config file 'SetupInfo': 'D:\cicd\actions-runner\.setup_info'
+[2026-09-30 19:25:21Z INFO HostContext] Well known directory 'Bin': 'D:\cicd\actions-runner\bin'
+[2026-09-30 19:25:21Z INFO HostContext] Well known directory 'Root': 'D:\cicd\actions-runner'
+[2026-09-30 19:25:21Z INFO HostContext] Well known directory 'Work': 'D:\cicd\actions-runner\_work'
+[2026-09-30 19:25:21Z INFO PipelineDirectoryManager] Loading tracking config if exists: D:\cicd\actions-runner\_work\_PipelineMapping\***-ops/my-repo\PipelineFolder.json
+[2026-09-30 19:25:21Z INFO PipelineDirectoryManager] Updating job run properties.
+[2026-09-30 19:25:21Z INFO HostContext] Well known directory 'Bin': 'D:\cicd\actions-runner\bin'
+[2026-09-30 19:25:21Z INFO HostContext] Well known directory 'Root': 'D:\cicd\actions-runner'
+[2026-09-30 19:25:21Z INFO HostContext] Well known directory 'Work': 'D:\cicd\actions-runner\_work'
+[2026-09-30 19:25:21Z INFO HostContext] Well known directory 'Bin': 'D:\cicd\actions-runner\bin'
+[2026-09-30 19:25:21Z INFO HostContext] Well known directory 'Root': 'D:\cicd\actions-runner'
+[2026-09-30 19:25:21Z INFO HostContext] Well known directory 'Work': 'D:\cicd\actions-runner\_work'
+[2026-09-30 19:25:21Z INFO HostContext] Well known directory 'Bin': 'D:\cicd\actions-runner\bin'
+[2026-09-30 19:25:21Z INFO HostContext] Well known directory 'Root': 'D:\cicd\actions-runner'
+[2026-09-30 19:25:21Z INFO HostContext] Well known directory 'Work': 'D:\cicd\actions-runner\_work'
+[2026-09-30 19:25:21Z INFO JobExtension] Downloading actions
+[2026-09-30 19:25:21Z INFO HostContext] Well known directory 'Bin': 'D:\cicd\actions-runner\bin'
+[2026-09-30 19:25:21Z INFO HostContext] Well known directory 'Root': 'D:\cicd\actions-runner'
+[2026-09-30 19:25:21Z INFO HostContext] Well known directory 'Work': 'D:\cicd\actions-runner\_work'
+[2026-09-30 19:25:21Z INFO HostContext] Well known directory 'Actions': 'D:\cicd\actions-runner\_work\_actions'
+[2026-09-30 19:25:21Z INFO Worker] Listening for cancel message from the channel.
+[2026-09-30 19:25:21Z INFO Worker] Waiting for the job to complete or for a cancel message from the channel.
+[2026-09-30 19:25:22Z INFO ResultServer] Successfully started websocket client.
+[2026-09-30 19:25:22Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'e5245cf8-7b0c-4910-bf0b-088514f56aa0', success rate: 1/1.
+[2026-09-30 19:25:22Z INFO JobServerQueue] Job timeline record has been updated for the first time.
+[2026-09-30 19:25:22Z INFO HostContext] Well known directory 'Bin': 'D:\cicd\actions-runner\bin'
+[2026-09-30 19:25:22Z INFO HostContext] Well known directory 'Root': 'D:\cicd\actions-runner'
+[2026-09-30 19:25:22Z INFO HostContext] Well known directory 'Work': 'D:\cicd\actions-runner\_work'
+[2026-09-30 19:25:22Z INFO HostContext] Well known directory 'Actions': 'D:\cicd\actions-runner\_work\_actions'
+[2026-09-30 19:25:22Z INFO HostContext] Well known directory 'Bin': 'D:\cicd\actions-runner\bin'
+[2026-09-30 19:25:22Z INFO HostContext] Well known directory 'Root': 'D:\cicd\actions-runner'
+[2026-09-30 19:25:22Z INFO HostContext] Well known directory 'Work': 'D:\cicd\actions-runner\_work'
+[2026-09-30 19:25:22Z INFO HostContext] Well known directory 'Actions': 'D:\cicd\actions-runner\_work\_actions'
+[2026-09-30 19:25:22Z INFO ActionManager] Save archive 'https://codeload.github.com/actions/checkout/zip/11d5960a326750d5838078e36cf38b85af677262' into D:\cicd\actions-runner\_work\_actions\_temp_68d669dc-e2a7-40a2-8a99-a124e4b672f5\048ad3d0-8779-42f7-b2fc-d07a63e20857.zip.
+[2026-09-30 19:25:22Z INFO ActionManager] Using Basic token for action archive download.
+[2026-09-30 19:25:22Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'e5245cf8-7b0c-4910-bf0b-088514f56aa0', success rate: 1/1.
+[2026-09-30 19:25:23Z INFO ActionManager] Request URL: https://codeload.github.com/actions/checkout/zip/11d5960a326750d5838078e36cf38b85af677262 X-GitHub-Request-Id: C9EA:2C5589:0F0C:BB69:6ABD6224 Http Status: OK
+[2026-09-30 19:25:26Z INFO ActionManager] Finished getting action repository.
+[2026-09-30 19:25:26Z INFO HostContext] Well known directory 'Bin': 'D:\cicd\actions-runner\bin'
+[2026-09-30 19:25:26Z INFO HostContext] Well known directory 'Root': 'D:\cicd\actions-runner'
+[2026-09-30 19:25:26Z INFO HostContext] Well known directory 'Work': 'D:\cicd\actions-runner\_work'
+[2026-09-30 19:25:26Z INFO HostContext] Well known directory 'Actions': 'D:\cicd\actions-runner\_work\_actions'
+[2026-09-30 19:25:26Z INFO ActionManifestManagerLegacy] Load schema file with definitions: [
+  "null",
+  "boolean",
+  "number",
+  "string",
+  "sequence",
+  "mapping",
+  "any",
+  "action-root",
+  "inputs",
+  "input",
+  "outputs",
+  "output-definition",
+  "runs",
+  "container-runs",
+  "container-runs-args",
+  "container-runs-env",
+  "node-runs",
+  "plugin-runs",
+  "composite-runs",
+  "composite-steps",
+  "composite-step",
+  "run-step",
+  "uses-step",
+  "container-runs-context",
+  "output-value",
+  "input-default-context",
+  "non-empty-string",
+  "string-steps-context",
+  "boolean-steps-context",
+  "step-env",
+  "step-if",
+  "step-with"
+]
+[2026-09-30 19:25:26Z INFO ActionManifestManager] Load schema file with definitions: [
+  "null",
+  "boolean",
+  "number",
+  "string",
+  "sequence",
+  "mapping",
+  "any",
+  "action-root",
+  "inputs",
+  "input",
+  "outputs",
+  "output-definition",
+  "runs",
+  "container-runs",
+  "container-runs-args",
+  "container-runs-env",
+  "node-runs",
+  "plugin-runs",
+  "composite-runs",
+  "composite-steps",
+  "composite-step",
+  "run-step",
+  "uses-step",
+  "container-runs-context",
+  "output-value",
+  "input-default-context",
+  "non-empty-string",
+  "string-steps-context",
+  "boolean-steps-context",
+  "step-env",
+  "step-if",
+  "step-with"
+]
+[2026-09-30 19:25:26Z INFO HostContext] Well known directory 'Bin': 'D:\cicd\actions-runner\bin'
+[2026-09-30 19:25:26Z INFO HostContext] Well known directory 'Root': 'D:\cicd\actions-runner'
+[2026-09-30 19:25:26Z INFO HostContext] Well known directory 'Work': 'D:\cicd\actions-runner\_work'
+[2026-09-30 19:25:26Z INFO HostContext] Well known directory 'Actions': 'D:\cicd\actions-runner\_work\_actions'
+[2026-09-30 19:25:27Z INFO ActionManifestManagerLegacy] Loaded action.yml file: {
+  "name": "Checkout",
+  "description": "Checkout a Git repository at a particular version",
+  "inputs": {
+    "type": 2,
+    "map": [
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 4,
+          "col": 3,
+          "lit": "repository"
+        },
+        "value": {
+          "type": 3,
+          "file": 2,
+          "line": 6,
+          "col": 14,
+          "expr": "github.repository"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 7,
+          "col": 3,
+          "lit": "ref"
+        },
+        "value": ""
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 12,
+          "col": 3,
+          "lit": "token"
+        },
+        "value": {
+          "type": 3,
+          "file": 2,
+          "line": 24,
+          "col": 14,
+          "expr": "github.token"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 25,
+          "col": 3,
+          "lit": "ssh-key"
+        },
+        "value": ""
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 37,
+          "col": 3,
+          "lit": "ssh-known-hosts"
+        },
+        "value": ""
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 42,
+          "col": 3,
+          "lit": "ssh-strict"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 47,
+          "col": 14,
+          "lit": "true"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 48,
+          "col": 3,
+          "lit": "ssh-user"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 51,
+          "col": 14,
+          "lit": "git"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 52,
+          "col": 3,
+          "lit": "persist-credentials"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 54,
+          "col": 14,
+          "lit": "true"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 55,
+          "col": 3,
+          "lit": "path"
+        },
+        "value": ""
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 57,
+          "col": 3,
+          "lit": "clean"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 59,
+          "col": 14,
+          "lit": "true"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 60,
+          "col": 3,
+          "lit": "filter"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 64,
+          "col": 14,
+          "lit": ""
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 65,
+          "col": 3,
+          "lit": "sparse-checkout"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 69,
+          "col": 14,
+          "lit": ""
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 70,
+          "col": 3,
+          "lit": "sparse-checkout-cone-mode"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 73,
+          "col": 14,
+          "lit": "true"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 74,
+          "col": 3,
+          "lit": "fetch-depth"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 76,
+          "col": 14,
+          "lit": "1"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 77,
+          "col": 3,
+          "lit": "fetch-tags"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 79,
+          "col": 14,
+          "lit": "false"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 80,
+          "col": 3,
+          "lit": "show-progress"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 82,
+          "col": 14,
+          "lit": "true"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 83,
+          "col": 3,
+          "lit": "lfs"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 85,
+          "col": 14,
+          "lit": "false"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 86,
+          "col": 3,
+          "lit": "submodules"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 94,
+          "col": 14,
+          "lit": "false"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 95,
+          "col": 3,
+          "lit": "set-safe-directory"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 97,
+          "col": 14,
+          "lit": "true"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 98,
+          "col": 3,
+          "lit": "github-server-url"
+        },
+        "value": ""
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 101,
+          "col": 3,
+          "lit": "allow-unsafe-pr-checkout"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 109,
+          "col": 14,
+          "lit": "false"
+        }
+      }
+    ]
+  },
+  "execution": {
+    "executionType": "nodeJS",
+    "hasPre": false,
+    "hasPost": true,
+    "script": "dist/index.js",
+    "pre": null,
+    "post": "dist/index.js",
+    "nodeVersion": "node20",
+    "cleanupCondition": "always()",
+    "initCondition": "always()"
+  },
+  "deprecated": null
+}
+[2026-09-30 19:25:27Z INFO ActionManager] Action node.js file: dist/index.js, no more preparation.
+[2026-09-30 19:25:27Z INFO HostContext] Well known directory 'Bin': 'D:\cicd\actions-runner\bin'
+[2026-09-30 19:25:27Z INFO HostContext] Well known directory 'Root': 'D:\cicd\actions-runner'
+[2026-09-30 19:25:27Z INFO HostContext] Well known directory 'Work': 'D:\cicd\actions-runner\_work'
+[2026-09-30 19:25:27Z INFO HostContext] Well known directory 'Actions': 'D:\cicd\actions-runner\_work\_actions'
+[2026-09-30 19:25:27Z INFO ActionManager] Load action that reference repository from 'D:\cicd\actions-runner\_work\_actions\actions\checkout\v4'
+[2026-09-30 19:25:27Z INFO HostContext] Well known directory 'Bin': 'D:\cicd\actions-runner\bin'
+[2026-09-30 19:25:27Z INFO HostContext] Well known directory 'Root': 'D:\cicd\actions-runner'
+[2026-09-30 19:25:27Z INFO HostContext] Well known directory 'Work': 'D:\cicd\actions-runner\_work'
+[2026-09-30 19:25:27Z INFO HostContext] Well known directory 'Actions': 'D:\cicd\actions-runner\_work\_actions'
+[2026-09-30 19:25:27Z INFO ActionManifestManagerLegacy] Loaded action.yml file: {
+  "name": "Checkout",
+  "description": "Checkout a Git repository at a particular version",
+  "inputs": {
+    "type": 2,
+    "map": [
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 4,
+          "col": 3,
+          "lit": "repository"
+        },
+        "value": {
+          "type": 3,
+          "file": 2,
+          "line": 6,
+          "col": 14,
+          "expr": "github.repository"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 7,
+          "col": 3,
+          "lit": "ref"
+        },
+        "value": ""
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 12,
+          "col": 3,
+          "lit": "token"
+        },
+        "value": {
+          "type": 3,
+          "file": 2,
+          "line": 24,
+          "col": 14,
+          "expr": "github.token"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 25,
+          "col": 3,
+          "lit": "ssh-key"
+        },
+        "value": ""
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 37,
+          "col": 3,
+          "lit": "ssh-known-hosts"
+        },
+        "value": ""
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 42,
+          "col": 3,
+          "lit": "ssh-strict"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 47,
+          "col": 14,
+          "lit": "true"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 48,
+          "col": 3,
+          "lit": "ssh-user"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 51,
+          "col": 14,
+          "lit": "git"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 52,
+          "col": 3,
+          "lit": "persist-credentials"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 54,
+          "col": 14,
+          "lit": "true"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 55,
+          "col": 3,
+          "lit": "path"
+        },
+        "value": ""
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 57,
+          "col": 3,
+          "lit": "clean"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 59,
+          "col": 14,
+          "lit": "true"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 60,
+          "col": 3,
+          "lit": "filter"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 64,
+          "col": 14,
+          "lit": ""
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 65,
+          "col": 3,
+          "lit": "sparse-checkout"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 69,
+          "col": 14,
+          "lit": ""
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 70,
+          "col": 3,
+          "lit": "sparse-checkout-cone-mode"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 73,
+          "col": 14,
+          "lit": "true"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 74,
+          "col": 3,
+          "lit": "fetch-depth"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 76,
+          "col": 14,
+          "lit": "1"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 77,
+          "col": 3,
+          "lit": "fetch-tags"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 79,
+          "col": 14,
+          "lit": "false"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 80,
+          "col": 3,
+          "lit": "show-progress"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 82,
+          "col": 14,
+          "lit": "true"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 83,
+          "col": 3,
+          "lit": "lfs"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 85,
+          "col": 14,
+          "lit": "false"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 86,
+          "col": 3,
+          "lit": "submodules"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 94,
+          "col": 14,
+          "lit": "false"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 95,
+          "col": 3,
+          "lit": "set-safe-directory"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 97,
+          "col": 14,
+          "lit": "true"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 98,
+          "col": 3,
+          "lit": "github-server-url"
+        },
+        "value": ""
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 101,
+          "col": 3,
+          "lit": "allow-unsafe-pr-checkout"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 109,
+          "col": 14,
+          "lit": "false"
+        }
+      }
+    ]
+  },
+  "execution": {
+    "executionType": "nodeJS",
+    "hasPre": false,
+    "hasPost": true,
+    "script": "dist/index.js",
+    "pre": null,
+    "post": "dist/index.js",
+    "nodeVersion": "node20",
+    "cleanupCondition": "always()",
+    "initCondition": "always()"
+  },
+  "deprecated": null
+}
+[2026-09-30 19:25:27Z INFO ActionManager] Action pre node.js file: N/A.
+[2026-09-30 19:25:27Z INFO ActionManager] Action node.js file: dist/index.js.
+[2026-09-30 19:25:27Z INFO ActionManager] Action post node.js file: dist/index.js.
+[2026-09-30 19:25:27Z INFO JobExtension] Adding .
+[2026-09-30 19:25:27Z INFO JobExtension] Adding .
+[2026-09-30 19:25:27Z INFO JobExtension] Adding .
+[2026-09-30 19:25:27Z INFO JobExtension] Adding .
+[2026-09-30 19:25:27Z INFO JobExtension] Adding .
+[2026-09-30 19:25:27Z INFO JobExtension] Adding .
+[2026-09-30 19:25:27Z INFO JobExtension] Adding .
+[2026-09-30 19:25:27Z INFO JobExtension] Adding .
+[2026-09-30 19:25:27Z INFO JobExtension] Adding .
+[2026-09-30 19:25:27Z INFO HostContext] Well known directory 'Bin': 'D:\cicd\actions-runner\bin'
+[2026-09-30 19:25:27Z INFO HostContext] Well known directory 'Root': 'D:\cicd\actions-runner'
+[2026-09-30 19:25:27Z INFO HostContext] Well known directory 'Diag': 'D:\cicd\actions-runner\_diag'
+[2026-09-30 19:25:27Z INFO HostContext] Well known directory 'Bin': 'D:\cicd\actions-runner\bin'
+[2026-09-30 19:25:27Z INFO HostContext] Well known directory 'Root': 'D:\cicd\actions-runner'
+[2026-09-30 19:25:27Z INFO HostContext] Well known directory 'Diag': 'D:\cicd\actions-runner\_diag'
+[2026-09-30 19:25:27Z INFO HostContext] Well known directory 'Bin': 'D:\cicd\actions-runner\bin'
+[2026-09-30 19:25:27Z INFO HostContext] Well known directory 'Root': 'D:\cicd\actions-runner'
+[2026-09-30 19:25:27Z INFO HostContext] Well known directory 'Diag': 'D:\cicd\actions-runner\_diag'
+[2026-09-30 19:25:27Z INFO HostContext] Well known directory 'Bin': 'D:\cicd\actions-runner\bin'
+[2026-09-30 19:25:27Z INFO HostContext] Well known directory 'Root': 'D:\cicd\actions-runner'
+[2026-09-30 19:25:27Z INFO HostContext] Well known directory 'Diag': 'D:\cicd\actions-runner\_diag'
+[2026-09-30 19:25:27Z INFO HostContext] Well known directory 'Bin': 'D:\cicd\actions-runner\bin'
+[2026-09-30 19:25:27Z INFO HostContext] Well known directory 'Root': 'D:\cicd\actions-runner'
+[2026-09-30 19:25:27Z INFO HostContext] Well known directory 'Diag': 'D:\cicd\actions-runner\_diag'
+[2026-09-30 19:25:27Z INFO HostContext] Well known directory 'Bin': 'D:\cicd\actions-runner\bin'
+[2026-09-30 19:25:27Z INFO HostContext] Well known directory 'Root': 'D:\cicd\actions-runner'
+[2026-09-30 19:25:27Z INFO HostContext] Well known directory 'Diag': 'D:\cicd\actions-runner\_diag'
+[2026-09-30 19:25:27Z INFO HostContext] Well known directory 'Bin': 'D:\cicd\actions-runner\bin'
+[2026-09-30 19:25:27Z INFO HostContext] Well known directory 'Root': 'D:\cicd\actions-runner'
+[2026-09-30 19:25:27Z INFO HostContext] Well known directory 'Diag': 'D:\cicd\actions-runner\_diag'
+[2026-09-30 19:25:27Z INFO HostContext] Well known directory 'Bin': 'D:\cicd\actions-runner\bin'
+[2026-09-30 19:25:27Z INFO HostContext] Well known directory 'Root': 'D:\cicd\actions-runner'
+[2026-09-30 19:25:27Z INFO HostContext] Well known directory 'Diag': 'D:\cicd\actions-runner\_diag'
+[2026-09-30 19:25:27Z INFO HostContext] Well known directory 'Bin': 'D:\cicd\actions-runner\bin'
+[2026-09-30 19:25:27Z INFO HostContext] Well known directory 'Root': 'D:\cicd\actions-runner'
+[2026-09-30 19:25:27Z INFO HostContext] Well known directory 'Diag': 'D:\cicd\actions-runner\_diag'
+[2026-09-30 19:25:27Z INFO HostContext] Well known directory 'Bin': 'D:\cicd\actions-runner\bin'
+[2026-09-30 19:25:27Z INFO HostContext] Well known directory 'Root': 'D:\cicd\actions-runner'
+[2026-09-30 19:25:27Z INFO HostContext] Well known directory 'Diag': 'D:\cicd\actions-runner\_diag'
+[2026-09-30 19:25:27Z INFO HostContext] Well known directory 'Bin': 'D:\cicd\actions-runner\bin'
+[2026-09-30 19:25:27Z INFO HostContext] Well known directory 'Root': 'D:\cicd\actions-runner'
+[2026-09-30 19:25:27Z INFO HostContext] Well known directory 'Diag': 'D:\cicd\actions-runner\_diag'
+[2026-09-30 19:25:27Z INFO HostContext] Well known directory 'Bin': 'D:\cicd\actions-runner\bin'
+[2026-09-30 19:25:27Z INFO HostContext] Well known directory 'Root': 'D:\cicd\actions-runner'
+[2026-09-30 19:25:27Z INFO HostContext] Well known directory 'Diag': 'D:\cicd\actions-runner\_diag'
+[2026-09-30 19:25:27Z INFO HostContext] Well known directory 'Bin': 'D:\cicd\actions-runner\bin'
+[2026-09-30 19:25:27Z INFO HostContext] Well known directory 'Root': 'D:\cicd\actions-runner'
+[2026-09-30 19:25:27Z INFO HostContext] Well known directory 'Diag': 'D:\cicd\actions-runner\_diag'
+[2026-09-30 19:25:27Z INFO HostContext] Well known directory 'Bin': 'D:\cicd\actions-runner\bin'
+[2026-09-30 19:25:27Z INFO HostContext] Well known directory 'Root': 'D:\cicd\actions-runner'
+[2026-09-30 19:25:27Z INFO HostContext] Well known directory 'Diag': 'D:\cicd\actions-runner\_diag'
+[2026-09-30 19:25:27Z INFO HostContext] Well known directory 'Bin': 'D:\cicd\actions-runner\bin'
+[2026-09-30 19:25:27Z INFO HostContext] Well known directory 'Root': 'D:\cicd\actions-runner'
+[2026-09-30 19:25:27Z INFO HostContext] Well known directory 'Diag': 'D:\cicd\actions-runner\_diag'
+[2026-09-30 19:25:27Z INFO HostContext] Well known directory 'Bin': 'D:\cicd\actions-runner\bin'
+[2026-09-30 19:25:27Z INFO HostContext] Well known directory 'Root': 'D:\cicd\actions-runner'
+[2026-09-30 19:25:27Z INFO HostContext] Well known directory 'Diag': 'D:\cicd\actions-runner\_diag'
+[2026-09-30 19:25:27Z INFO HostContext] Well known directory 'Bin': 'D:\cicd\actions-runner\bin'
+[2026-09-30 19:25:27Z INFO HostContext] Well known directory 'Root': 'D:\cicd\actions-runner'
+[2026-09-30 19:25:27Z INFO HostContext] Well known directory 'Diag': 'D:\cicd\actions-runner\_diag'
+[2026-09-30 19:25:27Z INFO HostContext] Well known directory 'Bin': 'D:\cicd\actions-runner\bin'
+[2026-09-30 19:25:27Z INFO HostContext] Well known directory 'Root': 'D:\cicd\actions-runner'
+[2026-09-30 19:25:27Z INFO HostContext] Well known directory 'Diag': 'D:\cicd\actions-runner\_diag'
+[2026-09-30 19:25:27Z INFO JobExtension] Total accessible running process: 355.
+[2026-09-30 19:25:27Z INFO HostContext] Well known directory 'Bin': 'D:\cicd\actions-runner\bin'
+[2026-09-30 19:25:27Z INFO HostContext] Well known directory 'Root': 'D:\cicd\actions-runner'
+[2026-09-30 19:25:27Z INFO HostContext] Well known directory 'Work': 'D:\cicd\actions-runner\_work'
+[2026-09-30 19:25:27Z INFO JobExtension] Start checking server connectivity.
+[2026-09-30 19:25:27Z INFO JobExtension] Check server connectivity for https://broker.actions.githubusercontent.com/health.
+[2026-09-30 19:25:27Z INFO JobExtension] Check server connectivity for https://token.actions.githubusercontent.com/ready.
+[2026-09-30 19:25:27Z INFO JobExtension] Check server connectivity for https://run.actions.githubusercontent.com/health.
+[2026-09-30 19:25:27Z INFO JobExtension] Start checking service connectivity in background.
+[2026-09-30 19:25:27Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'e5245cf8-7b0c-4910-bf0b-088514f56aa0', success rate: 1/1.
+[2026-09-30 19:25:27Z INFO ExecutionContext] Publish step telemetry for current step {
+  "action": "setup_job",
+  "type": "runner",
+  "stage": "Pre",
+  "stepId": "e5245cf8-7b0c-4910-bf0b-088514f56aa0",
+  "result": "succeeded",
+  "errorMessages": [],
+  "executionTimeInSeconds": 7,
+  "startTime": "2026-09-30T19:25:21.0802621Z",
+  "finishTime": "2026-09-30T19:25:27.3999808Z"
+}.
+[2026-09-30 19:25:27Z INFO JobRunner] Total job steps: 9.
+[2026-09-30 19:25:27Z INFO JobRunner] Run all job steps.
+[2026-09-30 19:25:27Z INFO DapDebugger] DapDebugger initialized
+[2026-09-30 19:25:27Z INFO StepsRunner] Processing step: DisplayName='Checkout Code'
+[2026-09-30 19:25:27Z INFO StepsRunner] Evaluating: success()
+[2026-09-30 19:25:27Z INFO StepsRunner] Result: true
+[2026-09-30 19:25:27Z INFO StepsRunner] Starting the step.
+[2026-09-30 19:25:27Z INFO HostContext] Well known directory 'Bin': 'D:\cicd\actions-runner\bin'
+[2026-09-30 19:25:27Z INFO HostContext] Well known directory 'Root': 'D:\cicd\actions-runner'
+[2026-09-30 19:25:27Z INFO HostContext] Well known directory 'Work': 'D:\cicd\actions-runner\_work'
+[2026-09-30 19:25:27Z INFO StepsRunner] Which2: 'chcp'
+[2026-09-30 19:25:27Z INFO StepsRunner] Location: 'C:\WINDOWS\system32\chcp.COM'
+[2026-09-30 19:25:27Z INFO ProcessInvokerWrapper] Starting process:
+[2026-09-30 19:25:27Z INFO ProcessInvokerWrapper]   File name: 'C:\WINDOWS\system32\chcp.COM'
+[2026-09-30 19:25:27Z INFO ProcessInvokerWrapper]   Arguments: '65001'
+[2026-09-30 19:25:27Z INFO ProcessInvokerWrapper]   Working directory: 'D:\cicd\actions-runner\_work'
+[2026-09-30 19:25:27Z INFO ProcessInvokerWrapper]   Require exit code zero: 'False'
+[2026-09-30 19:25:27Z INFO ProcessInvokerWrapper]   Encoding web name:  ; code page: ''
+[2026-09-30 19:25:27Z INFO ProcessInvokerWrapper]   Force kill process on cancellation: 'False'
+[2026-09-30 19:25:27Z INFO ProcessInvokerWrapper]   Redirected STDIN: 'False'
+[2026-09-30 19:25:27Z INFO ProcessInvokerWrapper]   Persist current code page: 'True'
+[2026-09-30 19:25:27Z INFO ProcessInvokerWrapper]   Keep redirected STDIN open: 'False'
+[2026-09-30 19:25:27Z INFO ProcessInvokerWrapper]   High priority process: 'False'
+[2026-09-30 19:25:27Z INFO ProcessInvokerWrapper] Process started with process id 4424, waiting for process exit.
+[2026-09-30 19:25:27Z INFO ProcessInvokerWrapper] STDOUT/STDERR stream read finished.
+[2026-09-30 19:25:27Z INFO ProcessInvokerWrapper] STDOUT/STDERR stream read finished.
+[2026-09-30 19:25:27Z INFO ProcessInvokerWrapper] Finished process 4424 with exit code 0, and elapsed time 00:00:00.0547597.
+[2026-09-30 19:25:27Z INFO StepsRunner] Successfully returned to code page 65001 (UTF8)
+[2026-09-30 19:25:27Z INFO HostContext] Well known directory 'Bin': 'D:\cicd\actions-runner\bin'
+[2026-09-30 19:25:27Z INFO HostContext] Well known directory 'Root': 'D:\cicd\actions-runner'
+[2026-09-30 19:25:27Z INFO HostContext] Well known directory 'Work': 'D:\cicd\actions-runner\_work'
+[2026-09-30 19:25:27Z INFO HostContext] Well known directory 'Actions': 'D:\cicd\actions-runner\_work\_actions'
+[2026-09-30 19:25:27Z INFO ActionManager] Load action that reference repository from 'D:\cicd\actions-runner\_work\_actions\actions\checkout\v4'
+[2026-09-30 19:25:27Z INFO HostContext] Well known directory 'Bin': 'D:\cicd\actions-runner\bin'
+[2026-09-30 19:25:27Z INFO HostContext] Well known directory 'Root': 'D:\cicd\actions-runner'
+[2026-09-30 19:25:27Z INFO HostContext] Well known directory 'Work': 'D:\cicd\actions-runner\_work'
+[2026-09-30 19:25:27Z INFO HostContext] Well known directory 'Actions': 'D:\cicd\actions-runner\_work\_actions'
+[2026-09-30 19:25:27Z INFO ActionManifestManagerLegacy] Loaded action.yml file: {
+  "name": "Checkout",
+  "description": "Checkout a Git repository at a particular version",
+  "inputs": {
+    "type": 2,
+    "map": [
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 4,
+          "col": 3,
+          "lit": "repository"
+        },
+        "value": {
+          "type": 3,
+          "file": 2,
+          "line": 6,
+          "col": 14,
+          "expr": "github.repository"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 7,
+          "col": 3,
+          "lit": "ref"
+        },
+        "value": ""
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 12,
+          "col": 3,
+          "lit": "token"
+        },
+        "value": {
+          "type": 3,
+          "file": 2,
+          "line": 24,
+          "col": 14,
+          "expr": "github.token"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 25,
+          "col": 3,
+          "lit": "ssh-key"
+        },
+        "value": ""
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 37,
+          "col": 3,
+          "lit": "ssh-known-hosts"
+        },
+        "value": ""
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 42,
+          "col": 3,
+          "lit": "ssh-strict"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 47,
+          "col": 14,
+          "lit": "true"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 48,
+          "col": 3,
+          "lit": "ssh-user"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 51,
+          "col": 14,
+          "lit": "git"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 52,
+          "col": 3,
+          "lit": "persist-credentials"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 54,
+          "col": 14,
+          "lit": "true"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 55,
+          "col": 3,
+          "lit": "path"
+        },
+        "value": ""
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 57,
+          "col": 3,
+          "lit": "clean"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 59,
+          "col": 14,
+          "lit": "true"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 60,
+          "col": 3,
+          "lit": "filter"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 64,
+          "col": 14,
+          "lit": ""
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 65,
+          "col": 3,
+          "lit": "sparse-checkout"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 69,
+          "col": 14,
+          "lit": ""
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 70,
+          "col": 3,
+          "lit": "sparse-checkout-cone-mode"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 73,
+          "col": 14,
+          "lit": "true"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 74,
+          "col": 3,
+          "lit": "fetch-depth"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 76,
+          "col": 14,
+          "lit": "1"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 77,
+          "col": 3,
+          "lit": "fetch-tags"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 79,
+          "col": 14,
+          "lit": "false"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 80,
+          "col": 3,
+          "lit": "show-progress"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 82,
+          "col": 14,
+          "lit": "true"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 83,
+          "col": 3,
+          "lit": "lfs"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 85,
+          "col": 14,
+          "lit": "false"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 86,
+          "col": 3,
+          "lit": "submodules"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 94,
+          "col": 14,
+          "lit": "false"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 95,
+          "col": 3,
+          "lit": "set-safe-directory"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 97,
+          "col": 14,
+          "lit": "true"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 98,
+          "col": 3,
+          "lit": "github-server-url"
+        },
+        "value": ""
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 101,
+          "col": 3,
+          "lit": "allow-unsafe-pr-checkout"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 109,
+          "col": 14,
+          "lit": "false"
+        }
+      }
+    ]
+  },
+  "execution": {
+    "executionType": "nodeJS",
+    "hasPre": false,
+    "hasPost": true,
+    "script": "dist/index.js",
+    "pre": null,
+    "post": "dist/index.js",
+    "nodeVersion": "node20",
+    "cleanupCondition": "always()",
+    "initCondition": "always()"
+  },
+  "deprecated": null
+}
+[2026-09-30 19:25:27Z INFO ActionManager] Action pre node.js file: N/A.
+[2026-09-30 19:25:27Z INFO ActionManager] Action node.js file: dist/index.js.
+[2026-09-30 19:25:27Z INFO ActionManager] Action post node.js file: dist/index.js.
+[2026-09-30 19:25:27Z INFO ExecutionContext] Reserve record order 11 to 20 for post job actions.
+[2026-09-30 19:25:27Z INFO HostContext] Well known directory 'Bin': 'D:\cicd\actions-runner\bin'
+[2026-09-30 19:25:27Z INFO HostContext] Well known directory 'Root': 'D:\cicd\actions-runner'
+[2026-09-30 19:25:27Z INFO HostContext] Well known directory 'Diag': 'D:\cicd\actions-runner\_diag'
+[2026-09-30 19:25:27Z INFO HostContext] Well known directory 'Bin': 'D:\cicd\actions-runner\bin'
+[2026-09-30 19:25:27Z INFO HostContext] Well known directory 'Root': 'D:\cicd\actions-runner'
+[2026-09-30 19:25:27Z INFO HostContext] Well known directory 'Diag': 'D:\cicd\actions-runner\_diag'
+[2026-09-30 19:25:27Z INFO HostContext] Well known directory 'Bin': 'D:\cicd\actions-runner\bin'
+[2026-09-30 19:25:27Z INFO HostContext] Well known directory 'Root': 'D:\cicd\actions-runner'
+[2026-09-30 19:25:27Z INFO HostContext] Well known directory 'Work': 'D:\cicd\actions-runner\_work'
+[2026-09-30 19:25:27Z INFO HostContext] Well known directory 'Temp': 'D:\cicd\actions-runner\_work\_temp'
+[2026-09-30 19:25:27Z INFO ExecutionContext] Write event payload to D:\cicd\actions-runner\_work\_temp\_github_workflow\event.json
+[2026-09-30 19:25:27Z INFO HostContext] Well known directory 'Bin': 'D:\cicd\actions-runner\bin'
+[2026-09-30 19:25:27Z INFO HostContext] Well known directory 'Root': 'D:\cicd\actions-runner'
+[2026-09-30 19:25:27Z INFO HostContext] Well known directory 'Work': 'D:\cicd\actions-runner\_work'
+[2026-09-30 19:25:27Z INFO HostContext] Well known directory 'Temp': 'D:\cicd\actions-runner\_work\_temp'
+[2026-09-30 19:25:27Z INFO ExtensionManager] Getting extensions for interface: 'GitHub.Runner.Worker.IFileCommandExtension'
+[2026-09-30 19:25:27Z INFO ExtensionManager] Creating instance: GitHub.Runner.Worker.AddPathFileCommand, Runner.Worker
+[2026-09-30 19:25:27Z INFO ExtensionManager] Creating instance: GitHub.Runner.Worker.SetEnvFileCommand, Runner.Worker
+[2026-09-30 19:25:27Z INFO ExtensionManager] Creating instance: GitHub.Runner.Worker.CreateStepSummaryCommand, Runner.Worker
+[2026-09-30 19:25:27Z INFO ExtensionManager] Creating instance: GitHub.Runner.Worker.SaveStateFileCommand, Runner.Worker
+[2026-09-30 19:25:27Z INFO ExtensionManager] Creating instance: GitHub.Runner.Worker.SetOutputFileCommand, Runner.Worker
+[2026-09-30 19:25:27Z INFO ExtensionManager] Creating instance: GitHub.Runner.Worker.CreateArtifactsFileCommand, Runner.Worker
+[2026-09-30 19:25:27Z INFO ExtensionManager] Creating instance: GitHub.Runner.Worker.ArtifactsListFileCommand, Runner.Worker
+[2026-09-30 19:25:27Z INFO ActionManifestManagerLegacy] Input 'repository': default value evaluate result: {
+  "type": 0,
+  "file": 2,
+  "line": 6,
+  "col": 14,
+  "lit": "***-ops/my-repo"
+}
+[2026-09-30 19:25:27Z INFO ActionManifestManagerLegacy] Input 'ref': default value evaluate result: ""
+[2026-09-30 19:25:27Z INFO ActionManifestManagerLegacy] Input 'token': default value evaluate result: {
+  "type": 0,
+  "file": 2,
+  "line": 24,
+  "col": 14,
+  "lit": "***"
+}
+[2026-09-30 19:25:27Z INFO ActionManifestManagerLegacy] Input 'ssh-key': default value evaluate result: ""
+[2026-09-30 19:25:27Z INFO ActionManifestManagerLegacy] Input 'ssh-known-hosts': default value evaluate result: ""
+[2026-09-30 19:25:27Z INFO ActionManifestManagerLegacy] Input 'ssh-strict': default value evaluate result: {
+  "type": 0,
+  "file": 2,
+  "line": 47,
+  "col": 14,
+  "lit": "true"
+}
+[2026-09-30 19:25:27Z INFO ActionManifestManagerLegacy] Input 'ssh-user': default value evaluate result: {
+  "type": 0,
+  "file": 2,
+  "line": 51,
+  "col": 14,
+  "lit": "git"
+}
+[2026-09-30 19:25:27Z INFO ActionManifestManagerLegacy] Input 'persist-credentials': default value evaluate result: {
+  "type": 0,
+  "file": 2,
+  "line": 54,
+  "col": 14,
+  "lit": "true"
+}
+[2026-09-30 19:25:27Z INFO ActionManifestManagerLegacy] Input 'path': default value evaluate result: ""
+[2026-09-30 19:25:27Z INFO ActionManifestManagerLegacy] Input 'clean': default value evaluate result: {
+  "type": 0,
+  "file": 2,
+  "line": 59,
+  "col": 14,
+  "lit": "true"
+}
+[2026-09-30 19:25:27Z INFO ActionManifestManagerLegacy] Input 'filter': default value evaluate result: {
+  "type": 0,
+  "file": 2,
+  "line": 64,
+  "col": 14,
+  "lit": ""
+}
+[2026-09-30 19:25:27Z INFO ActionManifestManagerLegacy] Input 'sparse-checkout': default value evaluate result: {
+  "type": 0,
+  "file": 2,
+  "line": 69,
+  "col": 14,
+  "lit": ""
+}
+[2026-09-30 19:25:27Z INFO ActionManifestManagerLegacy] Input 'sparse-checkout-cone-mode': default value evaluate result: {
+  "type": 0,
+  "file": 2,
+  "line": 73,
+  "col": 14,
+  "lit": "true"
+}
+[2026-09-30 19:25:27Z INFO ActionManifestManagerLegacy] Input 'fetch-depth': default value evaluate result: {
+  "type": 0,
+  "file": 2,
+  "line": 76,
+  "col": 14,
+  "lit": "1"
+}
+[2026-09-30 19:25:27Z INFO ActionManifestManagerLegacy] Input 'fetch-tags': default value evaluate result: {
+  "type": 0,
+  "file": 2,
+  "line": 79,
+  "col": 14,
+  "lit": "false"
+}
+[2026-09-30 19:25:27Z INFO ActionManifestManagerLegacy] Input 'show-progress': default value evaluate result: {
+  "type": 0,
+  "file": 2,
+  "line": 82,
+  "col": 14,
+  "lit": "true"
+}
+[2026-09-30 19:25:27Z INFO ActionManifestManagerLegacy] Input 'lfs': default value evaluate result: {
+  "type": 0,
+  "file": 2,
+  "line": 85,
+  "col": 14,
+  "lit": "false"
+}
+[2026-09-30 19:25:27Z INFO ActionManifestManagerLegacy] Input 'submodules': default value evaluate result: {
+  "type": 0,
+  "file": 2,
+  "line": 94,
+  "col": 14,
+  "lit": "false"
+}
+[2026-09-30 19:25:27Z INFO ActionManifestManagerLegacy] Input 'set-safe-directory': default value evaluate result: {
+  "type": 0,
+  "file": 2,
+  "line": 97,
+  "col": 14,
+  "lit": "true"
+}
+[2026-09-30 19:25:27Z INFO ActionManifestManagerLegacy] Input 'github-server-url': default value evaluate result: ""
+[2026-09-30 19:25:27Z INFO ActionManifestManagerLegacy] Input 'allow-unsafe-pr-checkout': default value evaluate result: {
+  "type": 0,
+  "file": 2,
+  "line": 109,
+  "col": 14,
+  "lit": "false"
+}
+[2026-09-30 19:25:27Z INFO ExtensionManager] Getting extensions for interface: 'GitHub.Runner.Worker.IActionCommandExtension'
+[2026-09-30 19:25:27Z INFO ExtensionManager] Creating instance: GitHub.Runner.Worker.InternalPluginSetRepoPathCommandExtension, Runner.Worker
+[2026-09-30 19:25:27Z INFO ExtensionManager] Creating instance: GitHub.Runner.Worker.SetEnvCommandExtension, Runner.Worker
+[2026-09-30 19:25:27Z INFO ExtensionManager] Creating instance: GitHub.Runner.Worker.SetOutputCommandExtension, Runner.Worker
+[2026-09-30 19:25:27Z INFO ExtensionManager] Creating instance: GitHub.Runner.Worker.SaveStateCommandExtension, Runner.Worker
+[2026-09-30 19:25:27Z INFO ExtensionManager] Creating instance: GitHub.Runner.Worker.AddPathCommandExtension, Runner.Worker
+[2026-09-30 19:25:27Z INFO ExtensionManager] Creating instance: GitHub.Runner.Worker.AddMaskCommandExtension, Runner.Worker
+[2026-09-30 19:25:27Z INFO ExtensionManager] Creating instance: GitHub.Runner.Worker.AddMatcherCommandExtension, Runner.Worker
+[2026-09-30 19:25:27Z INFO ExtensionManager] Creating instance: GitHub.Runner.Worker.RemoveMatcherCommandExtension, Runner.Worker
+[2026-09-30 19:25:27Z INFO ExtensionManager] Creating instance: GitHub.Runner.Worker.WarningCommandExtension, Runner.Worker
+[2026-09-30 19:25:27Z INFO ExtensionManager] Creating instance: GitHub.Runner.Worker.ErrorCommandExtension, Runner.Worker
+[2026-09-30 19:25:27Z INFO ExtensionManager] Creating instance: GitHub.Runner.Worker.NoticeCommandExtension, Runner.Worker
+[2026-09-30 19:25:27Z INFO ExtensionManager] Creating instance: GitHub.Runner.Worker.DebugCommandExtension, Runner.Worker
+[2026-09-30 19:25:27Z INFO ExtensionManager] Creating instance: GitHub.Runner.Worker.GroupCommandExtension, Runner.Worker
+[2026-09-30 19:25:27Z INFO ExtensionManager] Creating instance: GitHub.Runner.Worker.EndGroupCommandExtension, Runner.Worker
+[2026-09-30 19:25:27Z INFO ExtensionManager] Creating instance: GitHub.Runner.Worker.EchoCommandExtension, Runner.Worker
+[2026-09-30 19:25:27Z INFO ActionCommandManager] Register action command extension for command internal-set-repo-path
+[2026-09-30 19:25:27Z INFO ActionCommandManager] Register action command extension for command set-env
+[2026-09-30 19:25:27Z INFO ActionCommandManager] Register action command extension for command set-output
+[2026-09-30 19:25:27Z INFO ActionCommandManager] Register action command extension for command save-state
+[2026-09-30 19:25:27Z INFO ActionCommandManager] Register action command extension for command add-path
+[2026-09-30 19:25:27Z INFO ActionCommandManager] Register action command extension for command add-mask
+[2026-09-30 19:25:27Z INFO ActionCommandManager] Register action command extension for command add-matcher
+[2026-09-30 19:25:27Z INFO ActionCommandManager] Register action command extension for command remove-matcher
+[2026-09-30 19:25:27Z INFO ActionCommandManager] Register action command extension for command warning
+[2026-09-30 19:25:27Z INFO ActionCommandManager] Register action command extension for command error
+[2026-09-30 19:25:27Z INFO ActionCommandManager] Register action command extension for command notice
+[2026-09-30 19:25:27Z INFO ActionCommandManager] Register action command extension for command debug
+[2026-09-30 19:25:27Z INFO ActionCommandManager] Register action command extension for command group
+[2026-09-30 19:25:27Z INFO ActionCommandManager] Register action command extension for command endgroup
+[2026-09-30 19:25:27Z INFO ActionCommandManager] Register action command extension for command echo
+[2026-09-30 19:25:27Z INFO HostContext] Well known directory 'Bin': 'D:\cicd\actions-runner\bin'
+[2026-09-30 19:25:27Z INFO HostContext] Well known directory 'Root': 'D:\cicd\actions-runner'
+[2026-09-30 19:25:27Z INFO HostContext] Well known directory 'Externals': 'D:\cicd\actions-runner\externals'
+[2026-09-30 19:25:27Z INFO ProcessInvokerWrapper] Starting process:
+[2026-09-30 19:25:27Z INFO ProcessInvokerWrapper]   File name: 'D:\cicd\actions-runner\externals\node24\bin\node.exe'
+[2026-09-30 19:25:27Z INFO ProcessInvokerWrapper]   Arguments: '"D:\cicd\actions-runner\_work\_actions\actions\checkout\v4\dist/index.js"'
+[2026-09-30 19:25:27Z INFO ProcessInvokerWrapper]   Working directory: 'D:\cicd\actions-runner\_work\my-repo\my-repo'
+[2026-09-30 19:25:27Z INFO ProcessInvokerWrapper]   Require exit code zero: 'False'
+[2026-09-30 19:25:27Z INFO ProcessInvokerWrapper]   Encoding web name: utf-8 ; code page: '65001'
+[2026-09-30 19:25:27Z INFO ProcessInvokerWrapper]   Force kill process on cancellation: 'False'
+[2026-09-30 19:25:27Z INFO ProcessInvokerWrapper]   Redirected STDIN: 'False'
+[2026-09-30 19:25:27Z INFO ProcessInvokerWrapper]   Persist current code page: 'True'
+[2026-09-30 19:25:27Z INFO ProcessInvokerWrapper]   Keep redirected STDIN open: 'False'
+[2026-09-30 19:25:27Z INFO ProcessInvokerWrapper]   High priority process: 'False'
+[2026-09-30 19:25:27Z INFO ProcessInvokerWrapper] Process started with process id 26720, waiting for process exit.
+[2026-09-30 19:25:27Z INFO JobServerQueue] Try to append 1 batches web console lines for record '39be5d59-d575-4438-b2eb-b703ae5c5fdc', success rate: 1/1.
+[2026-09-30 19:25:28Z INFO JobServerQueue] Try to upload 1 log files or attachments, success rate: 1/1.
+[2026-09-30 19:25:28Z INFO JobServerQueue] Got a step log file to send to results service.
+[2026-09-30 19:25:28Z INFO JobServerQueue] Starting upload of step log file to results service ResultsLog, D:\cicd\actions-runner\_diag\blocks\6c078622-02c2-80e4-b884-1b0faaf9f69e_e5245cf8-7b0c-4910-bf0b-088514f56aa0.1
+[2026-09-30 19:25:28Z INFO JobServerQueue] Try to append 1 batches web console lines for record '39be5d59-d575-4438-b2eb-b703ae5c5fdc', success rate: 1/1.
+[2026-09-30 19:25:29Z INFO AddMaskCommandExtension] Add new secret mask with length of 524
+[2026-09-30 19:25:29Z INFO JobServerQueue] Try to append 1 batches web console lines for record '39be5d59-d575-4438-b2eb-b703ae5c5fdc', success rate: 1/1.
+[2026-09-30 19:25:29Z INFO JobServerQueue] Try to append 1 batches web console lines for record '39be5d59-d575-4438-b2eb-b703ae5c5fdc', success rate: 1/1.
+[2026-09-30 19:25:29Z INFO JobServerQueue] Tried to upload 1 file(s) to results, success rate: 1/1.
+[2026-09-30 19:25:29Z INFO JobServerQueue] Try to append 1 batches web console lines for record '39be5d59-d575-4438-b2eb-b703ae5c5fdc', success rate: 1/1.
+[2026-09-30 19:25:30Z INFO JobServerQueue] Try to append 1 batches web console lines for record '39be5d59-d575-4438-b2eb-b703ae5c5fdc', success rate: 1/1.
+[2026-09-30 19:25:33Z INFO JobServerQueue] Try to append 1 batches web console lines for record '39be5d59-d575-4438-b2eb-b703ae5c5fdc', success rate: 1/1.
+[2026-09-30 19:25:34Z INFO JobServerQueue] Try to append 1 batches web console lines for record '39be5d59-d575-4438-b2eb-b703ae5c5fdc', success rate: 1/1.
+[2026-09-30 19:25:36Z INFO JobServerQueue] Try to append 1 batches web console lines for record '39be5d59-d575-4438-b2eb-b703ae5c5fdc', success rate: 1/1.
+[2026-09-30 19:25:36Z INFO JobServerQueue] Try to append 1 batches web console lines for record '39be5d59-d575-4438-b2eb-b703ae5c5fdc', success rate: 1/1.
+[2026-09-30 19:25:37Z INFO HostContext] Well known directory 'Bin': 'D:\cicd\actions-runner\bin'
+[2026-09-30 19:25:37Z INFO HostContext] Well known directory 'Root': 'D:\cicd\actions-runner'
+[2026-09-30 19:25:37Z INFO HostContext] Well known directory 'Work': 'D:\cicd\actions-runner\_work'
+[2026-09-30 19:25:38Z INFO JobServerQueue] Try to append 1 batches web console lines for record '39be5d59-d575-4438-b2eb-b703ae5c5fdc', success rate: 1/1.
+[2026-09-30 19:25:41Z INFO JobServerQueue] Try to append 1 batches web console lines for record '39be5d59-d575-4438-b2eb-b703ae5c5fdc', success rate: 1/1.
+[2026-09-30 19:25:42Z INFO JobServerQueue] Try to append 1 batches web console lines for record '39be5d59-d575-4438-b2eb-b703ae5c5fdc', success rate: 1/1.
+[2026-09-30 19:25:43Z INFO JobServerQueue] Try to append 1 batches web console lines for record '39be5d59-d575-4438-b2eb-b703ae5c5fdc', success rate: 1/1.
+[2026-09-30 19:25:43Z INFO JobServerQueue] Try to append 1 batches web console lines for record '39be5d59-d575-4438-b2eb-b703ae5c5fdc', success rate: 1/1.
+[2026-09-30 19:25:43Z INFO JobServerQueue] Try to append 1 batches web console lines for record '39be5d59-d575-4438-b2eb-b703ae5c5fdc', success rate: 1/1.
+[2026-09-30 19:25:43Z INFO ProcessInvokerWrapper] STDOUT/STDERR stream read finished.
+[2026-09-30 19:25:43Z INFO ProcessInvokerWrapper] STDOUT/STDERR stream read finished.
+[2026-09-30 19:25:43Z INFO ProcessInvokerWrapper] Finished process 26720 with exit code 0, and elapsed time 00:00:16.1688990.
+[2026-09-30 19:25:43Z INFO CreateStepSummaryCommand] Step Summary file (D:\cicd\actions-runner\_work\_temp\_runner_file_commands\step_summary_78dece71-673b-4f87-bd50-0f19da36595d) is empty; skipping attachment upload
+[2026-09-30 19:25:43Z INFO StepsRunner] Step result: 
+[2026-09-30 19:25:43Z INFO ExecutionContext] Publish step telemetry for current step {
+  "action": "actions/checkout",
+  "ref": "v4",
+  "type": "node24",
+  "stage": "Main",
+  "stepId": "39be5d59-d575-4438-b2eb-b703ae5c5fdc",
+  "stepContextName": "__actions_checkout",
+  "hasPreStep": false,
+  "hasPostStep": true,
+  "result": "succeeded",
+  "errorMessages": [],
+  "executionTimeInSeconds": 17,
+  "startTime": "2026-09-30T19:25:27.5101453Z",
+  "finishTime": "2026-09-30T19:25:43.9644407Z"
+}.
+[2026-09-30 19:25:43Z INFO StepsRunner] No need for updating job result with current step result 'Succeeded'.
+[2026-09-30 19:25:43Z INFO StepsRunner] Current state: job state = ''
+[2026-09-30 19:25:43Z INFO StepsRunner] Processing step: DisplayName='Docker Login'
+[2026-09-30 19:25:43Z INFO StepsRunner] Evaluating: success()
+[2026-09-30 19:25:43Z INFO StepsRunner] Result: true
+[2026-09-30 19:25:43Z INFO StepsRunner] Starting the step.
+[2026-09-30 19:25:43Z INFO HostContext] Well known directory 'Bin': 'D:\cicd\actions-runner\bin'
+[2026-09-30 19:25:43Z INFO HostContext] Well known directory 'Root': 'D:\cicd\actions-runner'
+[2026-09-30 19:25:43Z INFO HostContext] Well known directory 'Work': 'D:\cicd\actions-runner\_work'
+[2026-09-30 19:25:43Z INFO StepsRunner] Which2: 'chcp'
+[2026-09-30 19:25:43Z INFO StepsRunner] Location: 'C:\WINDOWS\system32\chcp.COM'
+[2026-09-30 19:25:43Z INFO ProcessInvokerWrapper] Starting process:
+[2026-09-30 19:25:43Z INFO ProcessInvokerWrapper]   File name: 'C:\WINDOWS\system32\chcp.COM'
+[2026-09-30 19:25:43Z INFO ProcessInvokerWrapper]   Arguments: '65001'
+[2026-09-30 19:25:43Z INFO ProcessInvokerWrapper]   Working directory: 'D:\cicd\actions-runner\_work'
+[2026-09-30 19:25:43Z INFO ProcessInvokerWrapper]   Require exit code zero: 'False'
+[2026-09-30 19:25:43Z INFO ProcessInvokerWrapper]   Encoding web name:  ; code page: ''
+[2026-09-30 19:25:43Z INFO ProcessInvokerWrapper]   Force kill process on cancellation: 'False'
+[2026-09-30 19:25:43Z INFO ProcessInvokerWrapper]   Redirected STDIN: 'False'
+[2026-09-30 19:25:43Z INFO ProcessInvokerWrapper]   Persist current code page: 'True'
+[2026-09-30 19:25:43Z INFO ProcessInvokerWrapper]   Keep redirected STDIN open: 'False'
+[2026-09-30 19:25:43Z INFO ProcessInvokerWrapper]   High priority process: 'False'
+[2026-09-30 19:25:43Z INFO ProcessInvokerWrapper] Process started with process id 18832, waiting for process exit.
+[2026-09-30 19:25:44Z INFO ProcessInvokerWrapper] STDOUT/STDERR stream read finished.
+[2026-09-30 19:25:44Z INFO ProcessInvokerWrapper] STDOUT/STDERR stream read finished.
+[2026-09-30 19:25:44Z INFO ProcessInvokerWrapper] Finished process 18832 with exit code 0, and elapsed time 00:00:00.0403563.
+[2026-09-30 19:25:44Z INFO StepsRunner] Successfully returned to code page 65001 (UTF8)
+[2026-09-30 19:25:44Z INFO HostContext] Well known directory 'Bin': 'D:\cicd\actions-runner\bin'
+[2026-09-30 19:25:44Z INFO HostContext] Well known directory 'Root': 'D:\cicd\actions-runner'
+[2026-09-30 19:25:44Z INFO HostContext] Well known directory 'Work': 'D:\cicd\actions-runner\_work'
+[2026-09-30 19:25:44Z INFO HostContext] Well known directory 'Temp': 'D:\cicd\actions-runner\_work\_temp'
+[2026-09-30 19:25:44Z INFO ExecutionContext] Write event payload to D:\cicd\actions-runner\_work\_temp\_github_workflow\event.json
+[2026-09-30 19:25:44Z INFO HostContext] Well known directory 'Bin': 'D:\cicd\actions-runner\bin'
+[2026-09-30 19:25:44Z INFO HostContext] Well known directory 'Root': 'D:\cicd\actions-runner'
+[2026-09-30 19:25:44Z INFO HostContext] Well known directory 'Work': 'D:\cicd\actions-runner\_work'
+[2026-09-30 19:25:44Z INFO HostContext] Well known directory 'Temp': 'D:\cicd\actions-runner\_work\_temp'
+[2026-09-30 19:25:44Z INFO ExtensionManager] Getting extensions for interface: 'GitHub.Runner.Worker.IFileCommandExtension'
+[2026-09-30 19:25:44Z INFO ExtensionManager] Getting extensions for interface: 'GitHub.Runner.Worker.IActionCommandExtension'
+[2026-09-30 19:25:44Z INFO ActionCommandManager] Register action command extension for command internal-set-repo-path
+[2026-09-30 19:25:44Z INFO ActionCommandManager] Register action command extension for command set-env
+[2026-09-30 19:25:44Z INFO ActionCommandManager] Register action command extension for command set-output
+[2026-09-30 19:25:44Z INFO ActionCommandManager] Register action command extension for command save-state
+[2026-09-30 19:25:44Z INFO ActionCommandManager] Register action command extension for command add-path
+[2026-09-30 19:25:44Z INFO ActionCommandManager] Register action command extension for command add-mask
+[2026-09-30 19:25:44Z INFO ActionCommandManager] Register action command extension for command add-matcher
+[2026-09-30 19:25:44Z INFO ActionCommandManager] Register action command extension for command remove-matcher
+[2026-09-30 19:25:44Z INFO ActionCommandManager] Register action command extension for command warning
+[2026-09-30 19:25:44Z INFO ActionCommandManager] Register action command extension for command error
+[2026-09-30 19:25:44Z INFO ActionCommandManager] Register action command extension for command notice
+[2026-09-30 19:25:44Z INFO ActionCommandManager] Register action command extension for command debug
+[2026-09-30 19:25:44Z INFO ActionCommandManager] Register action command extension for command group
+[2026-09-30 19:25:44Z INFO ActionCommandManager] Register action command extension for command endgroup
+[2026-09-30 19:25:44Z INFO ActionCommandManager] Register action command extension for command echo
+[2026-09-30 19:25:44Z INFO ScriptHandler] Which2: 'pwsh'
+[2026-09-30 19:25:44Z INFO ScriptHandler] Location: 'C:\Program Files\PowerShell\7\pwsh.EXE'
+[2026-09-30 19:25:44Z INFO HostContext] Well known directory 'Bin': 'D:\cicd\actions-runner\bin'
+[2026-09-30 19:25:44Z INFO HostContext] Well known directory 'Root': 'D:\cicd\actions-runner'
+[2026-09-30 19:25:44Z INFO HostContext] Well known directory 'Work': 'D:\cicd\actions-runner\_work'
+[2026-09-30 19:25:44Z INFO HostContext] Well known directory 'Temp': 'D:\cicd\actions-runner\_work\_temp'
+[2026-09-30 19:25:44Z INFO ScriptHandler] Which2: 'pwsh'
+[2026-09-30 19:25:44Z INFO ScriptHandler] Location: 'C:\Program Files\PowerShell\7\pwsh.EXE'
+[2026-09-30 19:25:44Z INFO ProcessInvokerWrapper] Starting process:
+[2026-09-30 19:25:44Z INFO ProcessInvokerWrapper]   File name: 'C:\Program Files\PowerShell\7\pwsh.EXE'
+[2026-09-30 19:25:44Z INFO ProcessInvokerWrapper]   Arguments: '-command ". 'D:\cicd\actions-runner\_work\_temp\93f9fb6b-4ebf-4054-b977-84d3add482d1.ps1'"'
+[2026-09-30 19:25:44Z INFO ProcessInvokerWrapper]   Working directory: 'D:\cicd\actions-runner\_work\my-repo\my-repo'
+[2026-09-30 19:25:44Z INFO ProcessInvokerWrapper]   Require exit code zero: 'False'
+[2026-09-30 19:25:44Z INFO ProcessInvokerWrapper]   Encoding web name:  ; code page: ''
+[2026-09-30 19:25:44Z INFO ProcessInvokerWrapper]   Force kill process on cancellation: 'False'
+[2026-09-30 19:25:44Z INFO ProcessInvokerWrapper]   Redirected STDIN: 'False'
+[2026-09-30 19:25:44Z INFO ProcessInvokerWrapper]   Persist current code page: 'True'
+[2026-09-30 19:25:44Z INFO ProcessInvokerWrapper]   Keep redirected STDIN open: 'False'
+[2026-09-30 19:25:44Z INFO ProcessInvokerWrapper]   High priority process: 'False'
+[2026-09-30 19:25:44Z INFO JobServerQueue] Got a step log file to send to results service.
+[2026-09-30 19:25:44Z INFO JobServerQueue] Starting upload of step log file to results service ResultsLog, D:\cicd\actions-runner\_diag\blocks\6c078622-02c2-80e4-b884-1b0faaf9f69e_39be5d59-d575-4438-b2eb-b703ae5c5fdc.1
+[2026-09-30 19:25:44Z INFO ProcessInvokerWrapper] Process started with process id 25752, waiting for process exit.
+[2026-09-30 19:25:44Z INFO JobServerQueue] Try to append 1 batches web console lines for record '39be5d59-d575-4438-b2eb-b703ae5c5fdc', success rate: 1/1.
+[2026-09-30 19:25:44Z INFO JobServerQueue] Try to append 1 batches web console lines for record '378e10c9-1c0a-4d60-a804-79acc625d24d', success rate: 1/1.
+[2026-09-30 19:25:44Z INFO JobServerQueue] Try to upload 1 log files or attachments, success rate: 1/1.
+[2026-09-30 19:25:45Z INFO JobServerQueue] Tried to upload 1 file(s) to results, success rate: 1/1.
+[2026-09-30 19:25:47Z INFO JobServerQueue] Try to append 1 batches web console lines for record '378e10c9-1c0a-4d60-a804-79acc625d24d', success rate: 1/1.
+[2026-09-30 19:25:47Z INFO ProcessInvokerWrapper] STDOUT/STDERR stream read finished.
+[2026-09-30 19:25:47Z INFO ProcessInvokerWrapper] STDOUT/STDERR stream read finished.
+[2026-09-30 19:25:47Z INFO HostContext] Well known directory 'Bin': 'D:\cicd\actions-runner\bin'
+[2026-09-30 19:25:47Z INFO HostContext] Well known directory 'Root': 'D:\cicd\actions-runner'
+[2026-09-30 19:25:47Z INFO HostContext] Well known directory 'Work': 'D:\cicd\actions-runner\_work'
+[2026-09-30 19:25:47Z INFO ProcessInvokerWrapper] Finished process 25752 with exit code 0, and elapsed time 00:00:03.3379073.
+[2026-09-30 19:25:47Z INFO CreateStepSummaryCommand] Step Summary file (D:\cicd\actions-runner\_work\_temp\_runner_file_commands\step_summary_97bfc01e-3af5-44d5-82c4-b0cfcbd63cd6) is empty; skipping attachment upload
+[2026-09-30 19:25:47Z INFO StepsRunner] Step result: 
+[2026-09-30 19:25:47Z INFO ExecutionContext] Publish step telemetry for current step {
+  "action": "pwsh",
+  "type": "run",
+  "stage": "Main",
+  "stepId": "378e10c9-1c0a-4d60-a804-79acc625d24d",
+  "stepContextName": "__run",
+  "result": "succeeded",
+  "errorMessages": [],
+  "executionTimeInSeconds": 4,
+  "startTime": "2026-09-30T19:25:43.9665991Z",
+  "finishTime": "2026-09-30T19:25:47.391006Z"
+}.
+[2026-09-30 19:25:47Z INFO StepsRunner] No need for updating job result with current step result 'Succeeded'.
+[2026-09-30 19:25:47Z INFO StepsRunner] Current state: job state = ''
+[2026-09-30 19:25:47Z INFO StepsRunner] Processing step: DisplayName='Build Docker Image'
+[2026-09-30 19:25:47Z INFO StepsRunner] Evaluating: success()
+[2026-09-30 19:25:47Z INFO StepsRunner] Result: true
+[2026-09-30 19:25:47Z INFO StepsRunner] Starting the step.
+[2026-09-30 19:25:47Z INFO HostContext] Well known directory 'Bin': 'D:\cicd\actions-runner\bin'
+[2026-09-30 19:25:47Z INFO HostContext] Well known directory 'Root': 'D:\cicd\actions-runner'
+[2026-09-30 19:25:47Z INFO HostContext] Well known directory 'Work': 'D:\cicd\actions-runner\_work'
+[2026-09-30 19:25:47Z INFO StepsRunner] Which2: 'chcp'
+[2026-09-30 19:25:47Z INFO StepsRunner] Location: 'C:\WINDOWS\system32\chcp.COM'
+[2026-09-30 19:25:47Z INFO ProcessInvokerWrapper] Starting process:
+[2026-09-30 19:25:47Z INFO ProcessInvokerWrapper]   File name: 'C:\WINDOWS\system32\chcp.COM'
+[2026-09-30 19:25:47Z INFO ProcessInvokerWrapper]   Arguments: '65001'
+[2026-09-30 19:25:47Z INFO ProcessInvokerWrapper]   Working directory: 'D:\cicd\actions-runner\_work'
+[2026-09-30 19:25:47Z INFO ProcessInvokerWrapper]   Require exit code zero: 'False'
+[2026-09-30 19:25:47Z INFO ProcessInvokerWrapper]   Encoding web name:  ; code page: ''
+[2026-09-30 19:25:47Z INFO ProcessInvokerWrapper]   Force kill process on cancellation: 'False'
+[2026-09-30 19:25:47Z INFO ProcessInvokerWrapper]   Redirected STDIN: 'False'
+[2026-09-30 19:25:47Z INFO ProcessInvokerWrapper]   Persist current code page: 'True'
+[2026-09-30 19:25:47Z INFO ProcessInvokerWrapper]   Keep redirected STDIN open: 'False'
+[2026-09-30 19:25:47Z INFO ProcessInvokerWrapper]   High priority process: 'False'
+[2026-09-30 19:25:47Z INFO ProcessInvokerWrapper] Process started with process id 20512, waiting for process exit.
+[2026-09-30 19:25:47Z INFO ProcessInvokerWrapper] STDOUT/STDERR stream read finished.
+[2026-09-30 19:25:47Z INFO ProcessInvokerWrapper] STDOUT/STDERR stream read finished.
+[2026-09-30 19:25:47Z INFO ProcessInvokerWrapper] Finished process 20512 with exit code 0, and elapsed time 00:00:00.0231158.
+[2026-09-30 19:25:47Z INFO StepsRunner] Successfully returned to code page 65001 (UTF8)
+[2026-09-30 19:25:47Z INFO HostContext] Well known directory 'Bin': 'D:\cicd\actions-runner\bin'
+[2026-09-30 19:25:47Z INFO HostContext] Well known directory 'Root': 'D:\cicd\actions-runner'
+[2026-09-30 19:25:47Z INFO HostContext] Well known directory 'Work': 'D:\cicd\actions-runner\_work'
+[2026-09-30 19:25:47Z INFO HostContext] Well known directory 'Temp': 'D:\cicd\actions-runner\_work\_temp'
+[2026-09-30 19:25:47Z INFO ExecutionContext] Write event payload to D:\cicd\actions-runner\_work\_temp\_github_workflow\event.json
+[2026-09-30 19:25:47Z INFO HostContext] Well known directory 'Bin': 'D:\cicd\actions-runner\bin'
+[2026-09-30 19:25:47Z INFO HostContext] Well known directory 'Root': 'D:\cicd\actions-runner'
+[2026-09-30 19:25:47Z INFO HostContext] Well known directory 'Work': 'D:\cicd\actions-runner\_work'
+[2026-09-30 19:25:47Z INFO HostContext] Well known directory 'Temp': 'D:\cicd\actions-runner\_work\_temp'
+[2026-09-30 19:25:47Z INFO ExtensionManager] Getting extensions for interface: 'GitHub.Runner.Worker.IFileCommandExtension'
+[2026-09-30 19:25:47Z INFO ExtensionManager] Getting extensions for interface: 'GitHub.Runner.Worker.IActionCommandExtension'
+[2026-09-30 19:25:47Z INFO ActionCommandManager] Register action command extension for command internal-set-repo-path
+[2026-09-30 19:25:47Z INFO ActionCommandManager] Register action command extension for command set-env
+[2026-09-30 19:25:47Z INFO ActionCommandManager] Register action command extension for command set-output
+[2026-09-30 19:25:47Z INFO ActionCommandManager] Register action command extension for command save-state
+[2026-09-30 19:25:47Z INFO ActionCommandManager] Register action command extension for command add-path
+[2026-09-30 19:25:47Z INFO ActionCommandManager] Register action command extension for command add-mask
+[2026-09-30 19:25:47Z INFO ActionCommandManager] Register action command extension for command add-matcher
+[2026-09-30 19:25:47Z INFO ActionCommandManager] Register action command extension for command remove-matcher
+[2026-09-30 19:25:47Z INFO ActionCommandManager] Register action command extension for command warning
+[2026-09-30 19:25:47Z INFO ActionCommandManager] Register action command extension for command error
+[2026-09-30 19:25:47Z INFO ActionCommandManager] Register action command extension for command notice
+[2026-09-30 19:25:47Z INFO ActionCommandManager] Register action command extension for command debug
+[2026-09-30 19:25:47Z INFO ActionCommandManager] Register action command extension for command group
+[2026-09-30 19:25:47Z INFO ActionCommandManager] Register action command extension for command endgroup
+[2026-09-30 19:25:47Z INFO ActionCommandManager] Register action command extension for command echo
+[2026-09-30 19:25:47Z INFO ScriptHandler] Which2: 'pwsh'
+[2026-09-30 19:25:47Z INFO ScriptHandler] Location: 'C:\Program Files\PowerShell\7\pwsh.EXE'
+[2026-09-30 19:25:47Z INFO HostContext] Well known directory 'Bin': 'D:\cicd\actions-runner\bin'
+[2026-09-30 19:25:47Z INFO HostContext] Well known directory 'Root': 'D:\cicd\actions-runner'
+[2026-09-30 19:25:47Z INFO HostContext] Well known directory 'Work': 'D:\cicd\actions-runner\_work'
+[2026-09-30 19:25:47Z INFO HostContext] Well known directory 'Temp': 'D:\cicd\actions-runner\_work\_temp'
+[2026-09-30 19:25:47Z INFO ScriptHandler] Which2: 'pwsh'
+[2026-09-30 19:25:47Z INFO ScriptHandler] Location: 'C:\Program Files\PowerShell\7\pwsh.EXE'
+[2026-09-30 19:25:47Z INFO ProcessInvokerWrapper] Starting process:
+[2026-09-30 19:25:47Z INFO ProcessInvokerWrapper]   File name: 'C:\Program Files\PowerShell\7\pwsh.EXE'
+[2026-09-30 19:25:47Z INFO ProcessInvokerWrapper]   Arguments: '-command ". 'D:\cicd\actions-runner\_work\_temp\98a813a3-24f3-4373-996d-e29d2841d8e0.ps1'"'
+[2026-09-30 19:25:47Z INFO ProcessInvokerWrapper]   Working directory: 'D:\cicd\actions-runner\_work\my-repo\my-repo'
+[2026-09-30 19:25:47Z INFO ProcessInvokerWrapper]   Require exit code zero: 'False'
+[2026-09-30 19:25:47Z INFO ProcessInvokerWrapper]   Encoding web name:  ; code page: ''
+[2026-09-30 19:25:47Z INFO ProcessInvokerWrapper]   Force kill process on cancellation: 'False'
+[2026-09-30 19:25:47Z INFO ProcessInvokerWrapper]   Redirected STDIN: 'False'
+[2026-09-30 19:25:47Z INFO ProcessInvokerWrapper]   Persist current code page: 'True'
+[2026-09-30 19:25:47Z INFO ProcessInvokerWrapper]   Keep redirected STDIN open: 'False'
+[2026-09-30 19:25:47Z INFO ProcessInvokerWrapper]   High priority process: 'False'
+[2026-09-30 19:25:47Z INFO JobServerQueue] Try to upload 1 log files or attachments, success rate: 1/1.
+[2026-09-30 19:25:47Z INFO ProcessInvokerWrapper] Process started with process id 5736, waiting for process exit.
+[2026-09-30 19:25:47Z INFO JobServerQueue] Try to append 1 batches web console lines for record '1360e268-b555-4525-8840-ae922f1d74c6', success rate: 1/1.
+[2026-09-30 19:25:48Z INFO JobServerQueue] Got a step log file to send to results service.
+[2026-09-30 19:25:48Z INFO JobServerQueue] Starting upload of step log file to results service ResultsLog, D:\cicd\actions-runner\_diag\blocks\6c078622-02c2-80e4-b884-1b0faaf9f69e_378e10c9-1c0a-4d60-a804-79acc625d24d.1
+[2026-09-30 19:25:48Z INFO JobServerQueue] Tried to upload 1 file(s) to results, success rate: 1/1.
+[2026-09-30 19:25:50Z INFO JobServerQueue] Try to append 1 batches web console lines for record '1360e268-b555-4525-8840-ae922f1d74c6', success rate: 1/1.
+[2026-09-30 19:25:50Z INFO JobServerQueue] Try to append 1 batches web console lines for record '1360e268-b555-4525-8840-ae922f1d74c6', success rate: 1/1.
+[2026-09-30 19:25:50Z INFO JobServerQueue] Try to append 1 batches web console lines for record '1360e268-b555-4525-8840-ae922f1d74c6', success rate: 1/1.
+[2026-09-30 19:25:51Z INFO JobServerQueue] Try to append 1 batches web console lines for record '1360e268-b555-4525-8840-ae922f1d74c6', success rate: 1/1.
+[2026-09-30 19:25:52Z INFO JobServerQueue] Try to append 1 batches web console lines for record '1360e268-b555-4525-8840-ae922f1d74c6', success rate: 1/1.
+[2026-09-30 19:25:52Z INFO JobServerQueue] Try to append 1 batches web console lines for record '1360e268-b555-4525-8840-ae922f1d74c6', success rate: 1/1.
+[2026-09-30 19:25:52Z INFO JobServerQueue] Try to append 1 batches web console lines for record '1360e268-b555-4525-8840-ae922f1d74c6', success rate: 1/1.
+[2026-09-30 19:25:53Z INFO JobServerQueue] Try to append 1 batches web console lines for record '1360e268-b555-4525-8840-ae922f1d74c6', success rate: 1/1.
+[2026-09-30 19:25:53Z INFO JobServerQueue] Try to append 1 batches web console lines for record '1360e268-b555-4525-8840-ae922f1d74c6', success rate: 1/1.
+[2026-09-30 19:25:53Z INFO JobServerQueue] Try to append 1 batches web console lines for record '1360e268-b555-4525-8840-ae922f1d74c6', success rate: 1/1.
+[2026-09-30 19:25:53Z INFO JobServerQueue] Try to append 1 batches web console lines for record '1360e268-b555-4525-8840-ae922f1d74c6', success rate: 1/1.
+[2026-09-30 19:25:54Z INFO JobServerQueue] Try to append 1 batches web console lines for record '1360e268-b555-4525-8840-ae922f1d74c6', success rate: 1/1.
+[2026-09-30 19:25:54Z INFO JobServerQueue] Try to append 1 batches web console lines for record '1360e268-b555-4525-8840-ae922f1d74c6', success rate: 1/1.
+[2026-09-30 19:25:54Z INFO JobServerQueue] Try to append 1 batches web console lines for record '1360e268-b555-4525-8840-ae922f1d74c6', success rate: 1/1.
+[2026-09-30 19:25:55Z INFO JobServerQueue] Try to append 1 batches web console lines for record '1360e268-b555-4525-8840-ae922f1d74c6', success rate: 1/1.
+[2026-09-30 19:25:55Z INFO JobServerQueue] Try to append 1 batches web console lines for record '1360e268-b555-4525-8840-ae922f1d74c6', success rate: 1/1.
+[2026-09-30 19:25:57Z INFO HostContext] Well known directory 'Bin': 'D:\cicd\actions-runner\bin'
+[2026-09-30 19:25:57Z INFO HostContext] Well known directory 'Root': 'D:\cicd\actions-runner'
+[2026-09-30 19:25:57Z INFO HostContext] Well known directory 'Work': 'D:\cicd\actions-runner\_work'
+[2026-09-30 19:25:58Z INFO JobServerQueue] Try to append 1 batches web console lines for record '1360e268-b555-4525-8840-ae922f1d74c6', success rate: 1/1.
+[2026-09-30 19:25:59Z INFO ProcessInvokerWrapper] STDOUT/STDERR stream read finished.
+[2026-09-30 19:25:59Z INFO ProcessInvokerWrapper] STDOUT/STDERR stream read finished.
+[2026-09-30 19:25:59Z INFO ProcessInvokerWrapper] Finished process 5736 with exit code 0, and elapsed time 00:00:11.6284306.
+[2026-09-30 19:25:59Z INFO CreateStepSummaryCommand] Step Summary file (D:\cicd\actions-runner\_work\_temp\_runner_file_commands\step_summary_23f8995b-7ca9-466d-88ce-310d79480bbd) is empty; skipping attachment upload
+[2026-09-30 19:25:59Z INFO StepsRunner] Step result: 
+[2026-09-30 19:25:59Z INFO ExecutionContext] Publish step telemetry for current step {
+  "action": "pwsh",
+  "type": "run",
+  "stage": "Main",
+  "stepId": "1360e268-b555-4525-8840-ae922f1d74c6",
+  "stepContextName": "__run_2",
+  "result": "succeeded",
+  "errorMessages": [],
+  "executionTimeInSeconds": 12,
+  "startTime": "2026-09-30T19:25:47.3919825Z",
+  "finishTime": "2026-09-30T19:25:59.059051Z"
+}.
+[2026-09-30 19:25:59Z INFO StepsRunner] No need for updating job result with current step result 'Succeeded'.
+[2026-09-30 19:25:59Z INFO StepsRunner] Current state: job state = ''
+[2026-09-30 19:25:59Z INFO StepsRunner] Processing step: DisplayName='Terraform Init'
+[2026-09-30 19:25:59Z INFO StepsRunner] Evaluating: success()
+[2026-09-30 19:25:59Z INFO StepsRunner] Result: true
+[2026-09-30 19:25:59Z INFO StepsRunner] Starting the step.
+[2026-09-30 19:25:59Z INFO HostContext] Well known directory 'Bin': 'D:\cicd\actions-runner\bin'
+[2026-09-30 19:25:59Z INFO HostContext] Well known directory 'Root': 'D:\cicd\actions-runner'
+[2026-09-30 19:25:59Z INFO HostContext] Well known directory 'Work': 'D:\cicd\actions-runner\_work'
+[2026-09-30 19:25:59Z INFO StepsRunner] Which2: 'chcp'
+[2026-09-30 19:25:59Z INFO StepsRunner] Location: 'C:\WINDOWS\system32\chcp.COM'
+[2026-09-30 19:25:59Z INFO ProcessInvokerWrapper] Starting process:
+[2026-09-30 19:25:59Z INFO ProcessInvokerWrapper]   File name: 'C:\WINDOWS\system32\chcp.COM'
+[2026-09-30 19:25:59Z INFO ProcessInvokerWrapper]   Arguments: '65001'
+[2026-09-30 19:25:59Z INFO ProcessInvokerWrapper]   Working directory: 'D:\cicd\actions-runner\_work'
+[2026-09-30 19:25:59Z INFO ProcessInvokerWrapper]   Require exit code zero: 'False'
+[2026-09-30 19:25:59Z INFO ProcessInvokerWrapper]   Encoding web name:  ; code page: ''
+[2026-09-30 19:25:59Z INFO ProcessInvokerWrapper]   Force kill process on cancellation: 'False'
+[2026-09-30 19:25:59Z INFO ProcessInvokerWrapper]   Redirected STDIN: 'False'
+[2026-09-30 19:25:59Z INFO ProcessInvokerWrapper]   Persist current code page: 'True'
+[2026-09-30 19:25:59Z INFO ProcessInvokerWrapper]   Keep redirected STDIN open: 'False'
+[2026-09-30 19:25:59Z INFO ProcessInvokerWrapper]   High priority process: 'False'
+[2026-09-30 19:25:59Z INFO ProcessInvokerWrapper] Process started with process id 15136, waiting for process exit.
+[2026-09-30 19:25:59Z INFO ProcessInvokerWrapper] STDOUT/STDERR stream read finished.
+[2026-09-30 19:25:59Z INFO ProcessInvokerWrapper] STDOUT/STDERR stream read finished.
+[2026-09-30 19:25:59Z INFO ProcessInvokerWrapper] Finished process 15136 with exit code 0, and elapsed time 00:00:00.0539449.
+[2026-09-30 19:25:59Z INFO StepsRunner] Successfully returned to code page 65001 (UTF8)
+[2026-09-30 19:25:59Z INFO HostContext] Well known directory 'Bin': 'D:\cicd\actions-runner\bin'
+[2026-09-30 19:25:59Z INFO HostContext] Well known directory 'Root': 'D:\cicd\actions-runner'
+[2026-09-30 19:25:59Z INFO HostContext] Well known directory 'Work': 'D:\cicd\actions-runner\_work'
+[2026-09-30 19:25:59Z INFO HostContext] Well known directory 'Temp': 'D:\cicd\actions-runner\_work\_temp'
+[2026-09-30 19:25:59Z INFO ExecutionContext] Write event payload to D:\cicd\actions-runner\_work\_temp\_github_workflow\event.json
+[2026-09-30 19:25:59Z INFO HostContext] Well known directory 'Bin': 'D:\cicd\actions-runner\bin'
+[2026-09-30 19:25:59Z INFO HostContext] Well known directory 'Root': 'D:\cicd\actions-runner'
+[2026-09-30 19:25:59Z INFO HostContext] Well known directory 'Work': 'D:\cicd\actions-runner\_work'
+[2026-09-30 19:25:59Z INFO HostContext] Well known directory 'Temp': 'D:\cicd\actions-runner\_work\_temp'
+[2026-09-30 19:25:59Z INFO ExtensionManager] Getting extensions for interface: 'GitHub.Runner.Worker.IFileCommandExtension'
+[2026-09-30 19:25:59Z INFO ExtensionManager] Getting extensions for interface: 'GitHub.Runner.Worker.IActionCommandExtension'
+[2026-09-30 19:25:59Z INFO ActionCommandManager] Register action command extension for command internal-set-repo-path
+[2026-09-30 19:25:59Z INFO ActionCommandManager] Register action command extension for command set-env
+[2026-09-30 19:25:59Z INFO ActionCommandManager] Register action command extension for command set-output
+[2026-09-30 19:25:59Z INFO ActionCommandManager] Register action command extension for command save-state
+[2026-09-30 19:25:59Z INFO ActionCommandManager] Register action command extension for command add-path
+[2026-09-30 19:25:59Z INFO ActionCommandManager] Register action command extension for command add-mask
+[2026-09-30 19:25:59Z INFO ActionCommandManager] Register action command extension for command add-matcher
+[2026-09-30 19:25:59Z INFO ActionCommandManager] Register action command extension for command remove-matcher
+[2026-09-30 19:25:59Z INFO ActionCommandManager] Register action command extension for command warning
+[2026-09-30 19:25:59Z INFO ActionCommandManager] Register action command extension for command error
+[2026-09-30 19:25:59Z INFO ActionCommandManager] Register action command extension for command notice
+[2026-09-30 19:25:59Z INFO ActionCommandManager] Register action command extension for command debug
+[2026-09-30 19:25:59Z INFO ActionCommandManager] Register action command extension for command group
+[2026-09-30 19:25:59Z INFO ActionCommandManager] Register action command extension for command endgroup
+[2026-09-30 19:25:59Z INFO ActionCommandManager] Register action command extension for command echo
+[2026-09-30 19:25:59Z INFO ScriptHandler] Which2: 'pwsh'
+[2026-09-30 19:25:59Z INFO ScriptHandler] Location: 'C:\Program Files\PowerShell\7\pwsh.EXE'
+[2026-09-30 19:25:59Z INFO HostContext] Well known directory 'Bin': 'D:\cicd\actions-runner\bin'
+[2026-09-30 19:25:59Z INFO HostContext] Well known directory 'Root': 'D:\cicd\actions-runner'
+[2026-09-30 19:25:59Z INFO HostContext] Well known directory 'Work': 'D:\cicd\actions-runner\_work'
+[2026-09-30 19:25:59Z INFO HostContext] Well known directory 'Temp': 'D:\cicd\actions-runner\_work\_temp'
+[2026-09-30 19:25:59Z INFO ScriptHandler] Which2: 'pwsh'
+[2026-09-30 19:25:59Z INFO ScriptHandler] Location: 'C:\Program Files\PowerShell\7\pwsh.EXE'
+[2026-09-30 19:25:59Z INFO ProcessInvokerWrapper] Starting process:
+[2026-09-30 19:25:59Z INFO ProcessInvokerWrapper]   File name: 'C:\Program Files\PowerShell\7\pwsh.EXE'
+[2026-09-30 19:25:59Z INFO ProcessInvokerWrapper]   Arguments: '-command ". 'D:\cicd\actions-runner\_work\_temp\9c2bc846-859a-400b-adbf-b12cdd01a137.ps1'"'
+[2026-09-30 19:25:59Z INFO ProcessInvokerWrapper]   Working directory: 'D:\cicd\actions-runner\_work\my-repo\my-repo\infra'
+[2026-09-30 19:25:59Z INFO ProcessInvokerWrapper]   Require exit code zero: 'False'
+[2026-09-30 19:25:59Z INFO ProcessInvokerWrapper]   Encoding web name:  ; code page: ''
+[2026-09-30 19:25:59Z INFO ProcessInvokerWrapper]   Force kill process on cancellation: 'False'
+[2026-09-30 19:25:59Z INFO ProcessInvokerWrapper]   Redirected STDIN: 'False'
+[2026-09-30 19:25:59Z INFO ProcessInvokerWrapper]   Persist current code page: 'True'
+[2026-09-30 19:25:59Z INFO ProcessInvokerWrapper]   Keep redirected STDIN open: 'False'
+[2026-09-30 19:25:59Z INFO ProcessInvokerWrapper]   High priority process: 'False'
+[2026-09-30 19:25:59Z INFO JobServerQueue] Try to append 1 batches web console lines for record '240318ae-f383-42e7-811d-0a24626a18c2', success rate: 1/1.
+[2026-09-30 19:25:59Z INFO ProcessInvokerWrapper] Process started with process id 25408, waiting for process exit.
+[2026-09-30 19:25:59Z INFO JobServerQueue] Try to upload 1 log files or attachments, success rate: 1/1.
+[2026-09-30 19:26:00Z INFO JobServerQueue] Got a step log file to send to results service.
+[2026-09-30 19:26:00Z INFO JobServerQueue] Starting upload of step log file to results service ResultsLog, D:\cicd\actions-runner\_diag\blocks\6c078622-02c2-80e4-b884-1b0faaf9f69e_1360e268-b555-4525-8840-ae922f1d74c6.1
+[2026-09-30 19:26:00Z INFO JobServerQueue] Try to append 1 batches web console lines for record '240318ae-f383-42e7-811d-0a24626a18c2', success rate: 1/1.
+[2026-09-30 19:26:00Z INFO JobServerQueue] Try to append 1 batches web console lines for record '240318ae-f383-42e7-811d-0a24626a18c2', success rate: 1/1.
+[2026-09-30 19:26:00Z INFO JobServerQueue] Tried to upload 1 file(s) to results, success rate: 1/1.
+[2026-09-30 19:26:03Z INFO ProcessInvokerWrapper] STDOUT/STDERR stream read finished.
+[2026-09-30 19:26:03Z INFO ProcessInvokerWrapper] STDOUT/STDERR stream read finished.
+[2026-09-30 19:26:03Z INFO JobServerQueue] Try to append 1 batches web console lines for record '240318ae-f383-42e7-811d-0a24626a18c2', success rate: 1/1.
+[2026-09-30 19:26:03Z INFO ProcessInvokerWrapper] Finished process 25408 with exit code 0, and elapsed time 00:00:03.9388060.
+[2026-09-30 19:26:03Z INFO CreateStepSummaryCommand] Step Summary file (D:\cicd\actions-runner\_work\_temp\_runner_file_commands\step_summary_aeae135c-320b-42ca-a9c9-694548e8eb61) is empty; skipping attachment upload
+[2026-09-30 19:26:03Z INFO StepsRunner] Step result: 
+[2026-09-30 19:26:03Z INFO ExecutionContext] Publish step telemetry for current step {
+  "action": "pwsh",
+  "type": "run",
+  "stage": "Main",
+  "stepId": "240318ae-f383-42e7-811d-0a24626a18c2",
+  "stepContextName": "__run_3",
+  "result": "succeeded",
+  "errorMessages": [],
+  "executionTimeInSeconds": 5,
+  "startTime": "2026-09-30T19:25:59.061473Z",
+  "finishTime": "2026-09-30T19:26:03.0755039Z"
+}.
+[2026-09-30 19:26:03Z INFO StepsRunner] No need for updating job result with current step result 'Succeeded'.
+[2026-09-30 19:26:03Z INFO StepsRunner] Current state: job state = ''
+[2026-09-30 19:26:03Z INFO StepsRunner] Processing step: DisplayName='Terraform Validate'
+[2026-09-30 19:26:03Z INFO StepsRunner] Evaluating: success()
+[2026-09-30 19:26:03Z INFO StepsRunner] Result: true
+[2026-09-30 19:26:03Z INFO StepsRunner] Starting the step.
+[2026-09-30 19:26:03Z INFO HostContext] Well known directory 'Bin': 'D:\cicd\actions-runner\bin'
+[2026-09-30 19:26:03Z INFO HostContext] Well known directory 'Root': 'D:\cicd\actions-runner'
+[2026-09-30 19:26:03Z INFO HostContext] Well known directory 'Work': 'D:\cicd\actions-runner\_work'
+[2026-09-30 19:26:03Z INFO StepsRunner] Which2: 'chcp'
+[2026-09-30 19:26:03Z INFO StepsRunner] Location: 'C:\WINDOWS\system32\chcp.COM'
+[2026-09-30 19:26:03Z INFO ProcessInvokerWrapper] Starting process:
+[2026-09-30 19:26:03Z INFO ProcessInvokerWrapper]   File name: 'C:\WINDOWS\system32\chcp.COM'
+[2026-09-30 19:26:03Z INFO ProcessInvokerWrapper]   Arguments: '65001'
+[2026-09-30 19:26:03Z INFO ProcessInvokerWrapper]   Working directory: 'D:\cicd\actions-runner\_work'
+[2026-09-30 19:26:03Z INFO ProcessInvokerWrapper]   Require exit code zero: 'False'
+[2026-09-30 19:26:03Z INFO ProcessInvokerWrapper]   Encoding web name:  ; code page: ''
+[2026-09-30 19:26:03Z INFO ProcessInvokerWrapper]   Force kill process on cancellation: 'False'
+[2026-09-30 19:26:03Z INFO ProcessInvokerWrapper]   Redirected STDIN: 'False'
+[2026-09-30 19:26:03Z INFO ProcessInvokerWrapper]   Persist current code page: 'True'
+[2026-09-30 19:26:03Z INFO ProcessInvokerWrapper]   Keep redirected STDIN open: 'False'
+[2026-09-30 19:26:03Z INFO ProcessInvokerWrapper]   High priority process: 'False'
+[2026-09-30 19:26:03Z INFO ProcessInvokerWrapper] Process started with process id 19656, waiting for process exit.
+[2026-09-30 19:26:03Z INFO ProcessInvokerWrapper] STDOUT/STDERR stream read finished.
+[2026-09-30 19:26:03Z INFO ProcessInvokerWrapper] STDOUT/STDERR stream read finished.
+[2026-09-30 19:26:03Z INFO ProcessInvokerWrapper] Finished process 19656 with exit code 0, and elapsed time 00:00:00.0450479.
+[2026-09-30 19:26:03Z INFO StepsRunner] Successfully returned to code page 65001 (UTF8)
+[2026-09-30 19:26:03Z INFO HostContext] Well known directory 'Bin': 'D:\cicd\actions-runner\bin'
+[2026-09-30 19:26:03Z INFO HostContext] Well known directory 'Root': 'D:\cicd\actions-runner'
+[2026-09-30 19:26:03Z INFO HostContext] Well known directory 'Work': 'D:\cicd\actions-runner\_work'
+[2026-09-30 19:26:03Z INFO HostContext] Well known directory 'Temp': 'D:\cicd\actions-runner\_work\_temp'
+[2026-09-30 19:26:03Z INFO ExecutionContext] Write event payload to D:\cicd\actions-runner\_work\_temp\_github_workflow\event.json
+[2026-09-30 19:26:03Z INFO HostContext] Well known directory 'Bin': 'D:\cicd\actions-runner\bin'
+[2026-09-30 19:26:03Z INFO HostContext] Well known directory 'Root': 'D:\cicd\actions-runner'
+[2026-09-30 19:26:03Z INFO HostContext] Well known directory 'Work': 'D:\cicd\actions-runner\_work'
+[2026-09-30 19:26:03Z INFO HostContext] Well known directory 'Temp': 'D:\cicd\actions-runner\_work\_temp'
+[2026-09-30 19:26:03Z INFO ExtensionManager] Getting extensions for interface: 'GitHub.Runner.Worker.IFileCommandExtension'
+[2026-09-30 19:26:03Z INFO ExtensionManager] Getting extensions for interface: 'GitHub.Runner.Worker.IActionCommandExtension'
+[2026-09-30 19:26:03Z INFO ActionCommandManager] Register action command extension for command internal-set-repo-path
+[2026-09-30 19:26:03Z INFO ActionCommandManager] Register action command extension for command set-env
+[2026-09-30 19:26:03Z INFO ActionCommandManager] Register action command extension for command set-output
+[2026-09-30 19:26:03Z INFO ActionCommandManager] Register action command extension for command save-state
+[2026-09-30 19:26:03Z INFO ActionCommandManager] Register action command extension for command add-path
+[2026-09-30 19:26:03Z INFO ActionCommandManager] Register action command extension for command add-mask
+[2026-09-30 19:26:03Z INFO ActionCommandManager] Register action command extension for command add-matcher
+[2026-09-30 19:26:03Z INFO ActionCommandManager] Register action command extension for command remove-matcher
+[2026-09-30 19:26:03Z INFO ActionCommandManager] Register action command extension for command warning
+[2026-09-30 19:26:03Z INFO ActionCommandManager] Register action command extension for command error
+[2026-09-30 19:26:03Z INFO ActionCommandManager] Register action command extension for command notice
+[2026-09-30 19:26:03Z INFO ActionCommandManager] Register action command extension for command debug
+[2026-09-30 19:26:03Z INFO ActionCommandManager] Register action command extension for command group
+[2026-09-30 19:26:03Z INFO ActionCommandManager] Register action command extension for command endgroup
+[2026-09-30 19:26:03Z INFO ActionCommandManager] Register action command extension for command echo
+[2026-09-30 19:26:03Z INFO ScriptHandler] Which2: 'pwsh'
+[2026-09-30 19:26:03Z INFO ScriptHandler] Location: 'C:\Program Files\PowerShell\7\pwsh.EXE'
+[2026-09-30 19:26:03Z INFO HostContext] Well known directory 'Bin': 'D:\cicd\actions-runner\bin'
+[2026-09-30 19:26:03Z INFO HostContext] Well known directory 'Root': 'D:\cicd\actions-runner'
+[2026-09-30 19:26:03Z INFO HostContext] Well known directory 'Work': 'D:\cicd\actions-runner\_work'
+[2026-09-30 19:26:03Z INFO HostContext] Well known directory 'Temp': 'D:\cicd\actions-runner\_work\_temp'
+[2026-09-30 19:26:03Z INFO ScriptHandler] Which2: 'pwsh'
+[2026-09-30 19:26:03Z INFO ScriptHandler] Location: 'C:\Program Files\PowerShell\7\pwsh.EXE'
+[2026-09-30 19:26:03Z INFO ProcessInvokerWrapper] Starting process:
+[2026-09-30 19:26:03Z INFO ProcessInvokerWrapper]   File name: 'C:\Program Files\PowerShell\7\pwsh.EXE'
+[2026-09-30 19:26:03Z INFO ProcessInvokerWrapper]   Arguments: '-command ". 'D:\cicd\actions-runner\_work\_temp\2ddc72b9-4dab-4f2c-81c4-ad81ebaea34b.ps1'"'
+[2026-09-30 19:26:03Z INFO ProcessInvokerWrapper]   Working directory: 'D:\cicd\actions-runner\_work\my-repo\my-repo\infra'
+[2026-09-30 19:26:03Z INFO ProcessInvokerWrapper]   Require exit code zero: 'False'
+[2026-09-30 19:26:03Z INFO ProcessInvokerWrapper]   Encoding web name:  ; code page: ''
+[2026-09-30 19:26:03Z INFO ProcessInvokerWrapper]   Force kill process on cancellation: 'False'
+[2026-09-30 19:26:03Z INFO ProcessInvokerWrapper]   Redirected STDIN: 'False'
+[2026-09-30 19:26:03Z INFO ProcessInvokerWrapper]   Persist current code page: 'True'
+[2026-09-30 19:26:03Z INFO ProcessInvokerWrapper]   Keep redirected STDIN open: 'False'
+[2026-09-30 19:26:03Z INFO ProcessInvokerWrapper]   High priority process: 'False'
+[2026-09-30 19:26:03Z INFO ProcessInvokerWrapper] Process started with process id 26680, waiting for process exit.
+[2026-09-30 19:26:03Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'd878afd5-6ac3-4ac3-914a-2797fa48e166', success rate: 1/1.
+[2026-09-30 19:26:03Z INFO JobServerQueue] Try to upload 1 log files or attachments, success rate: 1/1.
+[2026-09-30 19:26:03Z INFO JobServerQueue] Got a step log file to send to results service.
+[2026-09-30 19:26:03Z INFO JobServerQueue] Starting upload of step log file to results service ResultsLog, D:\cicd\actions-runner\_diag\blocks\6c078622-02c2-80e4-b884-1b0faaf9f69e_240318ae-f383-42e7-811d-0a24626a18c2.1
+[2026-09-30 19:26:04Z INFO JobServerQueue] Tried to upload 1 file(s) to results, success rate: 1/1.
+[2026-09-30 19:26:06Z INFO ProcessInvokerWrapper] STDOUT/STDERR stream read finished.
+[2026-09-30 19:26:06Z INFO ProcessInvokerWrapper] STDOUT/STDERR stream read finished.
+[2026-09-30 19:26:06Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'd878afd5-6ac3-4ac3-914a-2797fa48e166', success rate: 1/1.
+[2026-09-30 19:26:06Z INFO ProcessInvokerWrapper] Finished process 26680 with exit code 0, and elapsed time 00:00:03.0405417.
+[2026-09-30 19:26:06Z INFO CreateStepSummaryCommand] Step Summary file (D:\cicd\actions-runner\_work\_temp\_runner_file_commands\step_summary_8e978f90-e5c7-4ebd-9f63-417383ee9ca9) is empty; skipping attachment upload
+[2026-09-30 19:26:06Z INFO StepsRunner] Step result: 
+[2026-09-30 19:26:06Z INFO ExecutionContext] Publish step telemetry for current step {
+  "action": "pwsh",
+  "type": "run",
+  "stage": "Main",
+  "stepId": "d878afd5-6ac3-4ac3-914a-2797fa48e166",
+  "stepContextName": "__run_4",
+  "result": "succeeded",
+  "errorMessages": [],
+  "executionTimeInSeconds": 4,
+  "startTime": "2026-09-30T19:26:03.0769901Z",
+  "finishTime": "2026-09-30T19:26:06.1819874Z"
+}.
+[2026-09-30 19:26:06Z INFO StepsRunner] No need for updating job result with current step result 'Succeeded'.
+[2026-09-30 19:26:06Z INFO StepsRunner] Current state: job state = ''
+[2026-09-30 19:26:06Z INFO StepsRunner] Processing step: DisplayName='Terraform Plan'
+[2026-09-30 19:26:06Z INFO StepsRunner] Evaluating: success()
+[2026-09-30 19:26:06Z INFO StepsRunner] Result: true
+[2026-09-30 19:26:06Z INFO StepsRunner] Starting the step.
+[2026-09-30 19:26:06Z INFO HostContext] Well known directory 'Bin': 'D:\cicd\actions-runner\bin'
+[2026-09-30 19:26:06Z INFO HostContext] Well known directory 'Root': 'D:\cicd\actions-runner'
+[2026-09-30 19:26:06Z INFO HostContext] Well known directory 'Work': 'D:\cicd\actions-runner\_work'
+[2026-09-30 19:26:06Z INFO StepsRunner] Which2: 'chcp'
+[2026-09-30 19:26:06Z INFO StepsRunner] Location: 'C:\WINDOWS\system32\chcp.COM'
+[2026-09-30 19:26:06Z INFO ProcessInvokerWrapper] Starting process:
+[2026-09-30 19:26:06Z INFO ProcessInvokerWrapper]   File name: 'C:\WINDOWS\system32\chcp.COM'
+[2026-09-30 19:26:06Z INFO ProcessInvokerWrapper]   Arguments: '65001'
+[2026-09-30 19:26:06Z INFO ProcessInvokerWrapper]   Working directory: 'D:\cicd\actions-runner\_work'
+[2026-09-30 19:26:06Z INFO ProcessInvokerWrapper]   Require exit code zero: 'False'
+[2026-09-30 19:26:06Z INFO ProcessInvokerWrapper]   Encoding web name:  ; code page: ''
+[2026-09-30 19:26:06Z INFO ProcessInvokerWrapper]   Force kill process on cancellation: 'False'
+[2026-09-30 19:26:06Z INFO ProcessInvokerWrapper]   Redirected STDIN: 'False'
+[2026-09-30 19:26:06Z INFO ProcessInvokerWrapper]   Persist current code page: 'True'
+[2026-09-30 19:26:06Z INFO ProcessInvokerWrapper]   Keep redirected STDIN open: 'False'
+[2026-09-30 19:26:06Z INFO ProcessInvokerWrapper]   High priority process: 'False'
+[2026-09-30 19:26:06Z INFO ProcessInvokerWrapper] Process started with process id 17300, waiting for process exit.
+[2026-09-30 19:26:06Z INFO ProcessInvokerWrapper] STDOUT/STDERR stream read finished.
+[2026-09-30 19:26:06Z INFO ProcessInvokerWrapper] STDOUT/STDERR stream read finished.
+[2026-09-30 19:26:06Z INFO ProcessInvokerWrapper] Finished process 17300 with exit code 0, and elapsed time 00:00:00.0432724.
+[2026-09-30 19:26:06Z INFO StepsRunner] Successfully returned to code page 65001 (UTF8)
+[2026-09-30 19:26:06Z INFO HostContext] Well known directory 'Bin': 'D:\cicd\actions-runner\bin'
+[2026-09-30 19:26:06Z INFO HostContext] Well known directory 'Root': 'D:\cicd\actions-runner'
+[2026-09-30 19:26:06Z INFO HostContext] Well known directory 'Work': 'D:\cicd\actions-runner\_work'
+[2026-09-30 19:26:06Z INFO HostContext] Well known directory 'Temp': 'D:\cicd\actions-runner\_work\_temp'
+[2026-09-30 19:26:06Z INFO ExecutionContext] Write event payload to D:\cicd\actions-runner\_work\_temp\_github_workflow\event.json
+[2026-09-30 19:26:06Z INFO HostContext] Well known directory 'Bin': 'D:\cicd\actions-runner\bin'
+[2026-09-30 19:26:06Z INFO HostContext] Well known directory 'Root': 'D:\cicd\actions-runner'
+[2026-09-30 19:26:06Z INFO HostContext] Well known directory 'Work': 'D:\cicd\actions-runner\_work'
+[2026-09-30 19:26:06Z INFO HostContext] Well known directory 'Temp': 'D:\cicd\actions-runner\_work\_temp'
+[2026-09-30 19:26:06Z INFO ExtensionManager] Getting extensions for interface: 'GitHub.Runner.Worker.IFileCommandExtension'
+[2026-09-30 19:26:06Z INFO ExtensionManager] Getting extensions for interface: 'GitHub.Runner.Worker.IActionCommandExtension'
+[2026-09-30 19:26:06Z INFO ActionCommandManager] Register action command extension for command internal-set-repo-path
+[2026-09-30 19:26:06Z INFO ActionCommandManager] Register action command extension for command set-env
+[2026-09-30 19:26:06Z INFO ActionCommandManager] Register action command extension for command set-output
+[2026-09-30 19:26:06Z INFO ActionCommandManager] Register action command extension for command save-state
+[2026-09-30 19:26:06Z INFO ActionCommandManager] Register action command extension for command add-path
+[2026-09-30 19:26:06Z INFO ActionCommandManager] Register action command extension for command add-mask
+[2026-09-30 19:26:06Z INFO ActionCommandManager] Register action command extension for command add-matcher
+[2026-09-30 19:26:06Z INFO ActionCommandManager] Register action command extension for command remove-matcher
+[2026-09-30 19:26:06Z INFO ActionCommandManager] Register action command extension for command warning
+[2026-09-30 19:26:06Z INFO ActionCommandManager] Register action command extension for command error
+[2026-09-30 19:26:06Z INFO ActionCommandManager] Register action command extension for command notice
+[2026-09-30 19:26:06Z INFO ActionCommandManager] Register action command extension for command debug
+[2026-09-30 19:26:06Z INFO ActionCommandManager] Register action command extension for command group
+[2026-09-30 19:26:06Z INFO ActionCommandManager] Register action command extension for command endgroup
+[2026-09-30 19:26:06Z INFO ActionCommandManager] Register action command extension for command echo
+[2026-09-30 19:26:06Z INFO ScriptHandler] Which2: 'pwsh'
+[2026-09-30 19:26:06Z INFO ScriptHandler] Location: 'C:\Program Files\PowerShell\7\pwsh.EXE'
+[2026-09-30 19:26:06Z INFO HostContext] Well known directory 'Bin': 'D:\cicd\actions-runner\bin'
+[2026-09-30 19:26:06Z INFO HostContext] Well known directory 'Root': 'D:\cicd\actions-runner'
+[2026-09-30 19:26:06Z INFO HostContext] Well known directory 'Work': 'D:\cicd\actions-runner\_work'
+[2026-09-30 19:26:06Z INFO HostContext] Well known directory 'Temp': 'D:\cicd\actions-runner\_work\_temp'
+[2026-09-30 19:26:06Z INFO ScriptHandler] Which2: 'pwsh'
+[2026-09-30 19:26:06Z INFO ScriptHandler] Location: 'C:\Program Files\PowerShell\7\pwsh.EXE'
+[2026-09-30 19:26:06Z INFO ProcessInvokerWrapper] Starting process:
+[2026-09-30 19:26:06Z INFO ProcessInvokerWrapper]   File name: 'C:\Program Files\PowerShell\7\pwsh.EXE'
+[2026-09-30 19:26:06Z INFO ProcessInvokerWrapper]   Arguments: '-command ". 'D:\cicd\actions-runner\_work\_temp\783e1245-5285-407e-9134-bc492bb9ff0c.ps1'"'
+[2026-09-30 19:26:06Z INFO ProcessInvokerWrapper]   Working directory: 'D:\cicd\actions-runner\_work\my-repo\my-repo\infra'
+[2026-09-30 19:26:06Z INFO ProcessInvokerWrapper]   Require exit code zero: 'False'
+[2026-09-30 19:26:06Z INFO ProcessInvokerWrapper]   Encoding web name:  ; code page: ''
+[2026-09-30 19:26:06Z INFO ProcessInvokerWrapper]   Force kill process on cancellation: 'False'
+[2026-09-30 19:26:06Z INFO ProcessInvokerWrapper]   Redirected STDIN: 'False'
+[2026-09-30 19:26:06Z INFO ProcessInvokerWrapper]   Persist current code page: 'True'
+[2026-09-30 19:26:06Z INFO ProcessInvokerWrapper]   Keep redirected STDIN open: 'False'
+[2026-09-30 19:26:06Z INFO ProcessInvokerWrapper]   High priority process: 'False'
+[2026-09-30 19:26:06Z INFO ProcessInvokerWrapper] Process started with process id 23704, waiting for process exit.
+[2026-09-30 19:26:06Z INFO JobServerQueue] Try to append 1 batches web console lines for record '5eb90abe-2d26-4b71-b5a8-41548c397652', success rate: 1/1.
+[2026-09-30 19:26:06Z INFO JobServerQueue] Try to upload 1 log files or attachments, success rate: 1/1.
+[2026-09-30 19:26:06Z INFO JobServerQueue] Got a step log file to send to results service.
+[2026-09-30 19:26:06Z INFO JobServerQueue] Starting upload of step log file to results service ResultsLog, D:\cicd\actions-runner\_diag\blocks\6c078622-02c2-80e4-b884-1b0faaf9f69e_d878afd5-6ac3-4ac3-914a-2797fa48e166.1
+[2026-09-30 19:26:07Z INFO HostContext] Well known directory 'Bin': 'D:\cicd\actions-runner\bin'
+[2026-09-30 19:26:07Z INFO HostContext] Well known directory 'Root': 'D:\cicd\actions-runner'
+[2026-09-30 19:26:07Z INFO HostContext] Well known directory 'Work': 'D:\cicd\actions-runner\_work'
+[2026-09-30 19:26:07Z INFO JobServerQueue] Tried to upload 1 file(s) to results, success rate: 1/1.
+[2026-09-30 19:26:10Z INFO JobServerQueue] Try to append 2 batches web console lines for record '5eb90abe-2d26-4b71-b5a8-41548c397652', success rate: 2/2.
+[2026-09-30 19:26:10Z INFO ProcessInvokerWrapper] STDOUT/STDERR stream read finished.
+[2026-09-30 19:26:10Z INFO ProcessInvokerWrapper] STDOUT/STDERR stream read finished.
+[2026-09-30 19:26:10Z INFO ProcessInvokerWrapper] Finished process 23704 with exit code 0, and elapsed time 00:00:03.9855224.
+[2026-09-30 19:26:10Z INFO CreateStepSummaryCommand] Step Summary file (D:\cicd\actions-runner\_work\_temp\_runner_file_commands\step_summary_d273a35c-c780-45ab-94e9-4a46ba1642a7) is empty; skipping attachment upload
+[2026-09-30 19:26:10Z INFO StepsRunner] Step result: 
+[2026-09-30 19:26:10Z INFO ExecutionContext] Publish step telemetry for current step {
+  "action": "pwsh",
+  "type": "run",
+  "stage": "Main",
+  "stepId": "5eb90abe-2d26-4b71-b5a8-41548c397652",
+  "stepContextName": "__run_5",
+  "result": "succeeded",
+  "errorMessages": [],
+  "executionTimeInSeconds": 5,
+  "startTime": "2026-09-30T19:26:06.186293Z",
+  "finishTime": "2026-09-30T19:26:10.2488062Z"
+}.
+[2026-09-30 19:26:10Z INFO StepsRunner] No need for updating job result with current step result 'Succeeded'.
+[2026-09-30 19:26:10Z INFO StepsRunner] Current state: job state = ''
+[2026-09-30 19:26:10Z INFO StepsRunner] Processing step: DisplayName='Terraform Apply'
+[2026-09-30 19:26:10Z INFO StepsRunner] Evaluating: success()
+[2026-09-30 19:26:10Z INFO StepsRunner] Result: true
+[2026-09-30 19:26:10Z INFO StepsRunner] Starting the step.
+[2026-09-30 19:26:10Z INFO HostContext] Well known directory 'Bin': 'D:\cicd\actions-runner\bin'
+[2026-09-30 19:26:10Z INFO HostContext] Well known directory 'Root': 'D:\cicd\actions-runner'
+[2026-09-30 19:26:10Z INFO HostContext] Well known directory 'Work': 'D:\cicd\actions-runner\_work'
+[2026-09-30 19:26:10Z INFO StepsRunner] Which2: 'chcp'
+[2026-09-30 19:26:10Z INFO StepsRunner] Location: 'C:\WINDOWS\system32\chcp.COM'
+[2026-09-30 19:26:10Z INFO ProcessInvokerWrapper] Starting process:
+[2026-09-30 19:26:10Z INFO ProcessInvokerWrapper]   File name: 'C:\WINDOWS\system32\chcp.COM'
+[2026-09-30 19:26:10Z INFO ProcessInvokerWrapper]   Arguments: '65001'
+[2026-09-30 19:26:10Z INFO ProcessInvokerWrapper]   Working directory: 'D:\cicd\actions-runner\_work'
+[2026-09-30 19:26:10Z INFO ProcessInvokerWrapper]   Require exit code zero: 'False'
+[2026-09-30 19:26:10Z INFO ProcessInvokerWrapper]   Encoding web name:  ; code page: ''
+[2026-09-30 19:26:10Z INFO ProcessInvokerWrapper]   Force kill process on cancellation: 'False'
+[2026-09-30 19:26:10Z INFO ProcessInvokerWrapper]   Redirected STDIN: 'False'
+[2026-09-30 19:26:10Z INFO ProcessInvokerWrapper]   Persist current code page: 'True'
+[2026-09-30 19:26:10Z INFO ProcessInvokerWrapper]   Keep redirected STDIN open: 'False'
+[2026-09-30 19:26:10Z INFO ProcessInvokerWrapper]   High priority process: 'False'
+[2026-09-30 19:26:10Z INFO ProcessInvokerWrapper] Process started with process id 6384, waiting for process exit.
+[2026-09-30 19:26:10Z INFO ProcessInvokerWrapper] STDOUT/STDERR stream read finished.
+[2026-09-30 19:26:10Z INFO ProcessInvokerWrapper] STDOUT/STDERR stream read finished.
+[2026-09-30 19:26:10Z INFO ProcessInvokerWrapper] Finished process 6384 with exit code 0, and elapsed time 00:00:00.0274686.
+[2026-09-30 19:26:10Z INFO StepsRunner] Successfully returned to code page 65001 (UTF8)
+[2026-09-30 19:26:10Z INFO HostContext] Well known directory 'Bin': 'D:\cicd\actions-runner\bin'
+[2026-09-30 19:26:10Z INFO HostContext] Well known directory 'Root': 'D:\cicd\actions-runner'
+[2026-09-30 19:26:10Z INFO HostContext] Well known directory 'Work': 'D:\cicd\actions-runner\_work'
+[2026-09-30 19:26:10Z INFO HostContext] Well known directory 'Temp': 'D:\cicd\actions-runner\_work\_temp'
+[2026-09-30 19:26:10Z INFO ExecutionContext] Write event payload to D:\cicd\actions-runner\_work\_temp\_github_workflow\event.json
+[2026-09-30 19:26:10Z INFO HostContext] Well known directory 'Bin': 'D:\cicd\actions-runner\bin'
+[2026-09-30 19:26:10Z INFO HostContext] Well known directory 'Root': 'D:\cicd\actions-runner'
+[2026-09-30 19:26:10Z INFO HostContext] Well known directory 'Work': 'D:\cicd\actions-runner\_work'
+[2026-09-30 19:26:10Z INFO HostContext] Well known directory 'Temp': 'D:\cicd\actions-runner\_work\_temp'
+[2026-09-30 19:26:10Z INFO ExtensionManager] Getting extensions for interface: 'GitHub.Runner.Worker.IFileCommandExtension'
+[2026-09-30 19:26:10Z INFO ExtensionManager] Getting extensions for interface: 'GitHub.Runner.Worker.IActionCommandExtension'
+[2026-09-30 19:26:10Z INFO ActionCommandManager] Register action command extension for command internal-set-repo-path
+[2026-09-30 19:26:10Z INFO ActionCommandManager] Register action command extension for command set-env
+[2026-09-30 19:26:10Z INFO ActionCommandManager] Register action command extension for command set-output
+[2026-09-30 19:26:10Z INFO ActionCommandManager] Register action command extension for command save-state
+[2026-09-30 19:26:10Z INFO ActionCommandManager] Register action command extension for command add-path
+[2026-09-30 19:26:10Z INFO ActionCommandManager] Register action command extension for command add-mask
+[2026-09-30 19:26:10Z INFO ActionCommandManager] Register action command extension for command add-matcher
+[2026-09-30 19:26:10Z INFO ActionCommandManager] Register action command extension for command remove-matcher
+[2026-09-30 19:26:10Z INFO ActionCommandManager] Register action command extension for command warning
+[2026-09-30 19:26:10Z INFO ActionCommandManager] Register action command extension for command error
+[2026-09-30 19:26:10Z INFO ActionCommandManager] Register action command extension for command notice
+[2026-09-30 19:26:10Z INFO ActionCommandManager] Register action command extension for command debug
+[2026-09-30 19:26:10Z INFO ActionCommandManager] Register action command extension for command group
+[2026-09-30 19:26:10Z INFO ActionCommandManager] Register action command extension for command endgroup
+[2026-09-30 19:26:10Z INFO ActionCommandManager] Register action command extension for command echo
+[2026-09-30 19:26:10Z INFO ScriptHandler] Which2: 'pwsh'
+[2026-09-30 19:26:10Z INFO ScriptHandler] Location: 'C:\Program Files\PowerShell\7\pwsh.EXE'
+[2026-09-30 19:26:10Z INFO HostContext] Well known directory 'Bin': 'D:\cicd\actions-runner\bin'
+[2026-09-30 19:26:10Z INFO HostContext] Well known directory 'Root': 'D:\cicd\actions-runner'
+[2026-09-30 19:26:10Z INFO HostContext] Well known directory 'Work': 'D:\cicd\actions-runner\_work'
+[2026-09-30 19:26:10Z INFO HostContext] Well known directory 'Temp': 'D:\cicd\actions-runner\_work\_temp'
+[2026-09-30 19:26:10Z INFO ScriptHandler] Which2: 'pwsh'
+[2026-09-30 19:26:10Z INFO ScriptHandler] Location: 'C:\Program Files\PowerShell\7\pwsh.EXE'
+[2026-09-30 19:26:10Z INFO ProcessInvokerWrapper] Starting process:
+[2026-09-30 19:26:10Z INFO ProcessInvokerWrapper]   File name: 'C:\Program Files\PowerShell\7\pwsh.EXE'
+[2026-09-30 19:26:10Z INFO ProcessInvokerWrapper]   Arguments: '-command ". 'D:\cicd\actions-runner\_work\_temp\9545f583-331b-4f25-97fe-95c20342e6d0.ps1'"'
+[2026-09-30 19:26:10Z INFO ProcessInvokerWrapper]   Working directory: 'D:\cicd\actions-runner\_work\my-repo\my-repo\infra'
+[2026-09-30 19:26:10Z INFO ProcessInvokerWrapper]   Require exit code zero: 'False'
+[2026-09-30 19:26:10Z INFO ProcessInvokerWrapper]   Encoding web name:  ; code page: ''
+[2026-09-30 19:26:10Z INFO ProcessInvokerWrapper]   Force kill process on cancellation: 'False'
+[2026-09-30 19:26:10Z INFO ProcessInvokerWrapper]   Redirected STDIN: 'False'
+[2026-09-30 19:26:10Z INFO ProcessInvokerWrapper]   Persist current code page: 'True'
+[2026-09-30 19:26:10Z INFO ProcessInvokerWrapper]   Keep redirected STDIN open: 'False'
+[2026-09-30 19:26:10Z INFO ProcessInvokerWrapper]   High priority process: 'False'
+[2026-09-30 19:26:10Z INFO JobServerQueue] Try to append 1 batches web console lines for record '6b0da0d3-bdfe-4efe-a35a-3e685b18c974', success rate: 1/1.
+[2026-09-30 19:26:10Z INFO ProcessInvokerWrapper] Process started with process id 19692, waiting for process exit.
+[2026-09-30 19:26:10Z INFO JobServerQueue] Try to upload 1 log files or attachments, success rate: 1/1.
+[2026-09-30 19:26:10Z INFO JobServerQueue] Got a step log file to send to results service.
+[2026-09-30 19:26:10Z INFO JobServerQueue] Starting upload of step log file to results service ResultsLog, D:\cicd\actions-runner\_diag\blocks\6c078622-02c2-80e4-b884-1b0faaf9f69e_5eb90abe-2d26-4b71-b5a8-41548c397652.1
+[2026-09-30 19:26:11Z INFO JobServerQueue] Tried to upload 1 file(s) to results, success rate: 1/1.
+[2026-09-30 19:26:12Z INFO JobServerQueue] Try to append 1 batches web console lines for record '6b0da0d3-bdfe-4efe-a35a-3e685b18c974', success rate: 1/1.
+[2026-09-30 19:26:12Z INFO ProcessInvokerWrapper] STDOUT/STDERR stream read finished.
+[2026-09-30 19:26:12Z INFO ProcessInvokerWrapper] STDOUT/STDERR stream read finished.
+[2026-09-30 19:26:12Z INFO ProcessInvokerWrapper] Finished process 19692 with exit code 1, and elapsed time 00:00:01.9228953.
+[2026-09-30 19:26:12Z INFO CreateStepSummaryCommand] Step Summary file (D:\cicd\actions-runner\_work\_temp\_runner_file_commands\step_summary_0a5a264c-5965-4580-924b-e52631e3aa6c) is empty; skipping attachment upload
+[2026-09-30 19:26:12Z INFO StepsRunner] Step result: Failed
+[2026-09-30 19:26:12Z INFO ExecutionContext] Publish step telemetry for current step {
+  "action": "pwsh",
+  "type": "run",
+  "stage": "Main",
+  "stepId": "6b0da0d3-bdfe-4efe-a35a-3e685b18c974",
+  "stepContextName": "__run_6",
+  "result": "failed",
+  "errorMessages": [
+    "Process completed with exit code 1."
+  ],
+  "executionTimeInSeconds": 2,
+  "startTime": "2026-09-30T19:26:10.2515597Z",
+  "finishTime": "2026-09-30T19:26:12.2206839Z"
+}.
+[2026-09-30 19:26:12Z INFO StepsRunner] Update job result with current step result 'Failed'.
+[2026-09-30 19:26:12Z INFO StepsRunner] Current state: job state = 'Failed'
+[2026-09-30 19:26:12Z INFO StepsRunner] Processing step: DisplayName='Wait for Deployment'
+[2026-09-30 19:26:12Z INFO StepsRunner] Evaluating: success()
+[2026-09-30 19:26:12Z INFO StepsRunner] Result: false
+[2026-09-30 19:26:12Z INFO StepsRunner] Skipping step due to condition evaluation.
+[2026-09-30 19:26:12Z INFO StepsRunner] No need for updating job result with current step result 'Skipped'.
+[2026-09-30 19:26:12Z INFO StepsRunner] Current state: job state = 'Failed'
+[2026-09-30 19:26:12Z INFO StepsRunner] Processing step: DisplayName='Verify Pods'
+[2026-09-30 19:26:12Z INFO StepsRunner] Evaluating: success()
+[2026-09-30 19:26:12Z INFO StepsRunner] Result: false
+[2026-09-30 19:26:12Z INFO StepsRunner] Skipping step due to condition evaluation.
+[2026-09-30 19:26:12Z INFO StepsRunner] No need for updating job result with current step result 'Skipped'.
+[2026-09-30 19:26:12Z INFO StepsRunner] Current state: job state = 'Failed'
+[2026-09-30 19:26:12Z INFO StepsRunner] Processing step: DisplayName='Post Checkout Code'
+[2026-09-30 19:26:12Z INFO StepsRunner] Evaluating: always()
+[2026-09-30 19:26:12Z INFO StepsRunner] Result: true
+[2026-09-30 19:26:12Z INFO StepsRunner] Starting the step.
+[2026-09-30 19:26:12Z INFO HostContext] Well known directory 'Bin': 'D:\cicd\actions-runner\bin'
+[2026-09-30 19:26:12Z INFO HostContext] Well known directory 'Root': 'D:\cicd\actions-runner'
+[2026-09-30 19:26:12Z INFO HostContext] Well known directory 'Work': 'D:\cicd\actions-runner\_work'
+[2026-09-30 19:26:12Z INFO StepsRunner] Which2: 'chcp'
+[2026-09-30 19:26:12Z INFO StepsRunner] Location: 'C:\WINDOWS\system32\chcp.COM'
+[2026-09-30 19:26:12Z INFO ProcessInvokerWrapper] Starting process:
+[2026-09-30 19:26:12Z INFO ProcessInvokerWrapper]   File name: 'C:\WINDOWS\system32\chcp.COM'
+[2026-09-30 19:26:12Z INFO ProcessInvokerWrapper]   Arguments: '65001'
+[2026-09-30 19:26:12Z INFO ProcessInvokerWrapper]   Working directory: 'D:\cicd\actions-runner\_work'
+[2026-09-30 19:26:12Z INFO ProcessInvokerWrapper]   Require exit code zero: 'False'
+[2026-09-30 19:26:12Z INFO ProcessInvokerWrapper]   Encoding web name:  ; code page: ''
+[2026-09-30 19:26:12Z INFO ProcessInvokerWrapper]   Force kill process on cancellation: 'False'
+[2026-09-30 19:26:12Z INFO ProcessInvokerWrapper]   Redirected STDIN: 'False'
+[2026-09-30 19:26:12Z INFO ProcessInvokerWrapper]   Persist current code page: 'True'
+[2026-09-30 19:26:12Z INFO ProcessInvokerWrapper]   Keep redirected STDIN open: 'False'
+[2026-09-30 19:26:12Z INFO ProcessInvokerWrapper]   High priority process: 'False'
+[2026-09-30 19:26:12Z INFO ProcessInvokerWrapper] Process started with process id 21312, waiting for process exit.
+[2026-09-30 19:26:12Z INFO ProcessInvokerWrapper] STDOUT/STDERR stream read finished.
+[2026-09-30 19:26:12Z INFO ProcessInvokerWrapper] STDOUT/STDERR stream read finished.
+[2026-09-30 19:26:12Z INFO ProcessInvokerWrapper] Finished process 21312 with exit code 0, and elapsed time 00:00:00.0233976.
+[2026-09-30 19:26:12Z INFO StepsRunner] Successfully returned to code page 65001 (UTF8)
+[2026-09-30 19:26:12Z INFO HostContext] Well known directory 'Bin': 'D:\cicd\actions-runner\bin'
+[2026-09-30 19:26:12Z INFO HostContext] Well known directory 'Root': 'D:\cicd\actions-runner'
+[2026-09-30 19:26:12Z INFO HostContext] Well known directory 'Work': 'D:\cicd\actions-runner\_work'
+[2026-09-30 19:26:12Z INFO HostContext] Well known directory 'Actions': 'D:\cicd\actions-runner\_work\_actions'
+[2026-09-30 19:26:12Z INFO ActionManager] Load action that reference repository from 'D:\cicd\actions-runner\_work\_actions\actions\checkout\v4'
+[2026-09-30 19:26:12Z INFO HostContext] Well known directory 'Bin': 'D:\cicd\actions-runner\bin'
+[2026-09-30 19:26:12Z INFO HostContext] Well known directory 'Root': 'D:\cicd\actions-runner'
+[2026-09-30 19:26:12Z INFO HostContext] Well known directory 'Work': 'D:\cicd\actions-runner\_work'
+[2026-09-30 19:26:12Z INFO HostContext] Well known directory 'Actions': 'D:\cicd\actions-runner\_work\_actions'
+[2026-09-30 19:26:12Z INFO ActionManifestManagerLegacy] Loaded action.yml file: {
+  "name": "Checkout",
+  "description": "Checkout a Git repository at a particular version",
+  "inputs": {
+    "type": 2,
+    "map": [
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 4,
+          "col": 3,
+          "lit": "repository"
+        },
+        "value": {
+          "type": 3,
+          "file": 2,
+          "line": 6,
+          "col": 14,
+          "expr": "github.repository"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 7,
+          "col": 3,
+          "lit": "ref"
+        },
+        "value": ""
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 12,
+          "col": 3,
+          "lit": "token"
+        },
+        "value": {
+          "type": 3,
+          "file": 2,
+          "line": 24,
+          "col": 14,
+          "expr": "github.token"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 25,
+          "col": 3,
+          "lit": "ssh-key"
+        },
+        "value": ""
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 37,
+          "col": 3,
+          "lit": "ssh-known-hosts"
+        },
+        "value": ""
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 42,
+          "col": 3,
+          "lit": "ssh-strict"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 47,
+          "col": 14,
+          "lit": "true"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 48,
+          "col": 3,
+          "lit": "ssh-user"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 51,
+          "col": 14,
+          "lit": "git"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 52,
+          "col": 3,
+          "lit": "persist-credentials"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 54,
+          "col": 14,
+          "lit": "true"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 55,
+          "col": 3,
+          "lit": "path"
+        },
+        "value": ""
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 57,
+          "col": 3,
+          "lit": "clean"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 59,
+          "col": 14,
+          "lit": "true"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 60,
+          "col": 3,
+          "lit": "filter"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 64,
+          "col": 14,
+          "lit": ""
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 65,
+          "col": 3,
+          "lit": "sparse-checkout"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 69,
+          "col": 14,
+          "lit": ""
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 70,
+          "col": 3,
+          "lit": "sparse-checkout-cone-mode"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 73,
+          "col": 14,
+          "lit": "true"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 74,
+          "col": 3,
+          "lit": "fetch-depth"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 76,
+          "col": 14,
+          "lit": "1"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 77,
+          "col": 3,
+          "lit": "fetch-tags"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 79,
+          "col": 14,
+          "lit": "false"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 80,
+          "col": 3,
+          "lit": "show-progress"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 82,
+          "col": 14,
+          "lit": "true"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 83,
+          "col": 3,
+          "lit": "lfs"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 85,
+          "col": 14,
+          "lit": "false"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 86,
+          "col": 3,
+          "lit": "submodules"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 94,
+          "col": 14,
+          "lit": "false"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 95,
+          "col": 3,
+          "lit": "set-safe-directory"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 97,
+          "col": 14,
+          "lit": "true"
+        }
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 98,
+          "col": 3,
+          "lit": "github-server-url"
+        },
+        "value": ""
+      },
+      {
+        "key": {
+          "type": 0,
+          "file": 2,
+          "line": 101,
+          "col": 3,
+          "lit": "allow-unsafe-pr-checkout"
+        },
+        "value": {
+          "type": 0,
+          "file": 2,
+          "line": 109,
+          "col": 14,
+          "lit": "false"
+        }
+      }
+    ]
+  },
+  "execution": {
+    "executionType": "nodeJS",
+    "hasPre": false,
+    "hasPost": true,
+    "script": "dist/index.js",
+    "pre": null,
+    "post": "dist/index.js",
+    "nodeVersion": "node20",
+    "cleanupCondition": "always()",
+    "initCondition": "always()"
+  },
+  "deprecated": null
+}
+[2026-09-30 19:26:12Z INFO ActionManager] Action pre node.js file: N/A.
+[2026-09-30 19:26:12Z INFO ActionManager] Action node.js file: dist/index.js.
+[2026-09-30 19:26:12Z INFO ActionManager] Action post node.js file: dist/index.js.
+[2026-09-30 19:26:12Z INFO HostContext] Well known directory 'Bin': 'D:\cicd\actions-runner\bin'
+[2026-09-30 19:26:12Z INFO HostContext] Well known directory 'Root': 'D:\cicd\actions-runner'
+[2026-09-30 19:26:12Z INFO HostContext] Well known directory 'Work': 'D:\cicd\actions-runner\_work'
+[2026-09-30 19:26:12Z INFO HostContext] Well known directory 'Temp': 'D:\cicd\actions-runner\_work\_temp'
+[2026-09-30 19:26:12Z INFO ExecutionContext] Write event payload to D:\cicd\actions-runner\_work\_temp\_github_workflow\event.json
+[2026-09-30 19:26:12Z INFO HostContext] Well known directory 'Bin': 'D:\cicd\actions-runner\bin'
+[2026-09-30 19:26:12Z INFO HostContext] Well known directory 'Root': 'D:\cicd\actions-runner'
+[2026-09-30 19:26:12Z INFO HostContext] Well known directory 'Work': 'D:\cicd\actions-runner\_work'
+[2026-09-30 19:26:12Z INFO HostContext] Well known directory 'Temp': 'D:\cicd\actions-runner\_work\_temp'
+[2026-09-30 19:26:12Z INFO ExtensionManager] Getting extensions for interface: 'GitHub.Runner.Worker.IFileCommandExtension'
+[2026-09-30 19:26:12Z INFO ActionManifestManagerLegacy] Input 'repository': default value evaluate result: {
+  "type": 0,
+  "file": 2,
+  "line": 6,
+  "col": 14,
+  "lit": "***-ops/my-repo"
+}
+[2026-09-30 19:26:12Z INFO ActionManifestManagerLegacy] Input 'ref': default value evaluate result: ""
+[2026-09-30 19:26:12Z INFO ActionManifestManagerLegacy] Input 'token': default value evaluate result: {
+  "type": 0,
+  "file": 2,
+  "line": 24,
+  "col": 14,
+  "lit": "***"
+}
+[2026-09-30 19:26:12Z INFO ActionManifestManagerLegacy] Input 'ssh-key': default value evaluate result: ""
+[2026-09-30 19:26:12Z INFO ActionManifestManagerLegacy] Input 'ssh-known-hosts': default value evaluate result: ""
+[2026-09-30 19:26:12Z INFO ActionManifestManagerLegacy] Input 'ssh-strict': default value evaluate result: {
+  "type": 0,
+  "file": 2,
+  "line": 47,
+  "col": 14,
+  "lit": "true"
+}
+[2026-09-30 19:26:12Z INFO ActionManifestManagerLegacy] Input 'ssh-user': default value evaluate result: {
+  "type": 0,
+  "file": 2,
+  "line": 51,
+  "col": 14,
+  "lit": "git"
+}
+[2026-09-30 19:26:12Z INFO ActionManifestManagerLegacy] Input 'persist-credentials': default value evaluate result: {
+  "type": 0,
+  "file": 2,
+  "line": 54,
+  "col": 14,
+  "lit": "true"
+}
+[2026-09-30 19:26:12Z INFO ActionManifestManagerLegacy] Input 'path': default value evaluate result: ""
+[2026-09-30 19:26:12Z INFO ActionManifestManagerLegacy] Input 'clean': default value evaluate result: {
+  "type": 0,
+  "file": 2,
+  "line": 59,
+  "col": 14,
+  "lit": "true"
+}
+[2026-09-30 19:26:12Z INFO ActionManifestManagerLegacy] Input 'filter': default value evaluate result: {
+  "type": 0,
+  "file": 2,
+  "line": 64,
+  "col": 14,
+  "lit": ""
+}
+[2026-09-30 19:26:12Z INFO ActionManifestManagerLegacy] Input 'sparse-checkout': default value evaluate result: {
+  "type": 0,
+  "file": 2,
+  "line": 69,
+  "col": 14,
+  "lit": ""
+}
+[2026-09-30 19:26:12Z INFO ActionManifestManagerLegacy] Input 'sparse-checkout-cone-mode': default value evaluate result: {
+  "type": 0,
+  "file": 2,
+  "line": 73,
+  "col": 14,
+  "lit": "true"
+}
+[2026-09-30 19:26:12Z INFO ActionManifestManagerLegacy] Input 'fetch-depth': default value evaluate result: {
+  "type": 0,
+  "file": 2,
+  "line": 76,
+  "col": 14,
+  "lit": "1"
+}
+[2026-09-30 19:26:12Z INFO ActionManifestManagerLegacy] Input 'fetch-tags': default value evaluate result: {
+  "type": 0,
+  "file": 2,
+  "line": 79,
+  "col": 14,
+  "lit": "false"
+}
+[2026-09-30 19:26:12Z INFO ActionManifestManagerLegacy] Input 'show-progress': default value evaluate result: {
+  "type": 0,
+  "file": 2,
+  "line": 82,
+  "col": 14,
+  "lit": "true"
+}
+[2026-09-30 19:26:12Z INFO ActionManifestManagerLegacy] Input 'lfs': default value evaluate result: {
+  "type": 0,
+  "file": 2,
+  "line": 85,
+  "col": 14,
+  "lit": "false"
+}
+[2026-09-30 19:26:12Z INFO ActionManifestManagerLegacy] Input 'submodules': default value evaluate result: {
+  "type": 0,
+  "file": 2,
+  "line": 94,
+  "col": 14,
+  "lit": "false"
+}
+[2026-09-30 19:26:12Z INFO ActionManifestManagerLegacy] Input 'set-safe-directory': default value evaluate result: {
+  "type": 0,
+  "file": 2,
+  "line": 97,
+  "col": 14,
+  "lit": "true"
+}
+[2026-09-30 19:26:12Z INFO ActionManifestManagerLegacy] Input 'github-server-url': default value evaluate result: ""
+[2026-09-30 19:26:12Z INFO ActionManifestManagerLegacy] Input 'allow-unsafe-pr-checkout': default value evaluate result: {
+  "type": 0,
+  "file": 2,
+  "line": 109,
+  "col": 14,
+  "lit": "false"
+}
+[2026-09-30 19:26:12Z INFO ExtensionManager] Getting extensions for interface: 'GitHub.Runner.Worker.IActionCommandExtension'
+[2026-09-30 19:26:12Z INFO ActionCommandManager] Register action command extension for command internal-set-repo-path
+[2026-09-30 19:26:12Z INFO ActionCommandManager] Register action command extension for command set-env
+[2026-09-30 19:26:12Z INFO ActionCommandManager] Register action command extension for command set-output
+[2026-09-30 19:26:12Z INFO ActionCommandManager] Register action command extension for command save-state
+[2026-09-30 19:26:12Z INFO ActionCommandManager] Register action command extension for command add-path
+[2026-09-30 19:26:12Z INFO ActionCommandManager] Register action command extension for command add-mask
+[2026-09-30 19:26:12Z INFO ActionCommandManager] Register action command extension for command add-matcher
+[2026-09-30 19:26:12Z INFO ActionCommandManager] Register action command extension for command remove-matcher
+[2026-09-30 19:26:12Z INFO ActionCommandManager] Register action command extension for command warning
+[2026-09-30 19:26:12Z INFO ActionCommandManager] Register action command extension for command error
+[2026-09-30 19:26:12Z INFO ActionCommandManager] Register action command extension for command notice
+[2026-09-30 19:26:12Z INFO ActionCommandManager] Register action command extension for command debug
+[2026-09-30 19:26:12Z INFO ActionCommandManager] Register action command extension for command group
+[2026-09-30 19:26:12Z INFO ActionCommandManager] Register action command extension for command endgroup
+[2026-09-30 19:26:12Z INFO ActionCommandManager] Register action command extension for command echo
+[2026-09-30 19:26:12Z INFO HostContext] Well known directory 'Bin': 'D:\cicd\actions-runner\bin'
+[2026-09-30 19:26:12Z INFO HostContext] Well known directory 'Root': 'D:\cicd\actions-runner'
+[2026-09-30 19:26:12Z INFO HostContext] Well known directory 'Externals': 'D:\cicd\actions-runner\externals'
+[2026-09-30 19:26:12Z INFO ProcessInvokerWrapper] Starting process:
+[2026-09-30 19:26:12Z INFO ProcessInvokerWrapper]   File name: 'D:\cicd\actions-runner\externals\node24\bin\node.exe'
+[2026-09-30 19:26:12Z INFO ProcessInvokerWrapper]   Arguments: '"D:\cicd\actions-runner\_work\_actions\actions\checkout\v4\dist/index.js"'
+[2026-09-30 19:26:12Z INFO ProcessInvokerWrapper]   Working directory: 'D:\cicd\actions-runner\_work\my-repo\my-repo'
+[2026-09-30 19:26:12Z INFO ProcessInvokerWrapper]   Require exit code zero: 'False'
+[2026-09-30 19:26:12Z INFO ProcessInvokerWrapper]   Encoding web name: utf-8 ; code page: '65001'
+[2026-09-30 19:26:12Z INFO ProcessInvokerWrapper]   Force kill process on cancellation: 'False'
+[2026-09-30 19:26:12Z INFO ProcessInvokerWrapper]   Redirected STDIN: 'False'
+[2026-09-30 19:26:12Z INFO ProcessInvokerWrapper]   Persist current code page: 'True'
+[2026-09-30 19:26:12Z INFO ProcessInvokerWrapper]   Keep redirected STDIN open: 'False'
+[2026-09-30 19:26:12Z INFO ProcessInvokerWrapper]   High priority process: 'False'
+[2026-09-30 19:26:12Z INFO ProcessInvokerWrapper] Process started with process id 26104, waiting for process exit.
+[2026-09-30 19:26:12Z INFO JobServerQueue] Try to append 1 batches web console lines for record '6b0da0d3-bdfe-4efe-a35a-3e685b18c974', success rate: 1/1.
+[2026-09-30 19:26:12Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'f56b2faa-98da-417e-801c-14aad74991fe', success rate: 1/1.
+[2026-09-30 19:26:12Z INFO JobServerQueue] Got a step log file to send to results service.
+[2026-09-30 19:26:12Z INFO JobServerQueue] Starting upload of step log file to results service ResultsLog, D:\cicd\actions-runner\_diag\blocks\6c078622-02c2-80e4-b884-1b0faaf9f69e_6b0da0d3-bdfe-4efe-a35a-3e685b18c974.1
+[2026-09-30 19:26:12Z INFO AddMaskCommandExtension] Add new secret mask with length of 32
+[2026-09-30 19:26:12Z INFO JobServerQueue] Try to upload 1 log files or attachments, success rate: 1/1.
+[2026-09-30 19:26:12Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'f56b2faa-98da-417e-801c-14aad74991fe', success rate: 1/1.
+[2026-09-30 19:26:12Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'f56b2faa-98da-417e-801c-14aad74991fe', success rate: 1/1.
+[2026-09-30 19:26:13Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'f56b2faa-98da-417e-801c-14aad74991fe', success rate: 1/1.
+[2026-09-30 19:26:13Z INFO JobServerQueue] Tried to upload 1 file(s) to results, success rate: 1/1.
+[2026-09-30 19:26:15Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'f56b2faa-98da-417e-801c-14aad74991fe', success rate: 1/1.
+[2026-09-30 19:26:15Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'f56b2faa-98da-417e-801c-14aad74991fe', success rate: 1/1.
+[2026-09-30 19:26:17Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'f56b2faa-98da-417e-801c-14aad74991fe', success rate: 1/1.
+[2026-09-30 19:26:17Z INFO JobServerQueue] Try to append 1 batches web console lines for record 'f56b2faa-98da-417e-801c-14aad74991fe', success rate: 1/1.
+[2026-09-30 19:26:17Z INFO HostContext] Well known directory 'Bin': 'D:\cicd\actions-runner\bin'
+[2026-09-30 19:26:17Z INFO HostContext] Well known directory 'Root': 'D:\cicd\actions-runner'
+[2026-09-30 19:26:17Z INFO HostContext] Well known directory 'Work': 'D:\cicd\actions-runner\_work'
+[2026-09-30 19:26:19Z INFO ProcessInvokerWrapper] STDOUT/STDERR stream read finished.
+[2026-09-30 19:26:19Z INFO ProcessInvokerWrapper] STDOUT/STDERR stream read finished.
+[2026-09-30 19:26:19Z INFO ProcessInvokerWrapper] Finished process 26104 with exit code 0, and elapsed time 00:00:06.8699224.
+[2026-09-30 19:26:19Z INFO CreateStepSummaryCommand] Step Summary file (D:\cicd\actions-runner\_work\_temp\_runner_file_commands\step_summary_48794f9f-0d5c-418a-8f39-085bd99a0bbf) is empty; skipping attachment upload
+[2026-09-30 19:26:19Z INFO StepsRunner] Step result: 
+[2026-09-30 19:26:19Z INFO ExecutionContext] Publish step telemetry for current step {
+  "action": "actions/checkout",
+  "ref": "v4",
+  "type": "node24",
+  "stage": "Post",
+  "stepId": "f56b2faa-98da-417e-801c-14aad74991fe",
+  "result": "succeeded",
+  "errorMessages": [],
+  "executionTimeInSeconds": 7,
+  "startTime": "2026-09-30T19:26:12.2275655Z",
+  "finishTime": "2026-09-30T19:26:19.1451308Z"
+}.
+[2026-09-30 19:26:19Z INFO StepsRunner] No need for updating job result with current step result 'Succeeded'.
+[2026-09-30 19:26:19Z INFO StepsRunner] Current state: job state = 'Failed'
+[2026-09-30 19:26:19Z INFO JobRunner] Finalize job.
+[2026-09-30 19:26:19Z INFO HostContext] Well known directory 'Bin': 'D:\cicd\actions-runner\bin'
+[2026-09-30 19:26:19Z INFO HostContext] Well known directory 'Root': 'D:\cicd\actions-runner'
+[2026-09-30 19:26:19Z INFO HostContext] Well known directory 'Diag': 'D:\cicd\actions-runner\_diag'
+[2026-09-30 19:26:19Z INFO HostContext] Well known directory 'Bin': 'D:\cicd\actions-runner\bin'
+[2026-09-30 19:26:19Z INFO HostContext] Well known directory 'Root': 'D:\cicd\actions-runner'
+[2026-09-30 19:26:19Z INFO HostContext] Well known directory 'Diag': 'D:\cicd\actions-runner\_diag'
+[2026-09-30 19:26:19Z INFO JobExtension] Initialize Env context
+[2026-09-30 19:26:19Z INFO JobExtension] Initialize steps context
+[2026-09-30 19:26:19Z INFO JobExtension] Total accessible running process: 352.
+[2026-09-30 19:26:19Z INFO JobExtension] Inspecting process environment variables. PID: 25796 (svchost)
+[2026-09-30 19:26:19Z WARN JobExtension] Ignore exception during read process environment variables: Access is denied.
+[2026-09-30 19:26:19Z INFO JobExtension] Wait for all connectivity checks to finish.
+[2026-09-30 19:26:19Z INFO JobExtension] Connectivity check result: {
+  "endpointUrl": "https://broker.actions.githubusercontent.com/health",
+  "endpointIPs": null,
+  "startTime": "2026-09-30T19:25:27.3834413Z",
+  "statusCode": "http_OK",
+  "requestId": "F7EE:12985:2F7228:315633:6ABD6229",
+  "httpRequestDurationInMs": 999,
+  "dnsResolutionDurationInMs": 0,
+  "dnsError": null
+}
+[2026-09-30 19:26:19Z INFO JobExtension] Connectivity check result: {
+  "endpointUrl": "https://token.actions.githubusercontent.com/ready",
+  "endpointIPs": null,
+  "startTime": "2026-09-30T19:25:27.3856382Z",
+  "statusCode": "http_NoContent",
+  "requestId": "F7ED:FEBDC:2BEFA3:2F7F2B:6ABD6229",
+  "httpRequestDurationInMs": 1306,
+  "dnsResolutionDurationInMs": 0,
+  "dnsError": null
+}
+[2026-09-30 19:26:19Z INFO JobExtension] Connectivity check result: {
+  "endpointUrl": "https://run.actions.githubusercontent.com/health",
+  "endpointIPs": null,
+  "startTime": "2026-09-30T19:25:27.3859938Z",
+  "statusCode": "http_OK",
+  "requestId": "F7EC:2923B:2F853F:316B43:6ABD6229",
+  "httpRequestDurationInMs": 1072,
+  "dnsResolutionDurationInMs": 0,
+  "dnsError": null
+}
+[2026-09-30 19:26:19Z INFO ExecutionContext] Publish step telemetry for current step {
+  "action": "complete_job",
+  "type": "runner",
+  "stage": "Post",
+  "stepId": "798b87e4-8e86-42d3-ac4a-2153935da114",
+  "result": "succeeded",
+  "errorMessages": [
+    "Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@v4. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/"
+  ],
+  "executionTimeInSeconds": 1,
+  "startTime": "2026-09-30T19:26:19.1588048Z",
+  "finishTime": "2026-09-30T19:26:19.2056156Z"
+}.
+[2026-09-30 19:26:19Z INFO JobRunner] Job result after all job steps finish: Failed
+[2026-09-30 19:26:19Z INFO JobRunner] Completing the job execution context.
+[2026-09-30 19:26:19Z INFO JobRunner] Shutting down the job server queue.
+[2026-09-30 19:26:19Z INFO JobServerQueue] Fire signal to shutdown all queues.
+[2026-09-30 19:26:19Z INFO JobServerQueue] All queue process task stopped.
+[2026-09-30 19:26:19Z INFO JobServerQueue] Try to append 1 batches web console lines for record '798b87e4-8e86-42d3-ac4a-2153935da114', success rate: 1/1.
+[2026-09-30 19:26:19Z INFO JobServerQueue] Web console line queue drained.
+[2026-09-30 19:26:19Z INFO JobServerQueue] Uploading 3 files in one shot.
+[2026-09-30 19:26:19Z INFO JobServerQueue] Try to upload 3 log files or attachments, success rate: 3/3.
+[2026-09-30 19:26:19Z INFO JobServerQueue] File upload queue drained.
+[2026-09-30 19:26:19Z INFO JobServerQueue] Starting results-based upload queue...
+[2026-09-30 19:26:19Z INFO JobServerQueue] Uploading 3 file(s) in one shot through results service.
+[2026-09-30 19:26:19Z INFO JobServerQueue] Got a step log file to send to results service.
+[2026-09-30 19:26:19Z INFO JobServerQueue] Starting upload of step log file to results service ResultsLog, D:\cicd\actions-runner\_diag\blocks\6c078622-02c2-80e4-b884-1b0faaf9f69e_f56b2faa-98da-417e-801c-14aad74991fe.1
+[2026-09-30 19:26:21Z INFO JobServerQueue] Got a step log file to send to results service.
+[2026-09-30 19:26:21Z INFO JobServerQueue] Starting upload of step log file to results service ResultsLog, D:\cicd\actions-runner\_diag\blocks\6c078622-02c2-80e4-b884-1b0faaf9f69e_798b87e4-8e86-42d3-ac4a-2153935da114.1
+[2026-09-30 19:26:22Z INFO JobServerQueue] Got a job log file to send to results service.
+[2026-09-30 19:26:22Z INFO JobServerQueue] Starting upload of job log file to results service ResultsLog, D:\cicd\actions-runner\_diag\blocks\6c078622-02c2-80e4-b884-1b0faaf9f69e_2df8a9c6-a163-5333-b137-88c3e4493c33.1
+[2026-09-30 19:26:23Z INFO JobServerQueue] Tried to upload 3 file(s) to results, success rate: 3/3.
+[2026-09-30 19:26:23Z INFO JobServerQueue] Results upload queue drained.
+[2026-09-30 19:26:23Z INFO JobServerQueue] Timeline update queue drained.
+[2026-09-30 19:26:23Z INFO JobServerQueue] Disposing job server ...
+[2026-09-30 19:26:23Z INFO JobServerQueue] Disposing results server ...
+[2026-09-30 19:26:23Z INFO JobServerQueue] All queue process tasks have been stopped, and all queues are drained.
+[2026-09-30 19:26:23Z INFO TempDirectoryManager] Cleaning runner temp folder: D:\cicd\actions-runner\_work\_temp
+[2026-09-30 19:26:23Z INFO HostContext] Well known directory 'Bin': 'D:\cicd\actions-runner\bin'
+[2026-09-30 19:26:23Z INFO HostContext] Well known directory 'Root': 'D:\cicd\actions-runner'
+[2026-09-30 19:26:23Z INFO HostContext] Well known directory 'Diag': 'D:\cicd\actions-runner\_diag'
+[2026-09-30 19:26:23Z INFO HostContext] Well known config file 'Telemetry': 'D:\cicd\actions-runner\_diag\.telemetry'
+[2026-09-30 19:26:23Z INFO JobRunner] Raising job completed against run service
+[2026-09-30 19:26:24Z INFO Worker] Job completed.

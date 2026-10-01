@@ -1,0 +1,12 @@
+﻿{
+  "repositoryName": "vikranttiwari988-ops/my-repo",
+  "pipelineDirectory": "my-repo",
+  "workspaceDirectory": "my-repo\\my-repo",
+  "repositories": {
+    "vikranttiwari988-ops/my-repo": {
+      "repositoryPath": "my-repo\\my-repo",
+      "lastRunOn": "09/27/2026 22:33:07 +05:30"
+    }
+  },
+  "lastRunOn": "10/01/2026 01:00:10 +05:30"
+}
