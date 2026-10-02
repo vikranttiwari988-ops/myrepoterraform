@@ -37,17 +37,25 @@ jobs:
         uses: hashicorp/setup-terraform@v3
 
       - name: Terraform Init
-        working-directory: terraform
+        working-directory: terraformec2oidc/terraform
         run: terraform init
 
       - name: Terraform Validate
-        working-directory: terraform
+        working-directory: terraformec2oidc/terraform
         run: terraform validate
 
       - name: Terraform Plan
-        working-directory: terraform
+        working-directory: terraformec2oidc/terraform
         run: terraform plan
-
+      
       - name: Terraform Apply
-        working-directory: terraform
+        working-directory: terraformec2oidc/terraform
         run: terraform apply -auto-approve
+        
+      - name: Wait 5 Minutes 
+        run: sleep 300
+        
+      - name: Terraform Apply
+        working-directory: terraformec2oidc/terraform
+        run: terraform destroy -auto-approve
+          
