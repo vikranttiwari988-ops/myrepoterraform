@@ -1,0 +1,11 @@
+﻿{
+  "agentId": 2,
+  "agentName": "VIKRANT",
+  "poolId": 1,
+  "poolName": "Default",
+  "serverUrl": "https://pipelinesghubeus21.actions.githubusercontent.com/xFeeV8GjsBZdKPuRRskkIPUoGFLk558aJzE1pJSZLsSoTu4xSy/",
+  "gitHubUrl": "https://github.com/vikranttiwari988-ops/myrepoterraform",
+  "workFolder": "_work",
+  "useV2Flow": true,
+  "serverUrlV2": "https://broker.actions.githubusercontent.com/"
+}
