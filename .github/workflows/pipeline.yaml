@@ -51,18 +51,10 @@ jobs:
       - name: Terraform Apply
         working-directory: terraformec2oidc/terraform
         run: terraform apply -auto-approve
-<<<<<<< HEAD
-      
-=======
 
->>>>>>> 74d242d9e962ebe2cadd893745faf66d7d5cf9f5
       - name: Wait 5 Minutes 
         run: sleep 300
         
       - name: Terraform Apply
         working-directory: terraformec2oidc/terraform
-<<<<<<< HEAD
-        run: terraform destroy -auto-approve  
-=======
-        run: terraform destroy -auto-approve    
->>>>>>> 74d242d9e962ebe2cadd893745faf66d7d5cf9f5
+        run: terraform destroy -auto-approve
