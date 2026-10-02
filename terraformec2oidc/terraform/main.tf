@@ -72,7 +72,7 @@ resource "aws_security_group" "web_sg" {
 resource "aws_instance" "web" {
   ami                         = "ami-01a00762f46d584a1"
   instance_type               = var.instance_type
-  key_name                    = var.key_name
+  key_name                    = "devopsvpkon"
   vpc_security_group_ids      = [aws_security_group.web_sg.id]
   subnet_id                   = aws_subnet.main.id
   associate_public_ip_address = true
