@@ -1,7 +1,7 @@
 resource "aws_vpc" "main" {
   cidr_block = "10.0.0.0/16"
   tags = {
-    Name = "github-cicd-vpc"
+    Name = "vik-github-cicd-vpc"
   }
 }
 resource "aws_subnet" "main" {
@@ -10,14 +10,14 @@ resource "aws_subnet" "main" {
   availability_zone       = "ap-south-1a"
   map_public_ip_on_launch = true
   tags = {
-    Name = "github-cicd-subnet"
+    Name = "vik-github-cicd-subnet"
   }
 }
 
 resource "aws_internet_gateway" "main" {
   vpc_id = aws_vpc.main.id
   tags = {
-    Name = "github-cicd-igw"
+    Name = "vik-github-cicd-igw"
   }
 }
 resource "aws_route_table" "main" {
@@ -27,7 +27,7 @@ resource "aws_route_table" "main" {
     gateway_id = aws_internet_gateway.main.id
   }
   tags = {
-    Name = "github-cicd-rt"
+    Name = "vik-github-cicd-rt"
   }
 }
 resource "aws_route_table_association" "main" {
@@ -64,7 +64,7 @@ resource "aws_security_group" "web_sg" {
   }
 
   tags = {
-    Name = "github-cicd-web-sg"
+    Name = "vik-github-cicd-web-sg"
   }
 }
 
