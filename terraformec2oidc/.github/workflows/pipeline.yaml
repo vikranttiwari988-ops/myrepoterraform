@@ -52,8 +52,8 @@ jobs:
         working-directory: terraformec2oidc/terraform
         run: terraform apply -auto-approve
         
-      - name: Wait 5 Minutes 
-        run: sleep 300
+      - name: Wait 3 Minutes 
+        run: sleep 180
         
       - name: Terraform Apply
         working-directory: terraformec2oidc/terraform
