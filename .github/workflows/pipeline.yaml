@@ -1,3 +1,4 @@
+
 name: Terraform AWS CI-CD
 
 on:
@@ -11,15 +12,116 @@ permissions:
 
 env:
   AWS_REGION: ap-south-1
+  TF_WORKING_DIR: terraformec2oidc/terraform
 
 jobs:
 
-  terraform:
-    name: Terraform Infrastructure
+  # Stage 1: Terraform Validate
+  terraform-validate:
+    name: Stage 1 - Terraform Validate
     runs-on: ubuntu-latest
 
     steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
 
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.role_to_assume }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Verify AWS Identity
+        run: aws sts get-caller-identity
+
+      - name: Terraform Init
+        working-directory: ${{ env.TF_WORKING_DIR }}
+        run: terraform init
+
+      - name: Terraform Validate
+        working-directory: ${{ env.TF_WORKING_DIR }}
+        run: terraform validate
+
+
+  # Stage 2: Terraform Plan
+  terraform-plan:
+    name: Stage 2 - Terraform Plan
+    runs-on: ubuntu-latest
+    needs: terraform-validate
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.role_to_assume }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Terraform Init
+        working-directory: ${{ env.TF_WORKING_DIR }}
+        run: terraform init
+
+      - name: Terraform Plan
+        working-directory: ${{ env.TF_WORKING_DIR }}
+        run: terraform plan -out=tfplan
+
+      - name: Upload Terraform Plan
+        uses: actions/upload-artifact@v4
+        with:
+          name: terraform-plan
+          path: ${{ env.TF_WORKING_DIR }}/tfplan
+          retention-days: 1
+
+
+  # Stage 3: Terraform Apply
+  terraform-apply:
+    name: Stage 3 - Terraform Apply
+    runs-on: ubuntu-latest
+    needs: terraform-plan
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.role_to_assume }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Terraform Init
+        working-directory: ${{ env.TF_WORKING_DIR }}
+        run: terraform init
+
+      - name: Download Terraform Plan
+        uses: actions/download-artifact@v4
+        with:
+          name: terraform-plan
+          path: ${{ env.TF_WORKING_DIR }}
+
+      - name: Terraform Apply
+        working-directory: ${{ env.TF_WORKING_DIR }}
+        run: terraform apply -auto-approve tfplan
+
+
+  # Stage 4: Verification
+  terraform-verify:
+    name: Stage 4 - Verify Infrastructure
+    runs-on: ubuntu-latest
+    needs: terraform-apply
+
+    steps:
       - name: Checkout Code
         uses: actions/checkout@v4
 
@@ -30,31 +132,42 @@ jobs:
           aws-region: ${{ env.AWS_REGION }}
 
       - name: Verify AWS Identity
+        run: aws sts get-caller-identity
+
+      - name: Wait 3 Minutes
+        run: sleep 180
+
+      - name: Verify EC2 Instances
         run: |
-          aws sts get-caller-identity
+          aws ec2 describe-instances \
+            --region "$AWS_REGION" \
+            --query 'Reservations[].Instances[].[InstanceId,State.Name]' \
+            --output table
+
+
+  # Stage 5: Terraform Destroy
+  terraform-destroy:
+    name: Stage 5 - Terraform Destroy
+    runs-on: ubuntu-latest
+    needs: terraform-verify
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v3
 
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.role_to_assume }}
+          aws-region: ${{ env.AWS_REGION }}
+
       - name: Terraform Init
-        working-directory: terraformec2oidc/terraform
+        working-directory: ${{ env.TF_WORKING_DIR }}
         run: terraform init
 
-      - name: Terraform Validate
-        working-directory: terraformec2oidc/terraform
-        run: terraform validate
-
-      - name: Terraform Plan
-        working-directory: terraformec2oidc/terraform
-        run: terraform plan
-      
-      - name: Terraform Apply
-        working-directory: terraformec2oidc/terraform
-        run: terraform apply -auto-approve
-
-      - name: Wait 3 Minutes to verify 
-        run: sleep 180
-        
-      - name: Terraform destroy
-        working-directory: terraformec2oidc/terraform
+      - name: Terraform Destroy
+        working-directory: ${{ env.TF_WORKING_DIR }}
         run: terraform destroy -auto-approve
